@@ -5,9 +5,12 @@ import {
   ImageSourcePropType,
   StyleSheet,
   Dimensions,
+  ImageBackground,
 } from "react-native";
+import Svg, { Path } from "react-native-svg";
 
 import Crew, { CrewProps } from "./Crew";
+import Rating from "./Rating";
 import Title from "./Title";
 
 export interface MovieViewProps {
@@ -44,7 +47,7 @@ const ratingsBarHeight = 109;
 
 const MovieView = () => {
   const [apiResonse, setApiResponse] = useState<MovieViewProps>(movieViewProps);
-  const { crew, title, genre, rating, overview } = apiResonse;
+  const { crew, title, genre, rating, overview, image } = apiResonse;
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -68,7 +71,17 @@ const MovieView = () => {
             overflow: "hidden",
           }}
         >
-          <Text>placeholder for image here</Text>
+          <ImageBackground
+            source={image}
+            imageStyle={{ resizeMode: "cover" }}
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              width: undefined,
+              height: undefined,
+            }}
+          />
         </View>
       </View>
       <View
@@ -85,8 +98,39 @@ const MovieView = () => {
           elevation: 80,
         }}
       >
-        <View>
-          <Text>rating here</Text>
+        <View style={{ flex: 1 }}>
+          <Rating
+            icon={
+              <View style={{ alignItems: "center" }}>
+                <StarIcon />
+                <View style={{ flexDirection: "row", marginTop: 4 }}>
+                  <Text
+                    style={{
+                      color: "#12153D",
+                      fontSize: 16,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    8.2
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#434670",
+                      alignSelf: "center",
+
+                      fontSize: 14,
+                      marginTop: 2,
+                    }}
+                  >
+                    /10
+                  </Text>
+                </View>
+                <Text style={{ color: "#9A9BB2", fontSize: 12 }}>153,374</Text>
+              </View>
+            }
+            title="4.8"
+            subtitle="subtitle"
+          />
         </View>
       </View>
       <Text />
@@ -124,5 +168,15 @@ const MovieView = () => {
     </View>
   );
 };
+
+const StarIcon = () => (
+  <Svg width={28} height={27} viewBox="0 0 28 27" fill="none">
+    <Path
+      // eslint-disable-next-line max-len
+      d="M21.413 26c-.213 0-.423-.05-.613-.147l-6.8-3.56-6.8 3.56a1.334 1.334 0 01-1.933-1.413L6.6 16.933 1.107 11.6a1.333 1.333 0 01-.334-1.333 1.333 1.333 0 011.08-.907l7.6-1.107 3.347-6.84a1.334 1.334 0 012.4 0l3.387 6.827 7.6 1.107a1.333 1.333 0 011.08.906 1.334 1.334 0 01-.334 1.334L21.44 16.92l1.333 7.507a1.333 1.333 0 01-.533 1.333c-.241.17-.532.254-.827.24z"
+      fill="#FCC419"
+    />
+  </Svg>
+);
 
 export default MovieView;

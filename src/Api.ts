@@ -1,13 +1,24 @@
-import { RottenTomatoesSearch } from "./rottenTomatoes";
+import { Searchrt } from "./TypeDefinitions";
 
-const URL =
-  "https://api.bluepie.in/get/rottentomatoes/search/?query=avengers&page_limit=10&page=1";
-
-const Api = async () => {
-  const rawResponse = await fetch(URL);
-  const json = await rawResponse.json();
-
-  return await (json as RottenTomatoesSearch);
+const Api = async (url: string) => {
+  const rawResponse = await fetch(url);
+  return await rawResponse.json();
 };
 
-export default Api;
+interface SearchRTProps {
+  query: string;
+  pageLimit: number;
+  page: number;
+}
+
+const SearchRT = async ({ query, pageLimit, page }: SearchRTProps) => {
+  const url = `https://api.bluepie.in/get/rottentomatoes/search/?query=${query}&page_limit=${pageLimit}&page=${page}`;
+  return (await Api(url)) as Searchrt;
+};
+
+const InfoRT = async (id: string) => {
+  const url = `https://api.bluepie.in/get/rottentomatoes/info/?id=${id}`;
+  return (await Api(url)) as Searchrt;
+};
+
+export { SearchRT as rtSearch, InfoRT as rtInfo };

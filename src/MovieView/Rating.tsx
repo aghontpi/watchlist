@@ -9,10 +9,19 @@ interface RatingProps {
 
 const Rating = ({ icon, title, subtitle }: RatingProps) => {
   return (
-    <View style={{ flexDirection: "column" }}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around",
+      }}
+    >
       <View>{icon}</View>
-      <Text>{title}</Text>
-      <Text>{subtitle}</Text>
+      <Text style={{ fontSize: 16 }}>Rate this</Text>
+      <Text style={{ fontSize: 16, textAlign: "center" }}>
+        Romato{"\n"}Score
+      </Text>
     </View>
   );
 };

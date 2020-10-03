@@ -1,0 +1,315 @@
+{
+  "status": "success",
+  "content": {
+    "total": 128,
+    "movies": [
+      {
+        "id": "770740154",
+        "title": "Marvel's The Avengers",
+        "year": 2012,
+        "mpaa_rating": "PG-13",
+        "runtime": 142,
+        "critics_consensus": "",
+        "release_dates": { "theater": "2012-05-04", "dvd": "2012-09-25" },
+        "ratings": {
+          "critics_rating": "Certified Fresh",
+          "critics_score": 92,
+          "audience_rating": "Upright",
+          "audience_score": 91
+        },
+        "synopsis": "Marvel Studios presents Marvel's The Avengers-the Super Hero team up of a lifetime, featuring iconic Marvel Super Heroes Iron Man, The Incredible Hulk, Thor, Captain America, Hawkeye and Black Widow. When an unexpected enemy emerges that threatens global safety and security, Nick Fury, Director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins. -- (C) Marvel",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/HmZ2tHElg85dK2LUMbLO4P50JV8=/54x72/v1.bTsxMTIzMTk5MztqOzE4NjYyOzIwNDg7OTAwOzEyMDA",
+          "profile": "https://resizing.flixster.com/z3vNSRuWTcm0zvEN9PHiep1auu8=/120x160/v1.bTsxMTIzMTk5MztqOzE4NjYyOzIwNDg7OTAwOzEyMDA",
+          "detailed": "https://resizing.flixster.com/9rT8I0JCC-qhirF8K2NJKQv31Dg=/180x240/v1.bTsxMTIzMTk5MztqOzE4NjYyOzIwNDg7OTAwOzEyMDA",
+          "original": "https://resizing.flixster.com/AKbz-hZG54c7Lo5y7QXtaEY3_TA=/900x1200/v1.bTsxMTIzMTk5MztqOzE4NjYyOzIwNDg7OTAwOzEyMDA"
+        },
+        "abridged_cast": [],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/770740154.json",
+          "alternate": "http://www.rottentomatoes.com/m/marvels_the_avengers/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/770740154/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/770740154/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/770740154/similar.json"
+        }
+      },
+      {
+        "id": "771313962",
+        "title": "Avengers: Age of Ultron",
+        "year": 2015,
+        "mpaa_rating": "PG-13",
+        "runtime": 141,
+        "critics_consensus": "",
+        "release_dates": { "theater": "2015-05-01", "dvd": "2015-10-02" },
+        "ratings": {
+          "critics_rating": "Certified Fresh",
+          "critics_score": 76,
+          "audience_rating": "Upright",
+          "audience_score": 83
+        },
+        "synopsis": "When Tony Stark jumpstarts a dormant peacekeeping program, things go awry and Earth's Mightiest Heroes, including Iron Man, Captain America, Thor, The Incredible Hulk, Black Widow and Hawkeye, are put to the ultimate test as they battle to save the planet from destruction at the hands of the villainous Ultron.",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/Z492_9bHdIOTNoBhyIHUv01W6W4=/54x81/v1.bTsxMTE5MDE0MztqOzE4NjYyOzIwNDg7MTA0NzsxNTcy",
+          "profile": "https://resizing.flixster.com/7Rnf0DFqLcKXLHPjl5K18QCVSuc=/120x180/v1.bTsxMTE5MDE0MztqOzE4NjYyOzIwNDg7MTA0NzsxNTcy",
+          "detailed": "https://resizing.flixster.com/w8pXYTXlMQAuEYEOeV3UE9XTmNg=/180x270/v1.bTsxMTE5MDE0MztqOzE4NjYyOzIwNDg7MTA0NzsxNTcy",
+          "original": "https://resizing.flixster.com/46iOTNa0cfb47N_g8uSOhc1XgSw=/1047x1572/v1.bTsxMTE5MDE0MztqOzE4NjYyOzIwNDg7MTA0NzsxNTcy"
+        },
+        "abridged_cast": [
+          { "name": "Robert Downey Jr.", "id": "162654529", "characters": ["Tony Stark/Iron Man"] },
+          { "name": "Chris Evans", "id": "162652784", "characters": ["Steve Rogers/Captain America"] },
+          { "name": "Mark Ruffalo", "id": "162653904", "characters": ["Bruce Banner/The Hulk"] },
+          { "name": "Chris Hemsworth", "id": "770829335", "characters": ["Thor"] },
+          { "name": "Linda Cardellini", "id": "162667559" }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/771313962.json",
+          "alternate": "http://www.rottentomatoes.com/m/avengers_age_of_ultron/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/771313962/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/771313962/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/771313962/similar.json"
+        }
+      },
+      {
+        "id": "770739679",
+        "title": "Captain America: The First Avenger",
+        "year": 2011,
+        "mpaa_rating": "PG-13",
+        "runtime": 124,
+        "critics_consensus": "",
+        "release_dates": { "theater": "2011-07-22", "dvd": "2011-10-25" },
+        "ratings": {
+          "critics_rating": "Certified Fresh",
+          "critics_score": 80,
+          "audience_rating": "Upright",
+          "audience_score": 74
+        },
+        "synopsis": "Captain America: The First Avenger will focus on the early days of the Marvel Universe when Steve Rogers (Chris Evans) volunteers to participate in an experimental program that turns him into the Super Soldier known as Captain America. As Captain America, Rogers joins forces with Bucky Barnes (Sebastian Stan) and Peggy Carter (Hayley Atwell) to wage war on the evil HYDRA organization, led by the villainous Red Skull (Hugo Weaving.) -- (C) Paramount",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/I421OmIaYE6dSNT3A3JhcaxOR4k=/52x81/v1.bTsxMTE1ODMzOTtqOzE4NjI4OzIwNDg7MTc0NTsyNzI0",
+          "profile": "https://resizing.flixster.com/BBUbJJIorCc2rYktwM-bNlEFw_c=/115x180/v1.bTsxMTE1ODMzOTtqOzE4NjI4OzIwNDg7MTc0NTsyNzI0",
+          "detailed": "https://resizing.flixster.com/8KRAH2KRZzsnnca-RHCD9BYf6YQ=/173x270/v1.bTsxMTE1ODMzOTtqOzE4NjI4OzIwNDg7MTc0NTsyNzI0",
+          "original": "https://resizing.flixster.com/MUHPmpqlNoEfCCgpOWPJaSR4VK0=/1745x2724/v1.bTsxMTE1ODMzOTtqOzE4NjI4OzIwNDg7MTc0NTsyNzI0"
+        },
+        "abridged_cast": [
+          {
+            "name": "Chris Evans",
+            "id": "162652784",
+            "characters": ["Captain America/Steve Rogers", "Steve Rogers / Captain America"]
+          },
+          { "name": "Tommy Lee Jones", "id": "162666788", "characters": ["Colonel Chester Phillips"] },
+          { "name": "Hugo Weaving", "id": "162709905", "characters": ["Johann Schmidt/Red Skull", "Red Skull"] },
+          { "name": "Hayley Atwell", "id": "417268294", "characters": ["Peggy Carter"] },
+          {
+            "name": "Sebastian Stan",
+            "id": "326299814",
+            "characters": ["Bucky Barnes", "James Buchanan \"Bucky\" Barnes"]
+          }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/770739679.json",
+          "alternate": "http://www.rottentomatoes.com/m/captain_america_the_first_avenger/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/770739679/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/770739679/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/770739679/similar.json"
+        }
+      },
+      {
+        "id": "771401853",
+        "title": "Avengers: Infinity War",
+        "year": 2018,
+        "mpaa_rating": "PG-13",
+        "runtime": 156,
+        "critics_consensus": "",
+        "release_dates": { "theater": "2018-04-27", "dvd": "2018-08-14" },
+        "ratings": {
+          "critics_rating": "Certified Fresh",
+          "critics_score": 85,
+          "audience_rating": "Upright",
+          "audience_score": 91
+        },
+        "synopsis": "An unprecedented cinematic journey ten years in the making and spanning the entire Marvel Cinematic Universe, Marvel Studios' \"Avengers: Infinity War\" brings to the screen the ultimate, deadliest showdown of all time. The Avengers and their Super Hero allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/DwMhIY1WUAP694YmX9tiEP23LIw=/54x80/v1.bTsxMjcwMDQ5MztqOzE4NjA0OzIwNDg7MTY4ODsyNTAw",
+          "profile": "https://resizing.flixster.com/FFJxlbgoyGjzimjVnxwrmEhHp9U=/120x178/v1.bTsxMjcwMDQ5MztqOzE4NjA0OzIwNDg7MTY4ODsyNTAw",
+          "detailed": "https://resizing.flixster.com/WnLaa1887k5GCpZi-qZAT9Y_GGU=/180x267/v1.bTsxMjcwMDQ5MztqOzE4NjA0OzIwNDg7MTY4ODsyNTAw",
+          "original": "https://resizing.flixster.com/GG4zV1T3-7OuyUfumtyU_NSLsoI=/1688x2500/v1.bTsxMjcwMDQ5MztqOzE4NjA0OzIwNDg7MTY4ODsyNTAw"
+        },
+        "abridged_cast": [
+          { "name": "Robert Downey Jr.", "id": "162654529", "characters": ["Tony Stark/ Iron Man"] },
+          { "name": "Chris Hemsworth", "id": "770829335", "characters": ["Thor"] },
+          { "name": "Mark Ruffalo", "id": "162653904", "characters": ["Bruce Banner / Hulk"] },
+          { "name": "Chris Evans", "id": "162652784", "characters": ["Steve Rogers / Captain America"] },
+          { "name": "Scarlett Johansson", "id": "162652872", "characters": ["Natasha Romanoff / Black Widow"] }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/771401853.json",
+          "alternate": "http://www.rottentomatoes.com/m/avengers_infinity_war/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/771401853/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/771401853/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/771401853/similar.json"
+        }
+      },
+      {
+        "id": "771432224",
+        "title": "Avengers: Endgame",
+        "year": 2019,
+        "mpaa_rating": "PG-13",
+        "runtime": 182,
+        "critics_consensus": "",
+        "release_dates": { "theater": "2019-04-26", "dvd": "2019-07-30" },
+        "ratings": {
+          "critics_rating": "Certified Fresh",
+          "critics_score": 94,
+          "audience_rating": "Upright",
+          "audience_score": 88
+        },
+        "synopsis": "The grave course of events set in motion by Thanos that wiped out half the universe and fractured the Avengers ranks compels the remaining Avengers to take one final stand in Marvel Studios' grand conclusion to twenty-two films, \"Avengers: Endgame.\"",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/pm038OyultcP_bbOtbcGW86lN0I=/54x80/v1.bTsxMzAxOTkzMjtqOzE4NjM3OzIwNDg7MTY4ODsyNTAw",
+          "profile": "https://resizing.flixster.com/Qn6Dhpi4ZuyG4v0mk0UU__U8TjA=/120x178/v1.bTsxMzAxOTkzMjtqOzE4NjM3OzIwNDg7MTY4ODsyNTAw",
+          "detailed": "https://resizing.flixster.com/pSqr1ZWxfvDHzHmSUkf7OnFBPoI=/180x267/v1.bTsxMzAxOTkzMjtqOzE4NjM3OzIwNDg7MTY4ODsyNTAw",
+          "original": "https://resizing.flixster.com/9j6D7xAzheD387BJhHj-v68KO1w=/1688x2500/v1.bTsxMzAxOTkzMjtqOzE4NjM3OzIwNDg7MTY4ODsyNTAw"
+        },
+        "abridged_cast": [
+          { "name": "Robert Downey Jr.", "id": "162654529", "characters": ["Tony Stark / Iron Man"] },
+          { "name": "Mark Ruffalo", "id": "162653904", "characters": ["Bruce Banner / Hulk"] },
+          { "name": "Scarlett Johansson", "id": "162652872", "characters": ["Natasha Romanoff / Black Widow"] },
+          { "name": "Chris Evans", "id": "162652784", "characters": ["Steve Rogers / Captain America"] },
+          { "name": "Chris Hemsworth", "id": "770829335", "characters": ["Thor"] }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/771432224.json",
+          "alternate": "http://www.rottentomatoes.com/m/avengers_endgame/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/771432224/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/771432224/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/771432224/similar.json"
+        }
+      },
+      {
+        "id": "11645",
+        "title": "The Avengers",
+        "year": 1998,
+        "mpaa_rating": "PG-13",
+        "runtime": 90,
+        "critics_consensus": "",
+        "release_dates": { "theater": "1998-08-14", "dvd": "2001-07-03" },
+        "ratings": {
+          "critics_rating": "Rotten",
+          "critics_score": 5,
+          "audience_rating": "Spilled",
+          "audience_score": 15
+        },
+        "synopsis": "",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/aeDk5ZdW7RL5rprt5IjEZhwGbkg=/54x72/v1.bTsxMTIwNzczMTtqOzE4NjU1OzIwNDg7MTUzNjsyMDQ4",
+          "profile": "https://resizing.flixster.com/bHOUd1Yk5wLImOa7XF2sdRAqNqY=/120x160/v1.bTsxMTIwNzczMTtqOzE4NjU1OzIwNDg7MTUzNjsyMDQ4",
+          "detailed": "https://resizing.flixster.com/5-KU6rVPBaegYh_dWbtB1oFDbu4=/180x240/v1.bTsxMTIwNzczMTtqOzE4NjU1OzIwNDg7MTUzNjsyMDQ4",
+          "original": "https://resizing.flixster.com/tUWSQK4Cf-ZlJOwTPSS1fooZyjw=/1536x2048/v1.bTsxMTIwNzczMTtqOzE4NjU1OzIwNDg7MTUzNjsyMDQ4"
+        },
+        "abridged_cast": [
+          { "name": "Ralph Fiennes", "id": "162653681", "characters": ["John Steed"] },
+          { "name": "Uma Thurman", "id": "162654901", "characters": ["Emma Peel"] },
+          { "name": "Sean Connery", "id": "162656350", "characters": ["Sir August de Wynter"] },
+          { "name": "Eileen Atkins", "id": "162663863", "characters": ["Alice"] },
+          { "name": "Eddie Izzard", "id": "162676569", "characters": ["Bailey"] }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/11645.json",
+          "alternate": "http://www.rottentomatoes.com/m/1083461-avengers/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/11645/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/11645/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/11645/similar.json"
+        }
+      },
+      {
+        "id": "771371799",
+        "title": "Avengers Confidential: Black Widow & Punisher",
+        "year": 2013,
+        "mpaa_rating": "PG-13",
+        "runtime": 83,
+        "release_dates": { "dvd": "2014-03-24" },
+        "ratings": { "critics_score": -1, "audience_rating": "Spilled", "audience_score": 45 },
+        "synopsis": "When The Punisher takes out a black market weapons dealer with stolen S.H.I.E.L.D. tech, he inadvertently stumbles upon a much larger terror plot under investigation by Black Widow, agent of S.H.I.E.L.D. Detained by the clandestine law enforcement organization, Nick Fury offers the Punisher his freedom in exchange for one mission; To work with Black Widow and stop the terrorist group known as LEVIATHAN.",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/gh_5G3fBMlHyuJU3UjFDo_eJAFY=/54x77/v1.bTsxMTE3NjQ1NjtqOzE4NjU1OzIwNDg7Mjg0OzQwNQ",
+          "profile": "https://resizing.flixster.com/X-pX0yLzc7CkCTrlIAwzQNs0_tY=/120x171/v1.bTsxMTE3NjQ1NjtqOzE4NjU1OzIwNDg7Mjg0OzQwNQ",
+          "detailed": "https://resizing.flixster.com/4Xsu8VzMsAvVnUNa6V8T6uFFHf4=/180x257/v1.bTsxMTE3NjQ1NjtqOzE4NjU1OzIwNDg7Mjg0OzQwNQ",
+          "original": "https://resizing.flixster.com/ApMq4gbpoVxpFZD4sjrqhOcM0-0=/284x405/v1.bTsxMTE3NjQ1NjtqOzE4NjU1OzIwNDg7Mjg0OzQwNQ"
+        },
+        "abridged_cast": [
+          { "name": "Jennifer Carpenter", "id": "162653772" },
+          { "name": "Brian Bloom", "id": "364657631" },
+          { "name": "John Eric Bentley", "id": "771048223" },
+          { "name": "Grant George", "id": "770860232" },
+          { "name": "Kyle Herbert", "id": "770779369" }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/771371799.json",
+          "alternate": "http://www.rottentomatoes.com/m/avengers_confidential_black_widow_and_punisher/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/771371799/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/771371799/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/771371799/similar.json"
+        }
+      },
+      {
+        "id": "771272442",
+        "title": "Avengers Marathon",
+        "year": 2012,
+        "mpaa_rating": "PG-13",
+        "runtime": 330,
+        "release_dates": { "theater": "2012-05-03" },
+        "ratings": { "critics_score": -1, "audience_rating": "Upright", "audience_score": 90 },
+        "synopsis": "Get ready to watch the greatest Marvel movie event ever held at your local AMC Theatre on May 3rd! Experience THE ULTIMATE MARVEL MARATHON with six movies on one epic day. Watch the heroes' stories unfold as they assemble for the midnight premiere of The Avengers 3D! Here's a list of the six movies being shown at THE ULTIMATE MARVEL MARATHON: Iron Man, The Incredible Hulk, Iron Man 2, Thor in 3D, Captain America in 3D, The Avengers in 3D.",
+        "posters": {
+          "thumbnail": "https://d2a5cgar23scu2.cloudfront.net/static/images/redesign/poster_default_thumb.gif",
+          "profile": "https://d2a5cgar23scu2.cloudfront.net/static/images/redesign/poster_default.gif",
+          "detailed": "https://d2a5cgar23scu2.cloudfront.net/static/images/redesign/poster_default.gif",
+          "original": "https://d2a5cgar23scu2.cloudfront.net/static/images/redesign/poster_default.gif"
+        },
+        "abridged_cast": [],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/771272442.json",
+          "alternate": "http://www.rottentomatoes.com/m/avengers_marathon/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/771272442/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/771272442/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/771272442/similar.json"
+        }
+      },
+      {
+        "id": "771413917",
+        "title": "Avengers Grimm",
+        "year": 2015,
+        "mpaa_rating": "Unrated",
+        "runtime": 90,
+        "release_dates": { "dvd": "2015-04-14" },
+        "ratings": { "critics_score": -1, "audience_rating": "Spilled", "audience_score": 16 },
+        "synopsis": "This /fantasy adventure film directed by Jeremy M. Inman brings together a bevy of popular fairy tale characters for a new modern adventure. Rumpelstiltskin destroys the Magic Mirror and is catapulted to the modern world, where he is hunted by Cinderella, Sleeping Beauty, Snow White, and Rapunzel. Casper Van Dien, Lou Ferrigno and Lauren Parkinson star.",
+        "posters": {
+          "thumbnail": "https://resizing.flixster.com/ds5eUd-BWzLPRFAE-78reF38Des=/54x77/v1.bTsxMTE5MTUyMztqOzE4NjQ3OzIwNDg7Mjg0OzQwNQ",
+          "profile": "https://resizing.flixster.com/SSOVO5SBd-rfZA0E5_0OesBoS00=/120x171/v1.bTsxMTE5MTUyMztqOzE4NjQ3OzIwNDg7Mjg0OzQwNQ",
+          "detailed": "https://resizing.flixster.com/9ojq80eHPt8pydLT1M4TyKHmc5Y=/180x257/v1.bTsxMTE5MTUyMztqOzE4NjQ3OzIwNDg7Mjg0OzQwNQ",
+          "original": "https://resizing.flixster.com/G02r85tDehobpgClNqaQxsp__is=/284x405/v1.bTsxMTE5MTUyMztqOzE4NjQ3OzIwNDg7Mjg0OzQwNQ"
+        },
+        "abridged_cast": [
+          { "name": "Casper Van Dien", "id": "162676944", "characters": ["Rumpelstiltskin"] },
+          { "name": "Lauren Parkinson", "id": "771066973", "characters": ["Snow White"] },
+          { "name": "Lou Ferrigno", "id": "164558827" },
+          { "name": "Marah Fairclough", "id": "771632234", "characters": ["Sleeping Beauty"] },
+          { "name": "Milynn Sarley", "id": "771456264", "characters": ["Cinderella"] }
+        ],
+        "links": {
+          "self": "http://api.rottentomatoes.com/api/private/v1.0/movies/771413917.json",
+          "alternate": "http://www.rottentomatoes.com/m/avengers_grimm/",
+          "cast": "http://api.rottentomatoes.com/api/private/v1.0/movies/771413917/cast.json",
+          "reviews": "http://api.rottentomatoes.com/api/private/v1.0/movies/771413917/reviews.json",
+          "similar": "http://api.rottentomatoes.com/api/private/v1.0/movies/771413917/similar.json"
+        }
+      }
+    ],
+    "links": {
+      "self": "http://api.rottentomatoes.com/api/private/v1.0/movies.json?q=avengers&page_limit=10&page=1",
+      "next": "http://api.rottentomatoes.com/api/private/v1.0/movies.json?q=avengers&page_limit=10&page=2"
+    },
+    "link_template": "//api.rottentomatoes.com/api/private/v1.0/movies.json?q={search-term}&page_limit={results-per-page}&page={page-number}"
+  }
+}

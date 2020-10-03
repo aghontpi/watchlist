@@ -71,7 +71,7 @@ const Title = ({
           </ScrollView>
         </View>
       </View>
-      <View style={{ position: "absolute", top: 0, right: 0 }}>
+      <View style={{ position: "absolute", right: 0, top: 8, bottom: 0 }}>
         <RoundedIcon
           name="plus"
           iconRatio={0.3}
