@@ -6,7 +6,7 @@ interface PeopleProps {
   role: string;
 }
 
-const size = 64;
+const SIZE = 64;
 
 const People = ({ name, role }: PeopleProps) => {
   return (
@@ -19,10 +19,10 @@ const People = ({ name, role }: PeopleProps) => {
     >
       <View
         style={{
-          borderRadius: size / 2,
+          borderRadius: SIZE / 2,
           backgroundColor: "blue",
-          width: size,
-          height: size,
+          width: SIZE,
+          height: SIZE,
         }}
       >
         {}
