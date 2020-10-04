@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import {
+  RectButton,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 
 export interface RoundedIconProps {
@@ -10,6 +13,7 @@ export interface RoundedIconProps {
   size: number;
   iconRatio: number;
   borderRadius?: number;
+  onPress: () => void;
 }
 
 const RoundedIcon = ({
@@ -19,6 +23,7 @@ const RoundedIcon = ({
   size,
   iconRatio,
   borderRadius,
+  onPress,
 }: RoundedIconProps) => {
   const styles = StyleSheet.create({
     container: {
@@ -27,12 +32,20 @@ const RoundedIcon = ({
       borderRadius: borderRadius !== 0 ? borderRadius : size / 2,
       justifyContent: "center",
       alignItems: "center",
+      overflow: "hidden",
       ...{ backgroundColor },
     },
   });
   const iconSize = size * iconRatio;
-  return (
-    <RectButton style={styles.container}>
+
+  return backgroundColor === "transparent" ? (
+    <TouchableWithoutFeedback style={styles.container} {...{ onPress }}>
+      <Text {...{ color }}>
+        <Icon size={iconSize} {...{ name, color }} />
+      </Text>
+    </TouchableWithoutFeedback>
+  ) : (
+    <RectButton style={styles.container} {...{ onPress }}>
       <Text {...{ color }}>
         <Icon size={iconSize} {...{ name, color }} />
       </Text>

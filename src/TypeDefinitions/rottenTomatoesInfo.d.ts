@@ -1,7 +1,4 @@
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
-export interface Infort {
+export interface Infort2 {
   status: string;
   content: Content;
 }
@@ -43,11 +40,26 @@ export interface Content {
 }
 
 export interface Casts {
-  creators: any[];
-  castItems: any[];
-  screenwriters: any[];
-  directors: any[];
-  producers: any[];
+  creators: People[] | [];
+  castItems: CastItem[] | [];
+  screenwriters: People[] | [];
+  directors: People[] | [];
+  producers: People[] | [];
+}
+
+export interface CastItem {
+  person?: People;
+  characters?: Character[];
+}
+
+export interface Character {
+  name: string;
+}
+
+export interface People {
+  name: string;
+  thumbnailImg: string;
+  url: string;
 }
 
 export interface GenreSet {
@@ -82,12 +94,7 @@ export interface Photo {
   submittedDate: string;
   submittedBy: SubmittedBy;
   url: string;
-  caption?: Caption;
-}
-
-export enum Caption {
-  Empty = "",
-  TheAvengersAssembled = "The Avengers, Assembled",
+  caption?: string;
 }
 
 export enum PhotoType {
@@ -208,12 +215,11 @@ export enum Freshness {
 
 export interface ReviewLinks {
   review: string;
-  publication?: string;
 }
 
 export interface Publication {
   name: string;
-  url: string;
+  url?: string;
 }
 
 export interface VideoClips {

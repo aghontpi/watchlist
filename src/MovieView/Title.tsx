@@ -79,6 +79,7 @@ const Title = ({
           size={64}
           color="white"
           borderRadius={20}
+          onPress={() => true}
         />
       </View>
     </View>
