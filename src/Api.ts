@@ -1,3 +1,4 @@
+import { RetrieveFromCache, StoreIntoCache } from "./Cache";
 import { Searchrt } from "./TypeDefinitions";
 
 const Api = async (url: string) => {
@@ -12,8 +13,25 @@ interface SearchRTProps {
 }
 
 const SearchRT = async ({ query, pageLimit, page }: SearchRTProps) => {
+  const cache = await RetrieveFromCache({
+    query: query,
+    responseType: "search",
+    origin: "rt",
+  });
+  if (cache) {
+    return cache;
+  }
+
   const url = `https://api.bluepie.in/get/rottentomatoes/search/?query=${query}&page_limit=${pageLimit}&page=${page}`;
-  return (await Api(url)) as Searchrt;
+  const response = await Api(url);
+  StoreIntoCache({
+    query: query,
+    responseType: "search",
+    origin: "rt",
+    response: response,
+  });
+
+  return response as Searchrt;
 };
 
 const InfoRT = async (id: string) => {
@@ -21,4 +39,58 @@ const InfoRT = async (id: string) => {
   return (await Api(url)) as Searchrt;
 };
 
-export { SearchRT as rtSearch, InfoRT as rtInfo };
+interface ImdbSearchProps {
+  title: string;
+}
+
+const searchImdb = async ({ title: query }: ImdbSearchProps) => {
+  const cache = await RetrieveFromCache({
+    query: query,
+    responseType: "search",
+    origin: "idb",
+  });
+  if (cache) {
+    return cache;
+  }
+  const url = `https://api.bluepie.in/get/imdb/search/?title=${query}`;
+  const response = await Api(url);
+  StoreIntoCache({
+    query: query,
+    response: response,
+    origin: "idb",
+    responseType: "search",
+  });
+  return response;
+};
+
+interface ImdbInfoProps {
+  id: string;
+}
+
+const infoImdb = async ({ id: query }: ImdbInfoProps) => {
+  const cache = await RetrieveFromCache({
+    query: query,
+    responseType: "search",
+    origin: "idb",
+  });
+  if (cache) {
+    return cache;
+  }
+  const url = `https://api.bluepie.in/get/imdb/info/?id=${query}`;
+
+  const response = await Api(url);
+  StoreIntoCache({
+    query: query,
+    response: response,
+    origin: "idb",
+    responseType: "search",
+  });
+  return response;
+};
+
+export {
+  SearchRT as rtSearch,
+  InfoRT as rtInfo,
+  searchImdb as searchIDB,
+  infoImdb as searchIdB,
+};

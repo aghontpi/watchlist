@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 interface CacheApiResponse {
   query: string;
-  response: JSON;
+  response: typeof JSON.parse;
   responseType: "info" | "search";
   origin: "idb" | "rt";
 }
@@ -22,7 +22,7 @@ const storeApiResponse = async ({
   }
 };
 
-interface RetrieveApiResponse extends Omit<CacheApiResponse, "response"> {}
+type RetrieveApiResponse = Omit<CacheApiResponse, "response">;
 
 const retrieveApiResponse = async ({
   query,

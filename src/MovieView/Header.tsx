@@ -28,7 +28,7 @@ const Header = ({ left, right }: HeaderProps) => {
         marginLeft: 32,
         marginRight: 32,
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: left ? "space-between" : "flex-end",
       }}
     >
       {left && (
