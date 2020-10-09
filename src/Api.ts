@@ -39,7 +39,7 @@ const InfoRT = async (id: string) => {
   return (await Api(url)) as Searchrt;
 };
 
-interface ImdbSearchProps {
+export interface ImdbSearchProps {
   title: string;
 }
 
@@ -92,5 +92,5 @@ export {
   SearchRT as rtSearch,
   InfoRT as rtInfo,
   searchImdb as searchIDB,
-  infoImdb as searchIdB,
+  infoImdb as infoIDB,
 };

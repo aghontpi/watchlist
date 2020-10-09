@@ -2,9 +2,14 @@ import React from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { ImdbStar, IMDB_YELLOW } from "../MovieView";
+import { ImdbStar, IMDB_YELLOW } from "../../MovieView";
 
-const Rating = () => {
+interface RatingProps {
+  heartOnPress: () => void;
+  idbRating: string;
+}
+
+const Rating = ({ heartOnPress, idbRating }: RatingProps) => {
   return (
     <View
       style={{
@@ -30,11 +35,12 @@ const Rating = () => {
             marginLeft: 8 / 2,
           }}
         >
-          5.6
+          {idbRating}
         </Text>
       </View>
       <View style={{ justifyContent: "center" }}>
-        <Text>rt</Text>
+        {/*TODO: have both rotten tomatoes and imdb rating show at list page. backend work*/}
+        <Text>{""}</Text>
       </View>
       <View
         style={{
@@ -43,7 +49,7 @@ const Rating = () => {
           justifyContent: "center",
         }}
       >
-        <Icon name="heart" size={24} />
+        <Icon name="heart" size={24} onPress={() => heartOnPress()} />
       </View>
     </View>
   );
