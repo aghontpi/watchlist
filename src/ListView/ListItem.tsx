@@ -4,13 +4,22 @@ import { RectButton } from "react-native-gesture-handler";
 
 import Rating from "./Rating";
 
-interface ListItemProps {
+export interface ListItemProps {
   onPress: () => void;
   idbRating: string;
-  rtRating: string;
+  rtRating?: string;
+  title: string;
+  actors: string[];
+  poster: string;
 }
 
-const ListItem = ({ onPress }: ListItemProps) => {
+const ListItem = ({
+  onPress,
+  idbRating,
+  title,
+  actors,
+  poster,
+}: ListItemProps) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const PLACEHOLDER_IMAGE = require("../assests/poster_small.jpg");
   return (
@@ -35,7 +44,7 @@ const ListItem = ({ onPress }: ListItemProps) => {
           }}
         >
           <ImageBackground
-            source={PLACEHOLDER_IMAGE}
+            source={poster ? { uri: poster } : PLACEHOLDER_IMAGE}
             style={{ flex: 1, width: undefined, height: undefined }}
             imageStyle={{ resizeMode: "cover" }}
           />
@@ -48,20 +57,21 @@ const ListItem = ({ onPress }: ListItemProps) => {
             overflow: "hidden",
           }}
         >
-          <Rating />
+          <Rating heartCallBack={() => true} {...{ idbRating }} />
           <View>
             <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 8 }}>
-              Ford vs Ferrari
+              {title}
             </Text>
           </View>
 
           <View style={{ flexDirection: "row", marginTop: 8 }}>
-            {["batman", "martian"].map((v, i) => (
-              <Text key={v} style={{ fontSize: 16, color: "#737599" }}>
-                {i !== 0 && ", "}
-                {v}
-              </Text>
-            ))}
+            {actors &&
+              actors.map((v, i) => (
+                <Text key={v} style={{ fontSize: 16, color: "#737599" }}>
+                  {i !== 0 && ", "}
+                  {v}
+                </Text>
+              ))}
           </View>
         </View>
       </View>

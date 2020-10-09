@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Dimensions } from "react-native";
 import { FlatList, TextInput } from "react-native-gesture-handler";
 
 import Header from "../MovieView/Header";
 
-import ListItem from "./ListItem";
+import ListItem, { ListItemProps } from "./ListItem";
+
+type ApiListItemProps = Omit<ListItemProps, "onPress">;
+
+interface FlatListRenderProps {
+  item: ApiListItemProps;
+  index: number;
+}
 
 interface ListViewProps {}
 
 const { width } = Dimensions.get("window");
 
 const ListView = () => {
+  const [api, setApi] = useState<ApiListItemProps[]>([
+    {
+      title: "Ford v Ferrari",
+      actors: ["Christian Bale", "Matt Damon"],
+      idbRating: "8.1",
+      poster:
+        "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
+    },
+  ]);
+
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -68,13 +85,14 @@ const ListView = () => {
         }}
       >
         <FlatList
-          data={[1, 2, 3]}
-          renderItem={({ item, index }) => (
+          data={api}
+          renderItem={({ item, index }: FlatListRenderProps) => (
             <ListItem
               key={index}
               onPress={() => {
                 return true;
               }}
+              {...item}
             />
           )}
         />
