@@ -2,19 +2,33 @@ import React from "react";
 import { View, Text, ImageBackground } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
+import Rating from "./Rating";
+
 interface ListItemProps {
   onPress: () => void;
+  idbRating: string;
+  rtRating: string;
 }
 
 const ListItem = ({ onPress }: ListItemProps) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const PLACEHOLDER_IMAGE = require("../assests/poster_small.jpg");
   return (
-    <RectButton {...{ onPress }} style={{ height: 180, flex: 1 }}>
-      <View style={{ flexDirection: "row", flex: 1 }}>
+    <RectButton
+      {...{ onPress }}
+      style={{ height: 172, flex: 1, marginBottom: 24 }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          flex: 1,
+          marginRight: 32,
+        }}
+      >
         <View
           style={{
-            borderRadius: 40,
+            borderTopRightRadius: 40,
+            borderBottomRightRadius: 40,
             overflow: "hidden",
             width: 164,
             height: 172,
@@ -26,16 +40,28 @@ const ListItem = ({ onPress }: ListItemProps) => {
             imageStyle={{ resizeMode: "cover" }}
           />
         </View>
-        <View style={{ marginLeft: 24, flexDirection: "column" }}>
-          <View style={{ flexDirection: "column" }}>
-            <Text>ratings here</Text>
-          </View>
+        <View
+          style={{
+            marginLeft: 24,
+            flexDirection: "column",
+            flex: 1,
+            overflow: "hidden",
+          }}
+        >
+          <Rating />
           <View>
-            <Text>Title of the movie here</Text>
+            <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 8 }}>
+              Ford vs Ferrari
+            </Text>
           </View>
 
-          <View>
-            <Text> actors here</Text>
+          <View style={{ flexDirection: "row", marginTop: 8 }}>
+            {["batman", "martian"].map((v, i) => (
+              <Text key={v} style={{ fontSize: 16, color: "#737599" }}>
+                {i !== 0 && ", "}
+                {v}
+              </Text>
+            ))}
           </View>
         </View>
       </View>

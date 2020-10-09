@@ -65,7 +65,6 @@ const ListView = () => {
         style={{
           flex: 1,
           marginTop: 40,
-          backgroundColor: "rgba(100,100,100,0.5)",
         }}
       >
         <FlatList
