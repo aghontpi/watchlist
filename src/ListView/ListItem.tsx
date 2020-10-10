@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, ImageBackground } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
-import Rating from "./Rating";
+import Rating from "./Components/Rating";
 
 export interface ListItemProps {
   onPress: () => void;
@@ -21,7 +21,7 @@ const ListItem = ({
   poster,
 }: ListItemProps) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const PLACEHOLDER_IMAGE = require("./../../assests/poster_small.jpg");
+  const PLACEHOLDER_IMAGE = require("../assests/poster_small.jpg");
   return (
     <RectButton
       {...{ onPress }}

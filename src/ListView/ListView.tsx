@@ -3,8 +3,10 @@ import { View } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 
 import { ImdbSearchProps, searchIDB } from "../Api";
+import { AfterLoginNavigationProp } from "../Components/Navigation";
 
-import { ListItem, ListItemProps, Search } from "./Components";
+import { Search } from "./Components";
+import ListItem, { ListItemProps } from "./ListItem";
 
 type ApiListItemProps = Omit<ListItemProps, "onPress">;
 
@@ -13,9 +15,7 @@ interface FlatListRenderProps {
   index: number;
 }
 
-interface ListViewProps {}
-
-const ListView = () => {
+const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
   const [api, setApi] = useState<ApiListItemProps[] | null>([
     {
       title: "Ford v Ferrari",
@@ -50,7 +50,7 @@ const ListView = () => {
             <ListItem
               key={index}
               onPress={() => {
-                return true;
+                navigation.navigate("MovieView");
               }}
               {...item}
             />
