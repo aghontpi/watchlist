@@ -26,6 +26,7 @@ const ListItem = ({
     <RectButton
       {...{ onPress }}
       style={{ height: 172, flex: 1, marginBottom: 24 }}
+      key={title}
     >
       <View
         style={{

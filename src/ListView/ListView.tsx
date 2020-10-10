@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 
 import { ImdbSearchProps, searchIDB } from "../Api";
 import { AfterLoginNavigationProp } from "../Components/Navigation";
@@ -36,28 +36,29 @@ const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
   };
 
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <Search SubmitSearch={(v) => ApiCall(v)} />
-      <View
-        style={{
-          flex: 1,
-          marginTop: 40,
-        }}
-      >
-        <FlatList
-          data={api}
-          renderItem={({ item, index }: FlatListRenderProps) => (
-            <ListItem
-              key={index}
-              onPress={() => {
-                navigation.navigate("MovieView");
-              }}
-              {...item}
-            />
-          )}
+    <FlatList
+      ListHeaderComponent={
+        <>
+          <Search SubmitSearch={(v) => ApiCall(v)} />
+          <View
+            style={{
+              flex: 1,
+              marginTop: 40,
+            }}
+          />
+        </>
+      }
+      data={api}
+      renderItem={({ item, index }: FlatListRenderProps) => (
+        <ListItem
+          key={index}
+          onPress={() => {
+            navigation.navigate("MovieView");
+          }}
+          {...item}
         />
-      </View>
-    </ScrollView>
+      )}
+    />
   );
 };
 
