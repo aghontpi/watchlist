@@ -3,7 +3,12 @@ import { View, Text } from "react-native";
 
 const SIZE = 28;
 
-const MetaIcon = ({ rating }: { rating: string }) => {
+interface MetaIconProps {
+  rating: string;
+  ratingCount: string;
+}
+
+const MetaIcon = ({ rating, ratingCount }: MetaIconProps) => {
   return (
     <View style={{ alignItems: "center" }}>
       <View
@@ -15,9 +20,16 @@ const MetaIcon = ({ rating }: { rating: string }) => {
           justifyContent: "center",
         }}
       >
-        <Text style={{ color: "white", fontSize: 14 }}>{rating}</Text>
+        <Text style={{ color: "white", fontSize: 14, fontWeight: "bold" }}>
+          {rating}
+        </Text>
       </View>
-      <Text style={{ color: "#12153D", marginTop: 9 }}>Metascore</Text>
+      <Text style={{ color: "#12153D", fontWeight: "bold", marginTop: 4 }}>
+        Metascore
+      </Text>
+      <Text style={{ fontSize: 12, color: "#9A9BB2" }}>
+        {ratingCount} reviews
+      </Text>
     </View>
   );
 };

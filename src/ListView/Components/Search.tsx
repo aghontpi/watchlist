@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Dimensions } from "react-native";
 
 import { ImdbSearchProps } from "../../Api";
@@ -10,7 +10,30 @@ interface SearchProps {
   SubmitSearch: (v: ImdbSearchProps) => void;
 }
 
+const GetRandomDuringStart = () => {
+  const startMovies: string[] = [
+    "dark knight",
+    "tenet",
+    "potter",
+    "fight club",
+    "django",
+    "inception",
+    "interstellar",
+    "predestin",
+    "ninja assas",
+    "iron man",
+    "avengers",
+    "end game",
+  ];
+  return startMovies[Math.floor(Math.random() * startMovies.length)];
+};
+
 const Search = ({ SubmitSearch }: SearchProps) => {
+  const [search, setSearch] = useState(GetRandomDuringStart());
+  useEffect(() => {
+    SubmitSearch({ title: search });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <View
@@ -59,6 +82,8 @@ const Search = ({ SubmitSearch }: SearchProps) => {
           autoCapitalize="words"
           autoCompleteType="off"
           selectionColor="black"
+          value={search}
+          onChangeText={(v: string) => setSearch(v)}
           onSubmitEditing={({ nativeEvent: { text } }) =>
             SubmitSearch({ title: text })
           }

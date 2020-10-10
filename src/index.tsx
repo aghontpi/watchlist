@@ -12,14 +12,14 @@ const StackNavigation = createStackNavigator<AfterLoginParamList>();
 
 const index = () => {
   return (
-    <NavigationContainer>
-      <MovieInfoContextProvider>
+    <MovieInfoContextProvider>
+      <NavigationContainer>
         <StackNavigation.Navigator headerMode="none">
           <StackNavigation.Screen name="MovieSearch" component={ListView} />
           <StackNavigation.Screen name="MovieView" component={MovieView} />
         </StackNavigation.Navigator>
-      </MovieInfoContextProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </MovieInfoContextProvider>
   );
 };
 

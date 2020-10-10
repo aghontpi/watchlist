@@ -21,8 +21,6 @@ const ListItem = ({
   cast,
   poster,
 }: ListItemProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const PLACEHOLDER_IMAGE = require("../assests/poster_small.jpg");
   return (
     <RectButton
       {...{ onPress }}
@@ -46,7 +44,11 @@ const ListItem = ({
           }}
         >
           <ImageBackground
-            source={poster ? { uri: poster } : PLACEHOLDER_IMAGE}
+            source={
+              poster
+                ? { uri: poster }
+                : { uri: "https://picsum.photos/172/172" }
+            }
             style={{ flex: 1, width: undefined, height: undefined }}
             imageStyle={{ resizeMode: "cover" }}
           />

@@ -33,7 +33,11 @@ const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
   return (
     <View>
       <View>
-        <Text style={{ fontSize: 32, color: "rgba(18,21,61,1)" }}>{title}</Text>
+        <Text
+          style={{ fontSize: 32, color: "rgba(18,21,61,1)", paddingRight: 64 }}
+        >
+          {title}
+        </Text>
         <View
           style={{
             marginTop: 9,

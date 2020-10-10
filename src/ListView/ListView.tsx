@@ -17,39 +17,24 @@ interface FlatListRenderProps {
 }
 
 const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
-  const [api, setApi] = useState<ApiListItemProps[] | null>([
-    {
-      id: "tt1950186",
-      title: "Ford v Ferrari",
-      cast: ["Christian Bale", "Matt Damon"],
-      idbRating: "8.1",
-      poster:
-        // eslint-disable-next-line max-len
-        "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
-    },
-  ]);
+  const [api, setApi] = useState<ApiListItemProps[] | null>(null);
 
   const { setMovieInfo } = useContext(MovieInfoContext);
-
-  const ApiCall = ({ ...props }: ImdbSearchProps) => {
-    searchIDB(props).then((v) =>
-      setApi((prev) => {
-        return v.content !== prev ? v.content : prev;
-      })
-    );
-  };
 
   return (
     <FlatList
       ListHeaderComponent={
         <>
-          <Search SubmitSearch={(v) => ApiCall(v)} />
-          <View
-            style={{
-              flex: 1,
-              marginTop: 40,
+          <Search
+            SubmitSearch={({ ...props }: ImdbSearchProps) => {
+              searchIDB(props).then((v) =>
+                setApi((prev) => {
+                  return v.content !== prev ? v.content : prev;
+                })
+              );
             }}
           />
+          <View style={{ flex: 1, marginTop: 40 }} />
         </>
       }
       data={api}
@@ -57,14 +42,15 @@ const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
         <ListItem
           key={index}
           onPress={() => {
-            infoIDB({ ...item }).then(
-              (v) =>
-                !setMovieInfo &&
-                setMovieInfo((prev) => {
-                  return v.content !== prev ? v.content : prev;
-                })
+            if (!setMovieInfo) {
+              return;
+            }
+            infoIDB({ ...item }).then((v) =>
+              setMovieInfo((prev) => {
+                navigation.navigate("MovieView");
+                return v.content !== prev ? v.content : prev;
+              })
             );
-            navigation.navigate("MovieView");
           }}
           {...item}
         />

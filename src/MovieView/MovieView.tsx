@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
-  ImageSourcePropType,
   StyleSheet,
   Dimensions,
   ImageBackground,
@@ -13,7 +12,7 @@ import { MovieInfoContext } from "../Context";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";
-import Crew, { Cast, CrewProps } from "./Crew";
+import Crew, { Cast } from "./Crew";
 import Rating from "./Rating";
 import Title from "./Title";
 
@@ -28,7 +27,9 @@ export interface MovieViewProps {
   rating: string;
   ratingCount: string;
   metaScore: string;
-  poster?: string;
+  poster: string;
+  metaCriticCount: string;
+  overview: string;
 }
 
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
@@ -37,6 +38,10 @@ const aspectRatio = 325 / 470;
 const height = aspectRatio * wWidth;
 const borderRadius = 64;
 const ratingsBarHeight = 109;
+
+const posterConversion = (imgSrc: string): string => {
+  return imgSrc ? imgSrc.slice(0, imgSrc.indexOf("_V1")) + "_SY720_.jpg" : "";
+};
 
 const MovieView = () => {
   const { movieInfo } = useContext(MovieInfoContext);
@@ -58,107 +63,8 @@ const MovieView = () => {
     metaScore,
     poster,
     overview,
-  } = {
-    genre: ["Action", "Biography", "Drama"],
-    certificate: "PG-13",
-    runtime: "2h 32min",
-    release: "15 November 2019 (USA)",
-    title: "Ford v Ferrari",
-    cast: [
-      {
-        actor: "Matt Damon",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BMTM0NzYzNDgxMl5BMl5BanBnXkFtZTcwMDg2MTMyMw@@._V1_UY44_CR0,0,32,44_AL_.jpg",
-        role: "Carroll Shelby",
-      },
-      {
-        actor: "Christian Bale",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BMTkxMzk4MjQ4MF5BMl5BanBnXkFtZTcwMzExODQxOA@@._V1_UX32_CR0,0,32,44_AL_.jpg",
-        role: "Ken Miles",
-      },
-      {
-        actor: "Jon Bernthal",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BMTcwNzA5MDg0OV5BMl5BanBnXkFtZTcwMTU2NjE0Nw@@._V1_UY44_CR0,0,32,44_AL_.jpg",
-        role: "Lee Iacocca",
-      },
-      {
-        actor: "Caitriona Balfe",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BZTM4ZDBhYWMtZmQ0Ny00YjI0LWFhMTEtM2IwNmZlZGQwYzJhXkEyXkFqcGdeQXVyMjA2Nzk2MDc@._V1_UX32_CR0,0,32,44_AL_.jpg",
-        role: "Mollie Miles",
-      },
-      {
-        actor: "Josh Lucas",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BM2I4NTgzYmQtZWFlYy00ZjNiLWJiNzQtNjlhZWJmMDk1MDNkXkEyXkFqcGdeQXVyMzYwNzUyOTM@._V1_UY44_CR6,0,32,44_AL_.jpg",
-        role: "Leo Beebe",
-      },
-      {
-        actor: "Noah Jupe",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BODlmOTIzM2MtMTdiOS00OTQwLWI0NTYtOTcyYTNmNDcwYzQ1XkEyXkFqcGdeQXVyNDg1NDM0NDk@._V1_UY44_CR2,0,32,44_AL_.jpg",
-        role: "Peter Miles",
-      },
-      {
-        actor: "Tracy Letts",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BNzQ4Mjc1NTU0OV5BMl5BanBnXkFtZTgwMTUxMjg0NzE@._V1_UY44_CR1,0,32,44_AL_.jpg",
-        role: "Henry Ford II",
-      },
-      {
-        actor: "Remo Girone",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BYWNmYjM3MDYtYTZlNS00Mzc4LWI0ZGYtMjJjMzFmNmU1MWI2XkEyXkFqcGdeQXVyOTI5NzM0NTI@._V1_UY44_CR0,0,32,44_AL_.jpg",
-        role: "Enzo Ferrari",
-      },
-      {
-        actor: "Ray McKinnon",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BMTkwNzEwMDg1NV5BMl5BanBnXkFtZTcwNDU1MDQ5OQ@@._V1_UY44_CR3,0,32,44_AL_.jpg",
-        role: "Phil Remington",
-      },
-      {
-        actor: "JJ Feild",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BMjBjNWNmZDYtYjZjNy00NzdmLTg4NjEtZTRhOTIzNDI2NWI1XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_UX32_CR0,0,32,44_AL_.jpg",
-        role: "Roy Lunn",
-      },
-      {
-        actor: "Jack McMullen",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BOThkMjAzYjItYzZjNi00NzQzLWEwMGYtOGM0YWI0ZjQ1MDQxXkEyXkFqcGdeQXVyMzkzNzUxMDM@._V1_UY44_CR17,0,32,44_AL_.jpg",
-        role: "Charlie Agapiou",
-      },
-      {
-        actor: "Corrado Invernizzi",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BNTUxZDBmZTMtNTRlNS00OGQ3LWExN2QtNzlkMjYzOTI0ZjA1XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_UX32_CR0,0,32,44_AL_.jpg",
-        role: "Franco Gozzi",
-      },
-      {
-        actor: "Joe Williamson",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BOTIyZjJiMzEtYmQxMi00ZjQ4LWI2NTMtMmRhYzcxZDA1M2RlXkEyXkFqcGdeQXVyNzY0MDUxNw@@._V1_UX32_CR0,0,32,44_AL_.jpg",
-        role: "Don Frey",
-      },
-      {
-        actor: "Ian Harding",
-        img:
-          "https://m.media-amazon.com/images/M/MV5BMjExNTk4MzI0OV5BMl5BanBnXkFtZTgwODkzODE0MjE@._V1_UX32_CR0,0,32,44_AL_.jpg",
-        role: "",
-      },
-    ],
-    directors: ["James Mangold"],
-    rating: "8.1/10",
-    ratingCount: "263,626",
-    metaScore: "81",
-    poster:
-      "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
-    overview:
-      "American car designer Carroll Shelby and driver Ken Miles battle corporate interference and the laws of physics to build a revolutionary race car for Ford in order to defeat Ferrari at the 24 Hours of Le Mans in 1966.",
-  };
+    metaCriticCount,
+  } = movieInfo;
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -183,7 +89,7 @@ const MovieView = () => {
           }}
         >
           <ImageBackground
-            source={{ uri: poster }}
+            source={{ uri: posterConversion(poster) }}
             resizeMode="cover"
             style={{
               flex: 1,
@@ -211,11 +117,11 @@ const MovieView = () => {
       >
         <View style={{ flex: 1 }}>
           <Rating
-            idbIcon={
-              <IdbIcon rating={rating.split("/")[0]} {...{ ratingCount }} />
+            idbIcon={<IdbIcon rating={rating} {...{ ratingCount }} />}
+            title="Your rating?"
+            metaIcon={
+              <MetaIcon rating={metaScore} ratingCount={metaCriticCount} />
             }
-            title="rate this"
-            metaIcon={<MetaIcon rating={metaScore} />}
           />
         </View>
       </View>
@@ -265,7 +171,7 @@ export const StarIcon = ({ size }: StarIconProps) => (
   </Svg>
 );
 StarIcon.defaultProps = {
-  size: 16,
+  size: 20,
 };
 
 export default MovieView;
