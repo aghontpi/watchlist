@@ -47,7 +47,6 @@ const ListView = () => {
           <FlatList
             data={api}
             renderItem={({ item, index }: FlatListRenderProps) => {
-              console.log(item);
               return (
                 <ListItem
                   key={index}
