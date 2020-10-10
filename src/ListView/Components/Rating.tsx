@@ -46,7 +46,7 @@ const Rating = ({ heartOnPress, idbRating }: RatingProps) => {
         style={{
           alignItems: "flex-end",
           flex: 1,
-          justifyContent: "center",
+          justifyContent: "flex-end",
         }}
       >
         <Icon name="heart" size={24} onPress={() => heartOnPress()} />

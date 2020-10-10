@@ -39,7 +39,7 @@ const ListItem = ({
             borderTopRightRadius: 40,
             borderBottomRightRadius: 40,
             overflow: "hidden",
-            width: 164,
+            width: 172,
             height: 172,
           }}
         >
@@ -60,7 +60,7 @@ const ListItem = ({
           <Rating heartOnPress={() => true} {...{ idbRating }} />
           <View>
             <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 8 }}>
-              {title}
+              {title.length < 37 ? title : title.slice(0, 34) + ".."}
             </Text>
           </View>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 
 import { ImdbSearchProps, searchIDB } from "../Api";
 
@@ -22,6 +22,7 @@ const ListView = () => {
       cast: ["Christian Bale", "Matt Damon"],
       idbRating: "8.1",
       poster:
+        // eslint-disable-next-line max-len
         "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
     },
   ]);
@@ -35,7 +36,7 @@ const ListView = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <Search SubmitSearch={(v) => ApiCall(v)} />
       <View
         style={{
@@ -43,24 +44,20 @@ const ListView = () => {
           marginTop: 40,
         }}
       >
-        {api && (
-          <FlatList
-            data={api}
-            renderItem={({ item, index }: FlatListRenderProps) => {
-              return (
-                <ListItem
-                  key={index}
-                  onPress={() => {
-                    return true;
-                  }}
-                  {...item}
-                />
-              );
-            }}
-          />
-        )}
+        <FlatList
+          data={api}
+          renderItem={({ item, index }: FlatListRenderProps) => (
+            <ListItem
+              key={index}
+              onPress={() => {
+                return true;
+              }}
+              {...item}
+            />
+          )}
+        />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
