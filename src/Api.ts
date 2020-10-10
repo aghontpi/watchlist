@@ -64,7 +64,7 @@ const searchImdb = async ({ title: query }: ImdbSearchProps) => {
   return response;
 };
 
-interface ImdbInfoProps {
+export interface ImdbInfoProps {
   id: string;
 }
 
@@ -78,14 +78,16 @@ const infoImdb = async ({ id: query }: ImdbInfoProps) => {
     return cache;
   }
   const url = `https://api.bluepie.in/get/imdb/info/?id=${query}`;
-
   const response = await Api(url);
-  StoreIntoCache({
-    query: query,
-    response: response,
-    origin: "idb",
-    responseType: "search",
-  });
+  response.status === "success" &&
+    StoreIntoCache({
+      query: query,
+      response: response,
+      origin: "idb",
+      responseType: "search",
+    });
+
+  console.log(url, response);
   return response;
 };
 

@@ -8,17 +8,11 @@ interface TitleProps {
   title: string;
   genre: string[];
   runtime: string;
-  releasedYear: string;
+  release: string;
   certificate: string;
 }
 
-const Title = ({
-  title,
-  genre,
-  runtime,
-  releasedYear,
-  certificate,
-}: TitleProps) => {
+const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
   const style = StyleSheet.create({
     genreButton: {
       borderRadius: 100,
@@ -46,7 +40,7 @@ const Title = ({
             flexDirection: "row",
           }}
         >
-          <Text style={{ color: "rgba(154,155,178,1)" }}>{releasedYear}</Text>
+          <Text style={{ color: "rgba(154,155,178,1)" }}>{release}</Text>
           <Text style={{ marginLeft: 24, color: "rgba(154,155,178,1)" }}>
             {certificate}
           </Text>

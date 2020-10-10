@@ -11,6 +11,7 @@ export interface ListItemProps {
   title: string;
   cast: string[];
   poster: string;
+  id: string;
 }
 
 const ListItem = ({

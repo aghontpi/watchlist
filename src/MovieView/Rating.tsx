@@ -1,13 +1,13 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { View, Text } from "react-native";
 
 interface RatingProps {
-  icon: React.ReactNode;
+  idbIcon: ReactNode;
   title: string;
-  subtitle: string;
+  metaIcon: ReactNode;
 }
 
-const Rating = ({ icon, title, subtitle }: RatingProps) => {
+const Rating = ({ idbIcon, title, metaIcon }: RatingProps) => {
   return (
     <View
       style={{
@@ -17,11 +17,9 @@ const Rating = ({ icon, title, subtitle }: RatingProps) => {
         justifyContent: "space-around",
       }}
     >
-      <View>{icon}</View>
-      <Text style={{ fontSize: 16 }}>Rate this</Text>
-      <Text style={{ fontSize: 16, textAlign: "center" }}>
-        Romato{"\n"}Score
-      </Text>
+      <View>{idbIcon}</View>
+      <Text style={{ fontSize: 16 }}>{title}</Text>
+      <View>{metaIcon}</View>
     </View>
   );
 };

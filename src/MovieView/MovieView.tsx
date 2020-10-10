@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -9,36 +9,29 @@ import {
 } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-import Crew, { CrewProps } from "./Crew";
+import { MovieInfoContext } from "../Context";
+
+import { MetaIcon } from "./Components";
+import IdbIcon from "./Components/IdbIcon";
+import Crew, { Cast, CrewProps } from "./Crew";
 import Rating from "./Rating";
 import Title from "./Title";
 
 export interface MovieViewProps {
-  image: ImageSourcePropType;
-  title: string;
-  overview: string;
-  rating: { imdb: string; rottenTomatoes: string };
   genre: string[];
-  crew: CrewProps;
+  certificate: string;
+  runtime: string;
+  release: string;
+  title: string;
+  cast: Cast[];
+  directors: string[];
+  rating: string;
+  ratingCount: string;
+  metaScore: string;
+  poster?: string;
 }
 
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
-
-const movieViewProps: MovieViewProps = {
-  image: require("../assests/placeholder.jpeg"),
-  title: "American Made",
-  overview:
-    // eslint-disable-next-line max-len
-    "American car designer Carroll Shelby and driver Ken Miles battle corporate interference and the laws of physics to build a revolutionary race car for Ford in order to defeat Ferrari at the 24 Hours of Le Mans in 1966",
-  rating: { imdb: "8", rottenTomatoes: "7.8" },
-  genre: ["action", "racing", "drama"],
-  crew: {
-    directors: ["James Mangold"],
-    actors: "Matt Damon, Christian Bale, Jon Bernthal, Caitriona Balfe".split(
-      ", "
-    ),
-  },
-};
 
 const aspectRatio = 325 / 470;
 const height = aspectRatio * wWidth;
@@ -46,8 +39,126 @@ const borderRadius = 64;
 const ratingsBarHeight = 109;
 
 const MovieView = () => {
-  const [apiResonse, setApiResponse] = useState<MovieViewProps>(movieViewProps);
-  const { crew, title, genre, rating, overview, image } = apiResonse;
+  const { movieInfo } = useContext(MovieInfoContext);
+
+  if (!movieInfo) {
+    return <Text>Movie not available</Text>;
+  }
+
+  const {
+    genre,
+    certificate,
+    runtime,
+    release,
+    title,
+    cast,
+    directors,
+    rating,
+    ratingCount,
+    metaScore,
+    poster,
+    overview,
+  } = {
+    genre: ["Action", "Biography", "Drama"],
+    certificate: "PG-13",
+    runtime: "2h 32min",
+    release: "15 November 2019 (USA)",
+    title: "Ford v Ferrari",
+    cast: [
+      {
+        actor: "Matt Damon",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BMTM0NzYzNDgxMl5BMl5BanBnXkFtZTcwMDg2MTMyMw@@._V1_UY44_CR0,0,32,44_AL_.jpg",
+        role: "Carroll Shelby",
+      },
+      {
+        actor: "Christian Bale",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BMTkxMzk4MjQ4MF5BMl5BanBnXkFtZTcwMzExODQxOA@@._V1_UX32_CR0,0,32,44_AL_.jpg",
+        role: "Ken Miles",
+      },
+      {
+        actor: "Jon Bernthal",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BMTcwNzA5MDg0OV5BMl5BanBnXkFtZTcwMTU2NjE0Nw@@._V1_UY44_CR0,0,32,44_AL_.jpg",
+        role: "Lee Iacocca",
+      },
+      {
+        actor: "Caitriona Balfe",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BZTM4ZDBhYWMtZmQ0Ny00YjI0LWFhMTEtM2IwNmZlZGQwYzJhXkEyXkFqcGdeQXVyMjA2Nzk2MDc@._V1_UX32_CR0,0,32,44_AL_.jpg",
+        role: "Mollie Miles",
+      },
+      {
+        actor: "Josh Lucas",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BM2I4NTgzYmQtZWFlYy00ZjNiLWJiNzQtNjlhZWJmMDk1MDNkXkEyXkFqcGdeQXVyMzYwNzUyOTM@._V1_UY44_CR6,0,32,44_AL_.jpg",
+        role: "Leo Beebe",
+      },
+      {
+        actor: "Noah Jupe",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BODlmOTIzM2MtMTdiOS00OTQwLWI0NTYtOTcyYTNmNDcwYzQ1XkEyXkFqcGdeQXVyNDg1NDM0NDk@._V1_UY44_CR2,0,32,44_AL_.jpg",
+        role: "Peter Miles",
+      },
+      {
+        actor: "Tracy Letts",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BNzQ4Mjc1NTU0OV5BMl5BanBnXkFtZTgwMTUxMjg0NzE@._V1_UY44_CR1,0,32,44_AL_.jpg",
+        role: "Henry Ford II",
+      },
+      {
+        actor: "Remo Girone",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BYWNmYjM3MDYtYTZlNS00Mzc4LWI0ZGYtMjJjMzFmNmU1MWI2XkEyXkFqcGdeQXVyOTI5NzM0NTI@._V1_UY44_CR0,0,32,44_AL_.jpg",
+        role: "Enzo Ferrari",
+      },
+      {
+        actor: "Ray McKinnon",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BMTkwNzEwMDg1NV5BMl5BanBnXkFtZTcwNDU1MDQ5OQ@@._V1_UY44_CR3,0,32,44_AL_.jpg",
+        role: "Phil Remington",
+      },
+      {
+        actor: "JJ Feild",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BMjBjNWNmZDYtYjZjNy00NzdmLTg4NjEtZTRhOTIzNDI2NWI1XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_UX32_CR0,0,32,44_AL_.jpg",
+        role: "Roy Lunn",
+      },
+      {
+        actor: "Jack McMullen",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BOThkMjAzYjItYzZjNi00NzQzLWEwMGYtOGM0YWI0ZjQ1MDQxXkEyXkFqcGdeQXVyMzkzNzUxMDM@._V1_UY44_CR17,0,32,44_AL_.jpg",
+        role: "Charlie Agapiou",
+      },
+      {
+        actor: "Corrado Invernizzi",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BNTUxZDBmZTMtNTRlNS00OGQ3LWExN2QtNzlkMjYzOTI0ZjA1XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_UX32_CR0,0,32,44_AL_.jpg",
+        role: "Franco Gozzi",
+      },
+      {
+        actor: "Joe Williamson",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BOTIyZjJiMzEtYmQxMi00ZjQ4LWI2NTMtMmRhYzcxZDA1M2RlXkEyXkFqcGdeQXVyNzY0MDUxNw@@._V1_UX32_CR0,0,32,44_AL_.jpg",
+        role: "Don Frey",
+      },
+      {
+        actor: "Ian Harding",
+        img:
+          "https://m.media-amazon.com/images/M/MV5BMjExNTk4MzI0OV5BMl5BanBnXkFtZTgwODkzODE0MjE@._V1_UX32_CR0,0,32,44_AL_.jpg",
+        role: "",
+      },
+    ],
+    directors: ["James Mangold"],
+    rating: "8.1/10",
+    ratingCount: "263,626",
+    metaScore: "81",
+    poster:
+      "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
+    overview:
+      "American car designer Carroll Shelby and driver Ken Miles battle corporate interference and the laws of physics to build a revolutionary race car for Ford in order to defeat Ferrari at the 24 Hours of Le Mans in 1966.",
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -72,8 +183,8 @@ const MovieView = () => {
           }}
         >
           <ImageBackground
-            source={image}
-            imageStyle={{ resizeMode: "cover" }}
+            source={{ uri: poster }}
+            resizeMode="cover"
             style={{
               flex: 1,
               justifyContent: "center",
@@ -100,36 +211,11 @@ const MovieView = () => {
       >
         <View style={{ flex: 1 }}>
           <Rating
-            icon={
-              <View style={{ alignItems: "center" }}>
-                <StarIcon />
-                <View style={{ flexDirection: "row", marginTop: 4 }}>
-                  <Text
-                    style={{
-                      color: "#12153D",
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    8.2
-                  </Text>
-                  <Text
-                    style={{
-                      color: "#434670",
-                      alignSelf: "center",
-
-                      fontSize: 14,
-                      marginTop: 2,
-                    }}
-                  >
-                    /10
-                  </Text>
-                </View>
-                <Text style={{ color: "#9A9BB2", fontSize: 12 }}>153,374</Text>
-              </View>
+            idbIcon={
+              <IdbIcon rating={rating.split("/")[0]} {...{ ratingCount }} />
             }
-            title="4.8"
-            subtitle="subtitle"
+            title="rate this"
+            metaIcon={<MetaIcon rating={metaScore} />}
           />
         </View>
       </View>
@@ -146,13 +232,7 @@ const MovieView = () => {
           },
         ]}
       >
-        <Title
-          title="Ford Vs Ferrari"
-          genre={genre}
-          runtime="1hr 32min"
-          releasedYear="2019"
-          certificate="U/A"
-        />
+        <Title {...{ title, genre, runtime, release, certificate }} />
         <View style={{ marginTop: 48 }}>
           <View>
             <Text style={{ fontSize: 24, color: "#12153D" }}>Plot</Text>
@@ -162,7 +242,7 @@ const MovieView = () => {
           </View>
         </View>
         <View style={{ marginTop: 48 }}>
-          <Crew directors={crew.directors} actors={crew.actors} />
+          <Crew actors={cast} />
         </View>
       </View>
     </View>

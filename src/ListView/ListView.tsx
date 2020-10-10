@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ImdbSearchProps, searchIDB } from "../Api";
+import { ImdbSearchProps, infoIDB, searchIDB } from "../Api";
 import { AfterLoginNavigationProp } from "../Components/Navigation";
+import { MovieInfoContext } from "../Context";
 
 import { Search } from "./Components";
 import ListItem, { ListItemProps } from "./ListItem";
@@ -18,6 +19,7 @@ interface FlatListRenderProps {
 const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
   const [api, setApi] = useState<ApiListItemProps[] | null>([
     {
+      id: "tt1950186",
       title: "Ford v Ferrari",
       cast: ["Christian Bale", "Matt Damon"],
       idbRating: "8.1",
@@ -26,6 +28,8 @@ const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
         "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
     },
   ]);
+
+  const { setMovieInfo } = useContext(MovieInfoContext);
 
   const ApiCall = ({ ...props }: ImdbSearchProps) => {
     searchIDB(props).then((v) =>
@@ -53,6 +57,13 @@ const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
         <ListItem
           key={index}
           onPress={() => {
+            infoIDB({ ...item }).then(
+              (v) =>
+                !setMovieInfo &&
+                setMovieInfo((prev) => {
+                  return v.content !== prev ? v.content : prev;
+                })
+            );
             navigation.navigate("MovieView");
           }}
           {...item}
