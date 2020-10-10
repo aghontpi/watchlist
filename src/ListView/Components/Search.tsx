@@ -58,8 +58,10 @@ const Search = ({ SubmitSearch }: SearchProps) => {
           autoCorrect={false}
           autoCapitalize="words"
           autoCompleteType="off"
-          selectionColor="transparent"
-          onSubmitEditing={({ nativeEvent: { text } }) => SubmitSearch(text)}
+          selectionColor="black"
+          onSubmitEditing={({ nativeEvent: { text } }) =>
+            SubmitSearch({ title: text })
+          }
         />
       </View>
     </>

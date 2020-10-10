@@ -9,7 +9,7 @@ export interface ListItemProps {
   idbRating: string;
   rtRating?: string;
   title: string;
-  actors: string[];
+  cast: string[];
   poster: string;
 }
 
@@ -17,11 +17,11 @@ const ListItem = ({
   onPress,
   idbRating,
   title,
-  actors,
+  cast,
   poster,
 }: ListItemProps) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const PLACEHOLDER_IMAGE = require("../assests/poster_small.jpg");
+  const PLACEHOLDER_IMAGE = require("./../../assests/poster_small.jpg");
   return (
     <RectButton
       {...{ onPress }}
@@ -65,8 +65,8 @@ const ListItem = ({
           </View>
 
           <View style={{ flexDirection: "row", marginTop: 8 }}>
-            {actors &&
-              actors.map((v, i) => (
+            {cast &&
+              cast.map((v, i) => (
                 <Text key={v} style={{ fontSize: 16, color: "#737599" }}>
                   {i !== 0 && ", "}
                   {v}

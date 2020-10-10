@@ -16,11 +16,10 @@ interface FlatListRenderProps {
 interface ListViewProps {}
 
 const ListView = () => {
-  const [api, setApi] = useState<ApiListItemProps[] | null>();
-  setApi([
+  const [api, setApi] = useState<ApiListItemProps[] | null>([
     {
       title: "Ford v Ferrari",
-      actors: ["Christian Bale", "Matt Damon"],
+      cast: ["Christian Bale", "Matt Damon"],
       idbRating: "8.1",
       poster:
         "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg",
@@ -28,8 +27,11 @@ const ListView = () => {
   ]);
 
   const ApiCall = ({ ...props }: ImdbSearchProps) => {
-    setApi(null);
-    searchIDB(props).then((v) => setApi(v));
+    searchIDB(props).then((v) =>
+      setApi((prev) => {
+        return v.content !== prev ? v.content : prev;
+      })
+    );
   };
 
   return (
@@ -41,18 +43,23 @@ const ListView = () => {
           marginTop: 40,
         }}
       >
-        <FlatList
-          data={api}
-          renderItem={({ item, index }: FlatListRenderProps) => (
-            <ListItem
-              key={index}
-              onPress={() => {
-                return true;
-              }}
-              {...item}
-            />
-          )}
-        />
+        {api && (
+          <FlatList
+            data={api}
+            renderItem={({ item, index }: FlatListRenderProps) => {
+              console.log(item);
+              return (
+                <ListItem
+                  key={index}
+                  onPress={() => {
+                    return true;
+                  }}
+                  {...item}
+                />
+              );
+            }}
+          />
+        )}
       </View>
     </View>
   );
