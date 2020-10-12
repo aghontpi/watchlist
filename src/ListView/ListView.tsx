@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import { ImdbSearchProps, infoIDB, searchIDB } from "../Api";
-import { AfterLoginNavigationProp } from "../Components/Navigation";
+import { DrawerNavigationProp } from "../Components/Navigation";
 import { MovieInfoContext } from "../Context";
 
 import { Search } from "./Components";
@@ -16,7 +16,7 @@ interface FlatListRenderProps {
   index: number;
 }
 
-const ListView = ({ navigation }: AfterLoginNavigationProp<"MovieSearch">) => {
+const ListView = ({ navigation }: DrawerNavigationProp<"search">) => {
   const [api, setApi] = useState<ApiListItemProps[] | null>(null);
 
   const { setMovieInfo } = useContext(MovieInfoContext);
