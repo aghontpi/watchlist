@@ -1,6 +1,8 @@
 import { RetrieveFromCache, StoreIntoCache } from "./Cache";
 import { Searchrt } from "./TypeDefinitions";
 
+const HOSTNAME = "api.bluepie.in";
+
 const Api = async (url: string) => {
   const rawResponse = await fetch(url);
   return await rawResponse.json();
@@ -22,7 +24,7 @@ const SearchRT = async ({ query, pageLimit, page }: SearchRTProps) => {
     return cache;
   }
 
-  const url = `https://api.bluepie.in/get/rottentomatoes/search/?query=${query}&page_limit=${pageLimit}&page=${page}`;
+  const url = `https://${HOSTNAME}/get/rottentomatoes/search/?query=${query}&page_limit=${pageLimit}&page=${page}`;
   const response = await Api(url);
   StoreIntoCache({
     query: query,
@@ -35,7 +37,7 @@ const SearchRT = async ({ query, pageLimit, page }: SearchRTProps) => {
 };
 
 const InfoRT = async (id: string) => {
-  const url = `https://api.bluepie.in/get/rottentomatoes/info/?id=${id}`;
+  const url = `https://${HOSTNAME}/get/rottentomatoes/info/?id=${id}`;
   return (await Api(url)) as Searchrt;
 };
 
@@ -52,7 +54,7 @@ const searchImdb = async ({ title: query }: ImdbSearchProps) => {
   if (cache) {
     return cache;
   }
-  const url = `https://api.bluepie.in/get/imdb/search/?title=${query}`;
+  const url = `https://${HOSTNAME}/get/imdb/search/?title=${query}`;
   const response = await Api(url);
   response.status === "success" &&
     StoreIntoCache({
@@ -77,7 +79,7 @@ const infoImdb = async ({ id: query }: ImdbInfoProps) => {
   if (cache) {
     return cache;
   }
-  const url = `https://api.bluepie.in/get/imdb/info/?id=${query}`;
+  const url = `https://${HOSTNAME}/get/imdb/info/?id=${query}`;
   const response = await Api(url);
   response.status === "success" &&
     StoreIntoCache({

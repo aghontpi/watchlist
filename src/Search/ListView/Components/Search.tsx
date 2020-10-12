@@ -63,7 +63,7 @@ const Search = ({ SubmitSearch }: SearchProps) => {
           borderBottomColor: "#EDEEEF",
         }}
       >
-        <View style={{}}>
+        <View>
           <Text
             style={{
               color: "#C1C4CD",

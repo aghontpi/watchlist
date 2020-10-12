@@ -7,6 +7,9 @@ interface CacheApiResponse {
   origin: "idb" | "rt";
 }
 
+const KeyTemplate = (query: string, responseType: string, origin: string) =>
+  `${query}:${responseType}:${origin}`;
+
 const storeApiResponse = async ({
   query,
   response,
@@ -14,7 +17,7 @@ const storeApiResponse = async ({
   origin,
 }: CacheApiResponse) => {
   try {
-    const key = `${query}:${responseType}:${origin}`;
+    const key = KeyTemplate(query, responseType, origin);
     await AsyncStorage.setItem(key, JSON.stringify(response));
   } catch (err) {
     console.log(err);
@@ -31,7 +34,7 @@ const retrieveApiResponse = async ({
 }: RetrieveApiResponse): Promise<JSON | null> => {
   let rtnValue = null;
   try {
-    const key = `${query}:${responseType}:${origin}`;
+    const key = KeyTemplate(query, responseType, origin);
     const retrievedValue = await AsyncStorage.getItem(key);
     rtnValue = retrievedValue != null ? JSON.parse(retrievedValue) : null;
   } catch (err) {
