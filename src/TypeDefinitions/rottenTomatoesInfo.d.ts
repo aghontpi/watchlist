@@ -1,4 +1,4 @@
-export interface Infort2 {
+export interface Infort {
   status: string;
   content: Content;
 }

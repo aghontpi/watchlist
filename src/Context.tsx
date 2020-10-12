@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useState } from "react";
 
-import { MovieViewProps } from "./MovieView/MovieView";
+import { MovieViewProps } from "./Search/MovieView/MovieView";
 
 interface MovieInfoContextProps {
   movieInfo: MovieViewProps | null;
