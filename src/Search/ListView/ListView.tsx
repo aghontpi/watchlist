@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ImdbSearchProps, infoIDB, searchIDB } from "../Api";
-import { DrawerNavigationProp } from "../Components/Navigation";
-import { MovieInfoContext } from "../Context";
+import { ImdbSearchProps, infoIDB, searchIDB } from "../../Api";
+import { MovieInfoContext } from "../../Context";
+import { MovieSearchInfoStackNavigationProps } from "../Search";
 
 import { Search } from "./Components";
 import ListItem, { ListItemProps } from "./ListItem";
@@ -16,7 +16,9 @@ interface FlatListRenderProps {
   index: number;
 }
 
-const ListView = ({ navigation }: DrawerNavigationProp<"search">) => {
+const ListView = ({
+  navigation,
+}: MovieSearchInfoStackNavigationProps<"ListView">) => {
   const [api, setApi] = useState<ApiListItemProps[] | null>(null);
 
   const { setMovieInfo } = useContext(MovieInfoContext);

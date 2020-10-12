@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Dimensions } from "react-native";
 
-import { ImdbSearchProps } from "../../Api";
+import { ImdbSearchProps } from "../../../Api";
 import Header from "../../MovieView/Header";
 
 const { width } = Dimensions.get("window");

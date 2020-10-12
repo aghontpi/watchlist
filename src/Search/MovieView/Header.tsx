@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-import { RoundedIcon } from "../Components";
+import { RoundedIcon } from "../../Components";
 
 interface HeaderProps {
   left?: {

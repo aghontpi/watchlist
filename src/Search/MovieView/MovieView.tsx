@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-import { MovieInfoContext } from "../Context";
+import { MovieInfoContext } from "../../Context";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";

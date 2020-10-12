@@ -18,13 +18,13 @@ export interface AfterLoginNavigationProp<
 }
 
 export type DrawerNavigationParamList = {
-  search: undefined;
-  watchList: undefined;
-  favourite: undefined;
-  profile: undefined;
-  people: undefined;
+  Search: undefined;
+  WatchList: undefined;
+  Favourite: undefined;
+  Profile: undefined;
+  People: undefined;
   settings: undefined;
-  logout: undefined;
+  Logout: undefined;
 };
 
 export interface DrawerNavigationProp<
