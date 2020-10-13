@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { ImdbStar, IMDB_YELLOW } from "../../MovieView";
+import { IMDB_YELLOW, StarIcon } from "../../../Components";
 
 interface RatingProps {
   heartOnPress: () => void;
@@ -27,7 +27,7 @@ const Rating = ({ heartOnPress, idbRating }: RatingProps) => {
           borderRadius: 5,
         }}
       >
-        <ImdbStar size={16} />
+        <StarIcon size={16} />
         <Text
           style={{
             color: IMDB_YELLOW,

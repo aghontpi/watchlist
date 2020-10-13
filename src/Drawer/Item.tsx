@@ -30,7 +30,7 @@ const style = StyleSheet.create({
   name: {
     fontSize: 20,
     letterSpacing: 0,
-    fontFamily: "Open Sans",
+    fontFamily: "Sk-Modernist-Regular",
     color: "#080808",
   },
 });

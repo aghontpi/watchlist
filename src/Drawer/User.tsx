@@ -41,7 +41,6 @@ const style = StyleSheet.create({
   name: {
     fontSize: 22,
     fontFamily: "Sk-Modernist-Bold",
-    fontWeight: "bold",
   },
   nick: {
     fontSize: 16,

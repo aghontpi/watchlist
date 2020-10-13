@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-import { StarIcon } from "../MovieView";
+import { StarIcon } from "../../../Components";
 
 interface IdbIconProps {
   rating: string;

@@ -6,7 +6,6 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
-import Svg, { Path } from "react-native-svg";
 
 import { MovieInfoContext } from "../../Context";
 
@@ -153,25 +152,6 @@ const MovieView = () => {
       </View>
     </View>
   );
-};
-
-interface StarIconProps {
-  size: number;
-}
-
-export const IMDB_YELLOW = "#FCC419";
-
-export const StarIcon = ({ size }: StarIconProps) => (
-  <Svg width={size} height={size} viewBox="0 0 28 27" fill="none">
-    <Path
-      // eslint-disable-next-line max-len
-      d="M21.413 26c-.213 0-.423-.05-.613-.147l-6.8-3.56-6.8 3.56a1.334 1.334 0 01-1.933-1.413L6.6 16.933 1.107 11.6a1.333 1.333 0 01-.334-1.333 1.333 1.333 0 011.08-.907l7.6-1.107 3.347-6.84a1.334 1.334 0 012.4 0l3.387 6.827 7.6 1.107a1.333 1.333 0 011.08.906 1.334 1.334 0 01-.334 1.334L21.44 16.92l1.333 7.507a1.333 1.333 0 01-.533 1.333c-.241.17-.532.254-.827.24z"
-      fill={IMDB_YELLOW}
-    />
-  </Svg>
-);
-StarIcon.defaultProps = {
-  size: 20,
 };
 
 export default MovieView;

@@ -1,1 +1,1 @@
-export { default, StarIcon as ImdbStar, IMDB_YELLOW } from "./MovieView";
+export { default } from "./MovieView";

@@ -32,6 +32,9 @@
 		6B57C17F2445464C94F7405B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA30F95CAB3949379466E06B /* Octicons.ttf */; };
 		2D5DCF81349C46EDAB29A2EC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B1638138BE471E83103F91 /* SimpleLineIcons.ttf */; };
 		EA55DEA730E745B6A0594E6B /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D21CE4FCDFCB45958AB86232 /* Zocial.ttf */; };
+		706B5E2D99E54A9A969DE6D5 /* Sk-Modernist-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF54A583272548C3852E60CB /* Sk-Modernist-Bold.otf */; };
+		2C0E22EFD831418B9647DF41 /* Sk-Modernist-Mono.otf in Resources */ = {isa = PBXBuildFile; fileRef = 023172E182A046CBA23C6FAC /* Sk-Modernist-Mono.otf */; };
+		39E6216F42804C8EBEFA782A /* Sk-Modernist-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01BC35BF5CE74F5A8FD49BD5 /* Sk-Modernist-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		AA30F95CAB3949379466E06B /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		09B1638138BE471E83103F91 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D21CE4FCDFCB45958AB86232 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EF54A583272548C3852E60CB /* Sk-Modernist-Bold.otf */ = {isa = PBXFileReference; name = "Sk-Modernist-Bold.otf"; path = "../assets/Fonts/Sk-Modernist-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		023172E182A046CBA23C6FAC /* Sk-Modernist-Mono.otf */ = {isa = PBXFileReference; name = "Sk-Modernist-Mono.otf"; path = "../assets/Fonts/Sk-Modernist-Mono.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		01BC35BF5CE74F5A8FD49BD5 /* Sk-Modernist-Regular.otf */ = {isa = PBXFileReference; name = "Sk-Modernist-Regular.otf"; path = "../assets/Fonts/Sk-Modernist-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,9 @@
 				AA30F95CAB3949379466E06B /* Octicons.ttf */,
 				09B1638138BE471E83103F91 /* SimpleLineIcons.ttf */,
 				D21CE4FCDFCB45958AB86232 /* Zocial.ttf */,
+				EF54A583272548C3852E60CB /* Sk-Modernist-Bold.otf */,
+				023172E182A046CBA23C6FAC /* Sk-Modernist-Mono.otf */,
+				01BC35BF5CE74F5A8FD49BD5 /* Sk-Modernist-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -368,6 +377,9 @@
 				6B57C17F2445464C94F7405B /* Octicons.ttf in Resources */,
 				2D5DCF81349C46EDAB29A2EC /* SimpleLineIcons.ttf in Resources */,
 				EA55DEA730E745B6A0594E6B /* Zocial.ttf in Resources */,
+				706B5E2D99E54A9A969DE6D5 /* Sk-Modernist-Bold.otf in Resources */,
+				2C0E22EFD831418B9647DF41 /* Sk-Modernist-Mono.otf in Resources */,
+				39E6216F42804C8EBEFA782A /* Sk-Modernist-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
