@@ -3,26 +3,41 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import { DrawerNavigationParamList } from "./Components/Navigation";
 import { Search } from "./Search";
 import Drawer from "./Drawer";
 import { DRAWER_WIDTH } from "./Drawer/Drawer";
+import { Login } from "./PreHome";
 
 const DrawerNavigation = createDrawerNavigator<DrawerNavigationParamList>();
 
+type StackNavigationParamList = {
+  Login: undefined;
+  Registraton: undefined;
+};
+
+const StackNavigation = createStackNavigator<StackNavigationParamList>();
+
 const index = () => {
-  return (
-    <NavigationContainer>
-      <DrawerNavigation.Navigator
-        initialRouteName="Search"
-        drawerContent={(props) => <Drawer {...props} />}
-        drawerStyle={style.drawerStyle}
-      >
-        <DrawerNavigation.Screen name="Search" component={Search} />
-      </DrawerNavigation.Navigator>
-    </NavigationContainer>
+  // TODO: complete the registration and login part
+  const signedIn = false;
+  const mainContent = signedIn ? (
+    <DrawerNavigation.Navigator
+      initialRouteName="Search"
+      drawerContent={(props) => <Drawer {...props} />}
+      drawerStyle={style.drawerStyle}
+    >
+      <DrawerNavigation.Screen name="Search" component={Search} />
+    </DrawerNavigation.Navigator>
+  ) : (
+    <StackNavigation.Navigator headerMode="none">
+      <StackNavigation.Screen name="Login" component={Login} />
+    </StackNavigation.Navigator>
   );
+
+  return <NavigationContainer>{mainContent}</NavigationContainer>;
 };
 
 const style = StyleSheet.create({
