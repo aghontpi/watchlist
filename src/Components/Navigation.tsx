@@ -1,6 +1,6 @@
 /**
- * navigation TypeChecking
- * refer https://reactnavigation.org/docs/typescript/
+ * autocomplete and typechecking for navigation
+ * https://reactnavigation.org/docs/typescript/
  */
 
 import { DrawerNavigationProp as RNDrawerNavigationProp } from "@react-navigation/drawer";
@@ -17,9 +17,9 @@ export type DrawerNavigationParamList = {
 };
 
 export interface DrawerNavigationProp<
-  RouteName extends keyof DrawerNavigationParamList
+  T extends keyof DrawerNavigationParamList
 > {
-  navigation: RNDrawerNavigationProp<DrawerNavigationParamList, RouteName>;
+  navigation: RNDrawerNavigationProp<DrawerNavigationParamList, T>;
 }
 
 export type MovieSearchInfoParamList = {
@@ -28,7 +28,18 @@ export type MovieSearchInfoParamList = {
 };
 
 export interface MovieSearchInfoStackNavigationProps<
-  RouteName extends keyof MovieSearchInfoParamList
+  T extends keyof MovieSearchInfoParamList
 > {
-  navigation: StackNavigationProp<MovieSearchInfoParamList, RouteName>;
+  navigation: StackNavigationProp<MovieSearchInfoParamList, T>;
+}
+
+export type StackNavigationParamList = {
+  Login: undefined;
+  Registraton: undefined;
+};
+
+export interface PreHomeStackNavigationProps<
+  T extends keyof StackNavigationParamList
+> {
+  navigation: StackNavigationProp<StackNavigationParamList, T>;
 }

@@ -1,10 +1,10 @@
 # WatchList
 
-> ACTIVELY IN DEVELOPMENT
+> NOT COMPLETE YET, ACTIVELY IN DEVELOPMENT
 
 ## What is this?
 
-A react native application, thus userStories has not been posted, will make it public after a significant portion of work is completed.
+A react native application, _In development_ thus userStories has not been posted, will make it public after a significant portion of work is completed.
 
 ## Overview
 

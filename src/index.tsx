@@ -5,19 +5,16 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { DrawerNavigationParamList } from "./Components/Navigation";
+import {
+  DrawerNavigationParamList,
+  StackNavigationParamList,
+} from "./Components/Navigation";
 import { Search } from "./Search";
 import Drawer from "./Drawer";
 import { DRAWER_WIDTH } from "./Drawer/Drawer";
 import { Login } from "./PreHome";
 
 const DrawerNavigation = createDrawerNavigator<DrawerNavigationParamList>();
-
-type StackNavigationParamList = {
-  Login: undefined;
-  Registraton: undefined;
-};
-
 const StackNavigation = createStackNavigator<StackNavigationParamList>();
 
 const index = () => {

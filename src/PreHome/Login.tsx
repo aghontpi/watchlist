@@ -1,7 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Login = () => {
+import { PreHomeStackNavigationProps } from "../Components/Navigation";
+
+const Login = (navigation: PreHomeStackNavigationProps<"Login">) => {
   return (
     <View style={style.holder}>
       <View style={style.titleHolder}>
