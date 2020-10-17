@@ -1,6 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Dimensions, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  TextInput,
+  Keyboard,
+} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+
+import { FontType, Size } from "../StyleConstants";
 
 interface InputProps {
   icon: string;
@@ -8,19 +16,20 @@ interface InputProps {
 }
 
 const { width } = Dimensions.get("window");
-// TODO: move global constants seperately
-const MARGIN_HORIZONTAL = 24;
 
 const Input = ({ icon, placeholder }: InputProps) => {
   return (
     <View style={style.holder}>
       <View style={style.content}>
         <View style={style.contentLayout}>
-          <Icon name={icon} size={28} color="#B2B2B2" />
+          <Icon name={icon} size={Size.l + 4} color="#B2B2B2" />
           <TextInput
             style={style.text}
             placeholder={placeholder}
             underlineColorAndroid="transparent"
+            autoCorrect={false}
+            blurOnSubmit={false}
+            onSubmitEditing={() => Keyboard.dismiss()}
           />
         </View>
       </View>
@@ -31,13 +40,13 @@ const Input = ({ icon, placeholder }: InputProps) => {
 const style = StyleSheet.create({
   holder: {
     height: 80,
-    width: width - MARGIN_HORIZONTAL * 2,
-    borderRadius: 20,
+    width: width - Size.l * 2,
+    borderRadius: Size.m + 2,
     overflow: "hidden",
   },
   content: {
     flex: 1,
-    padding: 24,
+    padding: Size.l,
     backgroundColor: "#E0E0E1",
   },
   contentLayout: {
@@ -46,9 +55,10 @@ const style = StyleSheet.create({
     flexDirection: "row",
   },
   text: {
-    marginHorizontal: 16,
+    marginHorizontal: Size.m,
     color: "#A7A7A7",
-    fontSize: 16,
+    backgroundColor: "#E0E0E1",
+    fontSize: FontType.body,
     flex: 1,
     padding: 0,
   },

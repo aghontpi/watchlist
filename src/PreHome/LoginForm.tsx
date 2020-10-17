@@ -2,8 +2,9 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import { Input } from "../Components/Form";
+import { FontType, Size } from "../Components/StyleConstants";
 
-import Button from "./Button";
+import Button from "./Components/Button";
 
 const LoginForm = () => {
   return (
@@ -14,6 +15,7 @@ const LoginForm = () => {
       <Input icon="lock" placeholder="Enter your password" />
       <View style={style.remember}>
         <Text style={[style.label, style.rememberText]}>Remember me</Text>
+        <Text style={[style.label, style.rememberText]}>Forgot password?</Text>
       </View>
       <View style={style.btn}>
         <Button color="#5B70F3" label="Login" onPress={() => true} />
@@ -28,22 +30,23 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
   label: {
-    fontSize: 20,
+    fontSize: FontType.heading2,
     fontWeight: "bold",
     opacity: 0.8,
-    marginVertical: 16,
+    marginVertical: Size.m,
     marginLeft: 4,
   },
   remember: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: Size.m,
   },
   rememberText: {
-    marginTop: 24,
+    marginTop: Size.l,
   },
   btn: {
     alignSelf: "center",
-    marginTop: 24,
+    marginTop: Size.l,
   },
 });
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import { Size } from "../../Components/StyleConstants";
+
 interface DividerProps {
   text: string;
   color: string;
@@ -32,7 +34,7 @@ const style = StyleSheet.create({
   },
   text: {
     width: 40,
-    fontSize: 24,
+    fontSize: Size.l,
     textAlign: "center",
   },
 });

@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import { Size } from "../../Components/StyleConstants";
+
 interface TermsProps {
   onPress: () => true;
   normal: string;
@@ -19,9 +21,10 @@ const Terms = ({ onPress, normal, bold }: TermsProps) => {
 const style = StyleSheet.create({
   holder: {
     flexDirection: "row",
+    alignItems: "center",
   },
   label: {
-    fontSize: 16,
+    fontSize: Size.m,
   },
   bold: {
     fontWeight: "bold",

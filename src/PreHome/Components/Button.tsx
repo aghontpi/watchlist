@@ -2,6 +2,8 @@ import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
+import { FontType, Size } from "../../Components/StyleConstants";
+
 interface ButtonProps {
   label: string;
   color: string;
@@ -21,16 +23,16 @@ const Button = ({ label, color, onPress }: ButtonProps) => {
 
 const style = StyleSheet.create({
   btn: {
-    width: 320,
-    height: 60,
-    borderRadius: 24,
+    width: Size.s * (5 * 10),
+    height: Size.s * 10 - 5,
+    borderRadius: Size.l,
     justifyContent: "center",
   },
   label: {
     color: "white",
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: FontType.body,
   },
 });
 

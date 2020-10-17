@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 
-import { GoogleIcon } from "../Components";
+import { GoogleIcon } from "../../Components";
+import { Size } from "../../Components/StyleConstants";
 
 import Divider from "./Divider";
 
@@ -19,7 +20,7 @@ const Footer = ({ terms }: FooterProps) => {
       </View>
       <View style={style.sso}>
         <View style={style.iconHolder}>
-          <GoogleIcon size={24} />
+          <GoogleIcon size={Size.l} />
         </View>
       </View>
       {terms && <View style={style.end}>{terms}</View>}
@@ -27,23 +28,25 @@ const Footer = ({ terms }: FooterProps) => {
   );
 };
 
+const IconSize = 40;
+
 const style = StyleSheet.create({
   holder: {
     flex: 1,
-    marginTop: 24,
+    marginTop: Size.l,
   },
   dividerHolder: {
     alignSelf: "center",
-    width: (width - 24 * 2) * 0.8,
+    width: (width - Size.l * 2) * 0.7,
   },
   sso: {
     alignSelf: "center",
-    marginVertical: 24,
+    marginVertical: Size.l,
   },
   iconHolder: {
-    width: 40,
-    height: 40,
-    borderRadius: 40 / 2,
+    width: IconSize,
+    height: IconSize,
+    borderRadius: IconSize / 2,
     overflow: "hidden",
     backgroundColor: "#F4F4F4",
     alignItems: "center",

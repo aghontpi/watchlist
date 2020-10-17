@@ -1,15 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { PreHomeStackNavigationProps } from "../Components/Navigation";
+import { FontType, Size, wHeight } from "../Components/StyleConstants";
 
-import Footer from "./Footer";
+import Footer from "./Components/Footer";
+import Terms from "./Components/Terms";
 import LoginForm from "./LoginForm";
-import Terms from "./Terms";
-export const MARGIN_HORIZONTAL = 24;
-
-export const { width, height } = Dimensions.get("window");
 
 const Login = (navigation: PreHomeStackNavigationProps<"Login">) => {
   return (
@@ -28,8 +26,8 @@ const Login = (navigation: PreHomeStackNavigationProps<"Login">) => {
           <Footer
             terms={
               <Terms
-                normal="Already have an account? "
-                bold="SignIn"
+                normal="New User? "
+                bold="Register here"
                 onPress={() => true}
               />
             }
@@ -43,8 +41,8 @@ const Login = (navigation: PreHomeStackNavigationProps<"Login">) => {
 const style = StyleSheet.create({
   holder: {
     flex: 1,
-    height: height,
-    marginHorizontal: MARGIN_HORIZONTAL,
+    height: wHeight,
+    marginHorizontal: Size.l,
   },
   titleHolder: {
     flex: 1,
@@ -52,14 +50,14 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 40,
+    fontSize: FontType.heading,
     fontWeight: "bold",
   },
   subTitleHolder: {
-    marginTop: 8,
+    marginTop: Size.s,
   },
   subtitle: {
-    fontSize: 24,
+    fontSize: Size.l,
     opacity: 0.3,
   },
   formHolder: {
