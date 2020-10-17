@@ -102,13 +102,13 @@ export {
   BrokenFriends,
 };
 
-interface StarIconProps {
+interface IconProps {
   size: number;
 }
 
 export const IMDB_YELLOW = "#FCC419";
 
-export const StarIcon = ({ size }: StarIconProps) => (
+export const StarIcon = ({ size }: IconProps) => (
   <Svg width={size} height={size} viewBox="0 0 28 27" fill="none">
     <Path
       d="M21.413 26c-.213 0-.423-.05-.613-.147l-6.8-3.56-6.8 3.56a1.334 1.334 0 01-1.933-1.413L6.6 16.933 1.107 11.6a1.333 1.333 0 01-.334-1.333 1.333 1.333 0 011.08-.907l7.6-1.107 3.347-6.84a1.334 1.334 0 012.4 0l3.387 6.827 7.6 1.107a1.333 1.333 0 011.08.906 1.334 1.334 0 01-.334 1.334L21.44 16.92l1.333 7.507a1.333 1.333 0 01-.533 1.333c-.241.17-.532.254-.827.24z"
@@ -119,3 +119,24 @@ export const StarIcon = ({ size }: StarIconProps) => (
 StarIcon.defaultProps = {
   size: 20,
 };
+
+export const Google = ({ size }: IconProps) => (
+  <Svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+    <Path
+      d="M19.767 10.21c0-.683-.056-1.368-.174-2.039h-9.476v3.863h5.426a4.642 4.642 0 01-2.008 3.047v2.506h3.238c1.9-1.746 2.994-4.326 2.994-7.378z"
+      fill="#4285F4"
+    />
+    <Path
+      d="M10.07 20c2.71 0 4.996-.887 6.661-2.417l-3.238-2.502c-.901.611-2.064.957-3.42.957-2.621 0-4.844-1.762-5.642-4.132H1.09v2.58A10.055 10.055 0 0010.07 20z"
+      fill="#34A853"
+    />
+    <Path
+      d="M4.436 11.963a5.986 5.986 0 010-3.848v-2.59h-3.36a10.005 10.005 0 000 9.028l3.36-2.59z"
+      fill="#FBBC04"
+    />
+    <Path
+      d="M10.079 3.96a5.482 5.482 0 013.858 1.5l2.872-2.856A9.696 9.696 0 0010.08 0a10.063 10.063 0 00-8.99 5.515l3.342 2.577c.794-2.371 3.023-4.132 5.647-4.132z"
+      fill="#EA4335"
+    />
+  </Svg>
+);

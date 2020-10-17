@@ -8,4 +8,5 @@ export {
   BrokenFriends as FriendsIcon,
   StarIcon,
   IMDB_YELLOW,
+  Google as GoogleIcon,
 } from "./CustomIcons";

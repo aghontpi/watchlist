@@ -1,30 +1,54 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { PreHomeStackNavigationProps } from "../Components/Navigation";
 
+import Footer from "./Footer";
+import LoginForm from "./LoginForm";
+import Terms from "./Terms";
+export const MARGIN_HORIZONTAL = 24;
+
+export const { width, height } = Dimensions.get("window");
+
 const Login = (navigation: PreHomeStackNavigationProps<"Login">) => {
   return (
-    <View style={style.holder}>
-      <View style={style.titleHolder}>
-        <Text style={style.title}>Welcome!</Text>
-        <View style={style.subTitleHolder}>
-          <Text style={style.subtitle}>Login with your account</Text>
+    <KeyboardAwareScrollView scrollEnabled={false}>
+      <View style={style.holder}>
+        <View style={style.titleHolder}>
+          <Text style={style.title}>Welcome!</Text>
+          <View style={style.subTitleHolder}>
+            <Text style={style.subtitle}>Login with your account</Text>
+          </View>
+        </View>
+        <View style={style.formHolder}>
+          <LoginForm />
+        </View>
+        <View style={style.footerHolder}>
+          <Footer
+            terms={
+              <Terms
+                normal="Already have an account? "
+                bold="SignIn"
+                onPress={() => true}
+              />
+            }
+          />
         </View>
       </View>
-      <View style={style.formHolder}>{}</View>
-      <View style={style.footerHolder}>{}</View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
 const style = StyleSheet.create({
   holder: {
     flex: 1,
+    height: height,
+    marginHorizontal: MARGIN_HORIZONTAL,
   },
   titleHolder: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   title: {
@@ -39,7 +63,7 @@ const style = StyleSheet.create({
     opacity: 0.3,
   },
   formHolder: {
-    flex: 3,
+    flex: 2,
   },
   footerHolder: {
     flex: 1,
