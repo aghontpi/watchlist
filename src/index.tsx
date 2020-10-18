@@ -1,16 +1,33 @@
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
 import { PreHome } from "./PreHome";
 import { HomeDrawer } from "./Drawer";
 
-const index = () => {
-  // TODO: complete the registration and login part
-  const signedIn = true;
-  const mainContent = signedIn ? <HomeDrawer /> : <PreHome />;
+const Index = () => {
+  const [initializing, setInitializing] = useState<boolean>(true);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged((userState) => {
+      setUser(userState);
+      if (initializing) {
+        setInitializing(false);
+      }
+    });
+    return subscriber; // unsubscribe on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (initializing) {
+    return null;
+  }
+
+  const mainContent = user ? <HomeDrawer /> : <PreHome />;
 
   return <NavigationContainer>{mainContent}</NavigationContainer>;
 };
 
-export default index;
+export default Index;
