@@ -10,19 +10,24 @@ const { width } = Dimensions.get("window");
 
 interface FooterProps {
   terms?: ReactNode;
+  socialIcons: boolean;
 }
 
-const Footer = ({ terms }: FooterProps) => {
+const Footer = ({ terms, socialIcons }: FooterProps) => {
   return (
     <View style={style.holder}>
-      <View style={style.dividerHolder}>
-        <Divider color="#AEAEAE" text="Or" />
-      </View>
-      <View style={style.sso}>
-        <View style={style.iconHolder}>
-          <GoogleIcon size={Size.l} />
-        </View>
-      </View>
+      {socialIcons && (
+        <>
+          <View style={style.dividerHolder}>
+            <Divider color="#AEAEAE" text="Or" />
+          </View>
+          <View style={style.sso}>
+            <View style={style.iconHolder}>
+              <GoogleIcon size={Size.l} />
+            </View>
+          </View>
+        </>
+      )}
       {terms && <View style={style.end}>{terms}</View>}
     </View>
   );

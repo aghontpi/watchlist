@@ -1,20 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 import { Size } from "../../Components/StyleConstants";
 
 interface TermsProps {
-  onPress: () => true;
+  onPress: () => void;
   normal: string;
   bold: string;
 }
 
 const Terms = ({ onPress, normal, bold }: TermsProps) => {
   return (
-    <View style={style.holder} {...{ onPress }}>
+    <TouchableWithoutFeedback style={style.holder} {...{ onPress }}>
       <Text style={style.label}>{normal}</Text>
       <Text style={style.bold}>{bold}</Text>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

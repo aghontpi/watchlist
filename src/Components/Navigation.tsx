@@ -35,7 +35,7 @@ export interface MovieSearchInfoStackNavigationProps<
 
 export type StackNavigationParamList = {
   Login: undefined;
-  Registraton: undefined;
+  Registration: undefined;
 };
 
 export interface PreHomeStackNavigationProps<

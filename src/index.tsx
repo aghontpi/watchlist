@@ -12,7 +12,7 @@ import {
 import { Search } from "./Search";
 import Drawer from "./Drawer";
 import { DRAWER_WIDTH } from "./Drawer/Drawer";
-import { Login } from "./PreHome";
+import { Login, Registration } from "./PreHome";
 
 const DrawerNavigation = createDrawerNavigator<DrawerNavigationParamList>();
 const StackNavigation = createStackNavigator<StackNavigationParamList>();
@@ -31,6 +31,7 @@ const index = () => {
   ) : (
     <StackNavigation.Navigator headerMode="none">
       <StackNavigation.Screen name="Login" component={Login} />
+      <StackNavigation.Screen name="Registration" component={Registration} />
     </StackNavigation.Navigator>
   );
 
