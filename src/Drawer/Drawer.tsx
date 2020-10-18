@@ -10,12 +10,11 @@ import {
   FriendsIcon,
   ProfileIcon,
   SearchIcon,
-  SettingsIcon,
 } from "../Components";
 import { BrokenLogout } from "../Components/CustomIcons";
 import {
   DrawerNavigationParamList,
-  DrawerNavigationProp,
+  DrawerProps,
 } from "../Components/Navigation";
 
 import Item from "./Item";
@@ -41,7 +40,14 @@ const DrawerItems: DrawerItems[] = [
   { name: "Logout", component: "Logout", icon: <BrokenLogout /> },
 ];
 
-const Drawer = ({ navigation }: DrawerNavigationProp<"Search">) => {
+const Drawer = ({ navigation }: DrawerProps) => {
+  const itemOnPress = ({ component }: DrawerItems): (() => void) => {
+    return () =>
+      component === "Logout"
+        ? logout().then(() => console.log("logout success"))
+        : navigation.navigate(component);
+  };
+
   return (
     <View style={style.container}>
       <View style={style.appNameContainer}>
@@ -61,17 +67,7 @@ const Drawer = ({ navigation }: DrawerNavigationProp<"Search">) => {
       <View style={style.itemsContainer}>
         <View style={style.drawerItems}>
           {DrawerItems.map((item) => (
-            <Item
-              key={item.name}
-              {...item}
-              onPress={() => {
-                if (item.component === "Logout") {
-                  logout().then(() => console.log("logout success"));
-                } else {
-                  navigation.navigate(item.component);
-                }
-              }}
-            />
+            <Item key={item.name} onPress={itemOnPress(item)} {...item} />
           ))}
         </View>
         <View style={style.stats}>

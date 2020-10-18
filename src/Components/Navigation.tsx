@@ -3,7 +3,12 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { DrawerNavigationProp as RNDrawerNavigationProp } from "@react-navigation/drawer";
+import {
+  DrawerContentComponentProps,
+  DrawerContentOptions,
+} from "@react-navigation/drawer";
+import { DrawerNavigationEventMap } from "@react-navigation/drawer/lib/typescript/src/types";
+import { NavigationHelpers } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type DrawerNavigationParamList = {
@@ -16,10 +21,12 @@ export type DrawerNavigationParamList = {
   Logout: undefined;
 };
 
-export interface DrawerNavigationProp<
-  T extends keyof DrawerNavigationParamList
-> {
-  navigation: RNDrawerNavigationProp<DrawerNavigationParamList, T>;
+export interface DrawerProps
+  extends DrawerContentComponentProps<DrawerContentOptions> {
+  navigation: NavigationHelpers<
+    DrawerNavigationParamList,
+    DrawerNavigationEventMap
+  >;
 }
 
 export type MovieSearchInfoParamList = {
