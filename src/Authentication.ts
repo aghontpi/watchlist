@@ -1,13 +1,43 @@
 import auth from "@react-native-firebase/auth";
-import { GoogleSignin } from "@react-native-community/google-signin";
+import {
+  GoogleSignin,
+  statusCodes,
+} from "@react-native-community/google-signin";
 
-GoogleSignin.configure({
-  webClientId:
-    "1092778736836-j44ga0bape99ctlhbrc18b6pq3v39jq5.apps.googleusercontent.com",
-});
+export const configureGoogle = () => {
+  GoogleSignin.configure({
+    webClientId:
+      "1092778736836-3t6la0uptqg3d2hpfii3gmd8tmkrhbvd.apps.googleusercontent.com",
+  });
+};
 
 export const onGoogleButtonPress = async () => {
-  const { idToken } = await GoogleSignin.signIn();
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  return auth().signInWithCredential(googleCredential);
+  try {
+    await GoogleSignin.hasPlayServices();
+    const { idToken } = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    const signInResult = auth().signInWithCredential(googleCredential);
+    console.log("signInSuccess:", signInResult);
+    return signInResult;
+  } catch (err) {
+    // TODO: configure and trigger error collection
+    switch (err.code) {
+      case statusCodes.SIGN_IN_CANCELLED:
+        console.log("signIn calcelled");
+        break;
+      case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+        console.log("google PlayService Not available");
+        break;
+      default:
+        console.log("SignIn error", err);
+    }
+  }
+};
+
+export const logout = async () => {
+  try {
+    await GoogleSignin.signOut();
+  } catch (err) {
+    console.error(err);
+  }
 };
