@@ -1,11 +1,8 @@
-import {
-  DrawerContentComponentProps,
-  DrawerContentOptions,
-} from "@react-navigation/drawer";
-import React from "react";
+import React, { ReactNode } from "react";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
+import { logout } from "../Authentication";
 import {
   RoundedIcon,
   ChartIcon,
@@ -15,6 +12,11 @@ import {
   SearchIcon,
   SettingsIcon,
 } from "../Components";
+import { BrokenLogout } from "../Components/CustomIcons";
+import {
+  DrawerNavigationParamList,
+  DrawerNavigationProp,
+} from "../Components/Navigation";
 
 import Item from "./Item";
 import User from "./User";
@@ -23,18 +25,23 @@ export const DRAWER_MARGIN_HORIZONTAL = 40;
 const { width } = Dimensions.get("window");
 export const DRAWER_WIDTH = width * 0.7;
 
-const DrawerItems = [
+interface DrawerItems {
+  name: string;
+  component: keyof DrawerNavigationParamList;
+  icon: ReactNode;
+}
+
+const DrawerItems: DrawerItems[] = [
   { name: "Search", component: "Search", icon: <SearchIcon /> },
   { name: "Your List", component: "Search", icon: <FavouriteIcon /> },
   { name: "Top 250", component: "Search", icon: <ChartIcon /> },
   { name: "Profile", component: "Search", icon: <ProfileIcon /> },
   { name: "Friend's List", component: "Search", icon: <FriendsIcon /> },
-  { name: "Settings", component: "Search", icon: <SettingsIcon /> },
+  //{ name: "Settings", component: "Search", icon: <SettingsIcon /> },
+  { name: "Logout", component: "Logout", icon: <BrokenLogout /> },
 ];
 
-const Drawer = ({
-  navigation,
-}: DrawerContentComponentProps<DrawerContentOptions>) => {
+const Drawer = ({ navigation }: DrawerNavigationProp<"Search">) => {
   return (
     <View style={style.container}>
       <View style={style.appNameContainer}>
@@ -54,7 +61,17 @@ const Drawer = ({
       <View style={style.itemsContainer}>
         <View style={style.drawerItems}>
           {DrawerItems.map((item) => (
-            <Item key={item.name} {...item} />
+            <Item
+              key={item.name}
+              {...item}
+              onPress={() => {
+                if (item.component === "Logout") {
+                  logout().then(() => console.log("logout success"));
+                } else {
+                  navigation.navigate(item.component);
+                }
+              }}
+            />
           ))}
         </View>
         <View style={style.stats}>

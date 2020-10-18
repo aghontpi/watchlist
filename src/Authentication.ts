@@ -37,6 +37,7 @@ export const onGoogleButtonPress = async () => {
 export const logout = async () => {
   try {
     await GoogleSignin.signOut();
+    await auth().signOut();
   } catch (err) {
     console.error(err);
   }

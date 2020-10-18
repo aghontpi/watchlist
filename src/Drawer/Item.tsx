@@ -5,11 +5,12 @@ import { RectButton } from "react-native-gesture-handler";
 interface ItemProps {
   name: string;
   icon: ReactNode;
+  onPress: () => void;
 }
 
-const Item = ({ name, icon }: ItemProps) => {
+const Item = ({ name, icon, onPress }: ItemProps) => {
   return (
-    <RectButton style={style.container}>
+    <RectButton style={style.container} {...{ onPress }}>
       <View style={style.image}>{icon}</View>
       <Text style={style.name}>{name}</Text>
     </RectButton>
