@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  ImageBackground,
-} from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 
+import {
+  FontType,
+  Size,
+  wHeight,
+  wWidth,
+} from "../../Components/StyleConstants";
 import { MovieInfoContext } from "../../Context";
 
 import { MetaIcon } from "./Components";
@@ -31,11 +31,9 @@ export interface MovieViewProps {
   overview: string;
 }
 
-const { width: wWidth, height: wHeight } = Dimensions.get("window");
-
 const aspectRatio = 325 / 470;
 const height = aspectRatio * wWidth;
-const borderRadius = 64;
+const borderRadius = Size.xl * 2;
 const ratingsBarHeight = 109;
 
 const posterConversion = (imgSrc: string): string => {
@@ -56,7 +54,7 @@ const MovieView = () => {
     release,
     title,
     cast,
-    directors,
+    // directors,
     rating,
     ratingCount,
     metaScore,
@@ -66,54 +64,18 @@ const MovieView = () => {
   } = movieInfo;
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={style.container}>
       <View style={{ height: height, width: wWidth }}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "white",
-          }}
-        />
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(100,100,200,0.5)",
-            borderBottomLeftRadius: borderRadius,
-            borderBottomRightRadius: borderRadius,
-            overflow: "hidden",
-          }}
-        >
+        <View style={style.imgContainer} />
+        <View style={[StyleSheet.absoluteFillObject, style.imgBackGround]}>
           <ImageBackground
             source={{ uri: posterConversion(poster) }}
             resizeMode="cover"
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              width: undefined,
-              height: undefined,
-            }}
+            style={style.img}
           />
         </View>
       </View>
-      <View
-        style={{
-          position: "absolute",
-          top: height - ratingsBarHeight / 2,
-          height: ratingsBarHeight,
-          right: 0,
-          borderTopLeftRadius: 50,
-          borderBottomLeftRadius: 50,
-          width: wWidth * 0.9,
-          backgroundColor: "white",
-          shadowColor: "black",
-          elevation: 80,
-        }}
-      >
+      <View style={style.ratingsBar}>
         <View style={{ flex: 1 }}>
           <Rating
             idbIcon={<IdbIcon rating={rating} {...{ ratingCount }} />}
@@ -125,33 +87,62 @@ const MovieView = () => {
         </View>
       </View>
       <Text />
-      <View
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            height: wHeight - (height + ratingsBarHeight / 2),
-            flex: 1,
-            top: undefined,
-            backgroundColor: "white",
-            marginHorizontal: 32,
-          },
-        ]}
-      >
+      <View style={[StyleSheet.absoluteFillObject, style.restOfInfo]}>
         <Title {...{ title, genre, runtime, release, certificate }} />
-        <View style={{ marginTop: 48 }}>
+        <View style={{ marginTop: Size.xxl + Size.s }}>
           <View>
-            <Text style={{ fontSize: 24, color: "#12153D" }}>Plot</Text>
-            <Text style={{ color: "#737599", fontSize: 16, marginTop: 16 }}>
-              {overview}
-            </Text>
+            <Text style={style.plot}>Plot</Text>
+            <Text style={style.overView}>{overview}</Text>
           </View>
         </View>
-        <View style={{ marginTop: 48 }}>
+        <View style={{ marginTop: Size.xxl + Size.s }}>
           <Crew actors={cast} />
         </View>
       </View>
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "white" },
+  imgContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  imgBackGround: {
+    backgroundColor: "rgba(100,100,200,0.5)",
+    borderBottomLeftRadius: borderRadius,
+    borderBottomRightRadius: borderRadius,
+    overflow: "hidden",
+  },
+  img: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: undefined,
+    height: undefined,
+  },
+  ratingsBar: {
+    position: "absolute",
+    top: height - ratingsBarHeight / 2,
+    height: ratingsBarHeight,
+    right: 0,
+    borderTopLeftRadius: Size.xxl + 10,
+    borderBottomLeftRadius: Size.xxl + 10,
+    width: wWidth * 0.9,
+    backgroundColor: "white",
+    shadowColor: "black",
+    elevation: Size.xxl * 2,
+  },
+  restOfInfo: {
+    height: wHeight - (height + ratingsBarHeight / 2),
+    flex: 1,
+    top: undefined,
+    backgroundColor: "white",
+    marginHorizontal: Size.xl,
+  },
+  plot: { fontSize: FontType.heading1, color: "#12153D" },
+  overView: { color: "#737599", fontSize: FontType.body, marginTop: Size.m },
+});
 
 export default MovieView;

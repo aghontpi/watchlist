@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import { StarIcon } from "../../../Components";
+import { FontType, Size } from "../../../Components/StyleConstants";
 
 interface IdbIconProps {
   rating: string;
@@ -10,33 +11,38 @@ interface IdbIconProps {
 
 const IdbIcon = ({ rating, ratingCount }: IdbIconProps) => {
   return (
-    <View style={{ alignItems: "center" }}>
+    <View style={style.container}>
       <StarIcon />
-      <View style={{ flexDirection: "row", marginTop: 4 }}>
-        <Text
-          style={{
-            color: "#12153D",
-            fontSize: 16,
-            fontWeight: "bold",
-          }}
-        >
-          {rating.split("/")[0]}
-        </Text>
-        <Text
-          style={{
-            color: "#434670",
-            alignSelf: "center",
-
-            fontSize: 14,
-            marginTop: 2,
-          }}
-        >
-          /10
-        </Text>
+      <View style={style.ratingContainer}>
+        <Text style={style.ratingText}>{rating.split("/")[0]}</Text>
+        <Text style={style.ratingOutOf}>/10</Text>
       </View>
-      <Text style={{ color: "#9A9BB2", fontSize: 12 }}>{ratingCount}</Text>
+      <Text style={style.totalRatingCount}>{ratingCount}</Text>
     </View>
   );
 };
 
+const style = StyleSheet.create({
+  container: {
+    alignItems: "center",
+  },
+  ratingContainer: { flexDirection: "row", marginTop: Size.s - 4 },
+  ratingText: {
+    color: "#12153D",
+    fontSize: FontType.body,
+    fontWeight: "bold",
+  },
+  ratingOutOf: {
+    color: "#434670",
+    alignSelf: "center",
+    fontSize: FontType.body - 2,
+    marginTop: 2,
+  },
+  totalRatingCount: {
+    color: "#9A9BB2",
+    fontSize: FontType.body - 4,
+  },
+});
+
+export { style as IdbIconStyle };
 export default IdbIcon;

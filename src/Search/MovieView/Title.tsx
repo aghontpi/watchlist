@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { RoundedIcon } from "../../Components";
+import { FontType, Size } from "../../Components/StyleConstants";
 
 interface TitleProps {
   title: string;
@@ -13,53 +14,25 @@ interface TitleProps {
 }
 
 const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
-  const style = StyleSheet.create({
-    genreButton: {
-      borderRadius: 100,
-      borderColor: "rgba(18,21,61,0.3)",
-      borderWidth: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      flex: 1,
-    },
-    genreStyleText: {
-      paddingVertical: 8,
-      paddingHorizontal: 20,
-      color: "#434670",
-      fontSize: 16,
-    },
-  });
-
   return (
     <View>
       <View>
-        <Text
-          style={{ fontSize: 32, color: "rgba(18,21,61,1)", paddingRight: 64 }}
-        >
-          {title}
-        </Text>
-        <View
-          style={{
-            marginTop: 9,
-            flexDirection: "row",
-          }}
-        >
-          <Text style={{ color: "rgba(154,155,178,1)" }}>{release}</Text>
-          <Text style={{ marginLeft: 24, color: "rgba(154,155,178,1)" }}>
-            {certificate}
+        <Text style={style.title}>{title}</Text>
+        <View style={style.otherInfo}>
+          <Text style={[style.otherInfoText, { marginLeft: 0 }]}>
+            {release}
           </Text>
-          <Text style={{ marginLeft: 24, color: "rgba(154,155,178,1)" }}>
-            {runtime}
-          </Text>
+          <Text style={style.otherInfoText}>{certificate}</Text>
+          <Text style={style.otherInfoText}>{runtime}</Text>
         </View>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: Size.l - 4 }}>
           <ScrollView bounces={true} horizontal={true}>
             {genre.map((v: string, i: number) => (
               <View
                 key={v}
                 style={
                   i !== 0
-                    ? { marginLeft: 20, ...style.genreButton }
+                    ? { marginLeft: Size.l - 4, ...style.genreButton }
                     : style.genreButton
                 }
               >
@@ -69,19 +42,52 @@ const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
           </ScrollView>
         </View>
       </View>
-      <View style={{ position: "absolute", right: 0, top: 8, bottom: 0 }}>
+      <View style={style.absolutePositionLeft}>
         <RoundedIcon
           name="plus"
           iconRatio={0.3}
           backgroundColor="rgba(254,109,142,1)"
-          size={64}
+          size={Size.xl * 2}
           color="white"
-          borderRadius={20}
+          borderRadius={Size.l - 4}
           onPress={() => true}
         />
       </View>
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  title: {
+    fontSize: FontType.heading - 8,
+    color: "rgba(18,21,61,1)",
+    paddingRight: Size.xl * 2,
+  },
+  otherInfo: {
+    marginTop: Size.s,
+    flexDirection: "row",
+  },
+  otherInfoText: { marginLeft: Size.l, color: "rgba(154,155,178,1)" },
+  genreButton: {
+    borderRadius: 100,
+    borderColor: "rgba(18,21,61,0.3)",
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+  genreStyleText: {
+    paddingVertical: Size.s,
+    paddingHorizontal: Size.l - 4,
+    color: "#434670",
+    fontSize: Size.m,
+  },
+  absolutePositionLeft: {
+    position: "absolute",
+    right: 0,
+    top: Size.s,
+    bottom: 0,
+  },
+});
 
 export default Title;

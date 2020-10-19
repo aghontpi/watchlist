@@ -25,7 +25,7 @@ const RoundedIcon = ({
   borderRadius,
   onPress,
 }: RoundedIconProps) => {
-  const styles = StyleSheet.create({
+  const dynamicStyle = StyleSheet.create({
     container: {
       height: size,
       width: size,
@@ -39,13 +39,13 @@ const RoundedIcon = ({
   const iconSize = size * iconRatio;
 
   return backgroundColor === "transparent" ? (
-    <TouchableWithoutFeedback style={styles.container} {...{ onPress }}>
+    <TouchableWithoutFeedback style={dynamicStyle.container} {...{ onPress }}>
       <Text {...{ color }}>
         <Icon size={iconSize} {...{ name, color }} />
       </Text>
     </TouchableWithoutFeedback>
   ) : (
-    <RectButton style={styles.container} {...{ onPress }}>
+    <RectButton style={dynamicStyle.container} {...{ onPress }}>
       <Text {...{ color }}>
         <Icon size={iconSize} {...{ name, color }} />
       </Text>

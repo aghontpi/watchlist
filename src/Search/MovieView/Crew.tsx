@@ -1,6 +1,8 @@
 import React from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+
+import { Size, wWidth } from "../../Components/StyleConstants";
 
 import People from "./Components/People";
 
@@ -15,18 +17,16 @@ export interface CrewProps {
   actors: Cast[];
 }
 
-const { width: wWidth } = Dimensions.get("window");
-
 const Crew = ({ actors }: CrewProps) => (
   <View>
-    <Text style={{ fontSize: 24, color: "#12153D" }}>Cast</Text>
+    <Text style={style.container}>Cast</Text>
     <View style={{ position: "relative" }}>
-      <View style={{ position: "absolute", width: wWidth, left: -32 }}>
+      <View style={style.crewContainer}>
         <ScrollView
           showsHorizontalScrollIndicator={false}
           bounces={true}
           horizontal={true}
-          style={{ marginTop: 16 }}
+          style={{ marginTop: Size.m }}
           centerContent={true}
         >
           {/* {directors &&
@@ -35,7 +35,7 @@ const Crew = ({ actors }: CrewProps) => (
             ))} */}
           {actors &&
             actors.map((item) => (
-              <View key={item.actor} style={{ marginLeft: 30 }}>
+              <View key={item.actor} style={{ marginLeft: Size.xl }}>
                 <People name={item.actor} {...item} />
               </View>
             ))}
@@ -48,5 +48,13 @@ const Crew = ({ actors }: CrewProps) => (
 Crew.defaultProps = {
   directors: null,
 };
+
+const style = StyleSheet.create({
+  container: {
+    fontSize: Size.l,
+    color: "#12153D",
+  },
+  crewContainer: { position: "absolute", width: wWidth, left: -1 * Size.xl },
+});
 
 export default Crew;

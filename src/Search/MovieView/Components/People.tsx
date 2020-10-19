@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text, ImageBackground } from "react-native";
+import { View, Text, ImageBackground, StyleSheet } from "react-native";
+
+import { FontType, Size } from "../../../Components/StyleConstants";
 
 interface PeopleProps {
   img: string;
@@ -7,7 +9,10 @@ interface PeopleProps {
   name: string;
 }
 
-const SIZE = 80;
+const SIZE = Size.xxl * 2;
+
+const wrapText = (s: string, w: number) =>
+  s.replace(new RegExp(`(?![^\\n]{1,${w}}$)([^\\n]{1,${w}})\\s`, "g"), "$1\n");
 
 const imgConverison = (imgSrc: string): string => {
   return imgSrc
@@ -17,39 +22,46 @@ const imgConverison = (imgSrc: string): string => {
 
 const People = ({ name, role, img }: PeopleProps) => {
   return (
-    <View
-      style={{
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View
-        style={{
-          borderRadius: SIZE / 2,
-          width: SIZE,
-          height: SIZE,
-          overflow: "hidden",
-        }}
-      >
+    <View style={style.container}>
+      <View style={style.imgContainer}>
         <ImageBackground
           source={{ uri: imgConverison(img) }}
           resizeMode="cover"
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: undefined,
-            height: undefined,
-            flex: 1,
-          }}
+          style={style.img}
         />
       </View>
-      <Text style={{ marginTop: 12, color: "#12153D", fontSize: 16 }}>
-        {name}
-      </Text>
-      <Text style={{ color: "#9A9BB2", fontSize: 16 }}>{role}</Text>
+      <Text style={style.name}>{wrapText(name, 18)}</Text>
+      <Text style={style.role}>{wrapText(role, 18)}</Text>
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imgContainer: {
+    borderRadius: SIZE / 2,
+    width: SIZE,
+    height: SIZE,
+    overflow: "hidden",
+  },
+  img: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: undefined,
+    height: undefined,
+    flex: 1,
+  },
+  name: {
+    marginTop: Size.m - 4,
+    color: "#12153D",
+    fontSize: FontType.body,
+    textAlign: "center",
+  },
+  role: { color: "#9A9BB2", fontSize: FontType.body, textAlign: "center" },
+});
 
 export default People;

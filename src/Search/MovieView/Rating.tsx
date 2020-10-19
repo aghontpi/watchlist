@@ -1,5 +1,7 @@
 import React, { ReactNode } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+
+import { Size } from "../../Components/StyleConstants";
 
 interface RatingProps {
   idbIcon: ReactNode;
@@ -9,19 +11,21 @@ interface RatingProps {
 
 const Rating = ({ idbIcon, title, metaIcon }: RatingProps) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-      }}
-    >
+    <View style={style.container}>
       <View>{idbIcon}</View>
-      <Text style={{ fontSize: 16 }}>{title}</Text>
+      <Text style={{ fontSize: Size.m }}>{title}</Text>
       <View>{metaIcon}</View>
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+});
 
 export default Rating;

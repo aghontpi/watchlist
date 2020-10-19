@@ -8,6 +8,7 @@ type SizeType = {
   m: 16;
   l: 24;
   xl: 32;
+  xxl: 40;
 };
 
 export const Size: SizeType = {
@@ -15,16 +16,19 @@ export const Size: SizeType = {
   m: 16,
   l: 24,
   xl: 32,
+  xxl: 40,
 };
 
 type FontType = {
   heading: 40;
+  heading1: 24;
   heading2: 20;
   body: 16;
 };
 
 export const FontType: FontType = {
   heading: 40,
+  heading1: 24,
   heading2: 20,
   body: 16,
 };

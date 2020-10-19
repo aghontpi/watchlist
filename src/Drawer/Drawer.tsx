@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import { logout } from "../Authentication";
@@ -16,13 +16,13 @@ import {
   DrawerNavigationParamList,
   DrawerProps,
 } from "../Components/Navigation";
+import { FontType, Size, wWidth } from "../Components/StyleConstants";
 
 import Item from "./Item";
 import User from "./User";
 
-export const DRAWER_MARGIN_HORIZONTAL = 40;
-const { width } = Dimensions.get("window");
-export const DRAWER_WIDTH = width * 0.7;
+export const DRAWER_MARGIN_HORIZONTAL = Size.xxl;
+export const DRAWER_WIDTH = wWidth * 0.7;
 
 interface DrawerItems {
   name: string;
@@ -60,12 +60,12 @@ const Drawer = ({ navigation }: DrawerProps) => {
           backgroundColor="#1d28c9"
           color="white"
           onPress={() => true}
-          size={48}
+          size={Size.xxl + Size.s}
           iconRatio={0.4}
         />
       </View>
       <View style={style.itemsContainer}>
-        <View style={style.drawerItems}>
+        <View>
           {DrawerItems.map((item) => (
             <Item key={item.name} onPress={itemOnPress(item)} {...item} />
           ))}
@@ -98,7 +98,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: DRAWER_MARGIN_HORIZONTAL,
-    paddingVertical: 40,
+    paddingVertical: Size.xxl,
     justifyContent: "space-between",
   },
   appNameContainer: {
@@ -106,16 +106,15 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  drawerItems: {},
   name: {
     flexDirection: "row",
   },
   appnameStart: {
-    fontSize: 32,
+    fontSize: FontType.heading - 8,
     fontFamily: "Sk-Modernist-Bold",
   },
   appnameEnd: {
-    fontSize: 32,
+    fontSize: FontType.heading - 8,
     fontFamily: "Sk-Modernist-Regular",
   },
   itemsContainer: {
@@ -127,17 +126,17 @@ const style = StyleSheet.create({
     justifyContent: "flex-start",
   },
   statsChart: {
-    borderRadius: 32,
+    borderRadius: Size.xl,
     overflow: "hidden",
   },
   linearGradient: {
-    paddingVertical: 24,
-    paddingLeft: 32,
+    paddingVertical: Size.l,
+    paddingLeft: Size.xl,
     justifyContent: "center",
   },
   statsText: {
     fontWeight: "bold",
-    fontSize: 24,
+    fontSize: FontType.heading1,
     color: "#ffffff",
     backgroundColor: "transparent",
   },
@@ -145,8 +144,8 @@ const style = StyleSheet.create({
     fontFamily: "Sk-Modernist-Regular",
     color: "#ffffff",
     opacity: 0.6,
-    fontSize: 12,
-    marginTop: 4,
+    fontSize: FontType.body - 4,
+    marginTop: Size.s - 4,
   },
 });
 

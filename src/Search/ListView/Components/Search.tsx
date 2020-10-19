@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Dimensions } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 
 import { ImdbSearchProps } from "../../../Api";
+import { FontType, Size, wWidth } from "../../../Components/StyleConstants";
 import Header from "../../MovieView/Header";
-
-const { width } = Dimensions.get("window");
 
 interface SearchProps {
   SubmitSearch: (v: ImdbSearchProps) => void;
@@ -30,20 +29,15 @@ const GetRandomDuringStart = () => {
 
 const Search = ({ SubmitSearch }: SearchProps) => {
   const [search, setSearch] = useState(GetRandomDuringStart());
+
   useEffect(() => {
     SubmitSearch({ title: search });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
-      <View
-        style={{
-          marginTop: 16,
-          width,
-          height: 60,
-          justifyContent: "flex-end",
-        }}
-      >
+      <View style={style.container}>
         <Header
           right={{
             icon: {
@@ -55,29 +49,13 @@ const Search = ({ SubmitSearch }: SearchProps) => {
           }}
         />
       </View>
-      <View
-        style={{
-          marginHorizontal: 32,
-          height: 85,
-          borderBottomWidth: 2,
-          borderBottomColor: "#EDEEEF",
-        }}
-      >
+      <View style={style.searchContaier}>
         <View>
-          <Text
-            style={{
-              color: "#C1C4CD",
-              fontSize: 10,
-              letterSpacing: 0.8,
-              fontWeight: "bold",
-            }}
-          >
-            SEARCH
-          </Text>
+          <Text style={style.searchLabel}>SEARCH</Text>
         </View>
         <TextInput
           underlineColorAndroid="transparent"
-          style={{ flex: 1, fontSize: 30, color: "black", fontWeight: "bold" }}
+          style={style.searchText}
           autoCorrect={false}
           autoCapitalize="words"
           autoCompleteType="off"
@@ -92,5 +70,32 @@ const Search = ({ SubmitSearch }: SearchProps) => {
     </>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    marginTop: Size.m,
+    width: wWidth,
+    height: 60,
+    justifyContent: "flex-end",
+  },
+  searchContaier: {
+    marginHorizontal: Size.xl,
+    height: 85,
+    borderBottomWidth: 2,
+    borderBottomColor: "#EDEEEF",
+  },
+  searchLabel: {
+    color: "#C1C4CD",
+    fontSize: FontType.body - 6,
+    letterSpacing: 0.8,
+    fontWeight: "bold",
+  },
+  searchText: {
+    flex: 1,
+    fontSize: FontType.heading - 10,
+    color: "black",
+    fontWeight: "bold",
+  },
+});
 
 export default Search;

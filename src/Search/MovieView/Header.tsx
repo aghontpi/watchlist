@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 
 import { RoundedIcon } from "../../Components";
+import { Size } from "../../Components/StyleConstants";
 
 interface HeaderProps {
   left?: {
@@ -25,8 +26,8 @@ const Header = ({ left, right }: HeaderProps) => {
     <View
       style={{
         flex: 1,
-        marginLeft: 32,
-        marginRight: 32,
+        marginLeft: Size.xl,
+        marginRight: Size.xl,
         flexDirection: "row",
         justifyContent: left ? "space-between" : "flex-end",
       }}
@@ -34,7 +35,7 @@ const Header = ({ left, right }: HeaderProps) => {
       {left && (
         <RoundedIcon
           iconRatio={1}
-          size={32}
+          size={Size.xl}
           {...left.icon}
           onPress={left.onPress}
         />
@@ -42,7 +43,7 @@ const Header = ({ left, right }: HeaderProps) => {
       {right && (
         <RoundedIcon
           iconRatio={1}
-          size={32}
+          size={Size.xl}
           {...right.icon}
           onPress={right.onPress}
         />
