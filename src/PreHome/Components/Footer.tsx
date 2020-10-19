@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
+import { onGoogleButtonPress } from "../../Authentication";
 import { GoogleIcon } from "../../Components";
 import { Size } from "../../Components/StyleConstants";
 
@@ -22,9 +24,16 @@ const Footer = ({ terms, socialIcons }: FooterProps) => {
             <Divider color="#AEAEAE" text="Or" />
           </View>
           <View style={style.sso}>
-            <View style={style.iconHolder}>
+            <RectButton
+              onPress={() =>
+                onGoogleButtonPress().then(() =>
+                  console.log("SignIn process Complete")
+                )
+              }
+              style={style.iconHolder}
+            >
               <GoogleIcon size={Size.l} />
-            </View>
+            </RectButton>
           </View>
         </>
       )}
