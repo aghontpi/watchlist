@@ -1,36 +1,39 @@
 import "react-native-gesture-handler";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import auth from "@react-native-firebase/auth";
 
-import { PreHome } from "./PreHome";
-import { HomeDrawer } from "./Drawer";
+import { UserInfoProvider, UserConext } from "./Context";
 import { configureGoogle } from "./Authentication";
+import { LoginUser, LogoutUser } from "./Reducer";
+import { HomeDrawer } from "./Drawer";
+import { PreHome } from "./PreHome";
 
 const Index = () => {
-  // TODO: convert this to use contextApi
-  const [initializing, setInitializing] = useState<boolean>(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  return (
+    <UserInfoProvider>
+      <NavigationContainer>
+        <AuthController />
+      </NavigationContainer>
+    </UserInfoProvider>
+  );
+};
+
+const AuthController = () => {
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(UserConext);
 
   useEffect(() => {
     configureGoogle();
-    const subscriber = auth().onAuthStateChanged((userState) => {
-      setUser(userState);
-      if (initializing) {
-        setInitializing(false);
-      }
+    return auth().onAuthStateChanged((userState) => {
+      userState ? dispatch(LoginUser(userState)) : dispatch(LogoutUser());
     });
-    return subscriber; // unsubscribe on unmount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (initializing) {
-    return null;
-  }
-
-  const mainContent = user ? <HomeDrawer /> : <PreHome />;
-
-  return <NavigationContainer>{mainContent}</NavigationContainer>;
+  return user ? <HomeDrawer /> : <PreHome />;
 };
 
 export default Index;

@@ -8,7 +8,7 @@ import {
   DrawerContentOptions,
 } from "@react-navigation/drawer";
 import { DrawerNavigationEventMap } from "@react-navigation/drawer/lib/typescript/src/types";
-import { NavigationHelpers } from "@react-navigation/native";
+import { NavigationHelpers, ParamListBase } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type DrawerNavigationParamList = {
@@ -23,10 +23,7 @@ export type DrawerNavigationParamList = {
 
 export interface DrawerProps
   extends DrawerContentComponentProps<DrawerContentOptions> {
-  navigation: NavigationHelpers<
-    DrawerNavigationParamList,
-    DrawerNavigationEventMap
-  >;
+  navigation: NavigationHelpers<ParamListBase, DrawerNavigationEventMap>;
 }
 
 export type MovieSearchInfoParamList = {

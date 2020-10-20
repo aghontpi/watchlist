@@ -17,7 +17,6 @@ export const onGoogleButtonPress = async () => {
     const { idToken } = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     const signInResult = auth().signInWithCredential(googleCredential);
-    console.log("signInSuccess:", signInResult);
     return signInResult;
   } catch (err) {
     // TODO: configure and trigger error collection
@@ -39,6 +38,6 @@ export const logout = async () => {
     await GoogleSignin.signOut();
     await auth().signOut();
   } catch (err) {
-    console.error(err);
+    console.error("logout", err);
   }
 };
