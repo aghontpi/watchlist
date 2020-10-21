@@ -21,7 +21,7 @@ const Layout = ({
   footer,
 }: LayoutProps) => {
   return (
-    <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={style.background}>
       <View style={style.holder}>
         <View style={style.titleHolder}>
           <Text style={style.title}>{title}</Text>
@@ -37,10 +37,13 @@ const Layout = ({
 };
 
 const style = StyleSheet.create({
+  background: {
+    backgroundColor: "white",
+  },
   holder: {
     flex: 1,
     height: wHeight,
-    marginHorizontal: Size.l,
+    paddingHorizontal: Size.l,
   },
   titleHolder: {
     flex: 1,
