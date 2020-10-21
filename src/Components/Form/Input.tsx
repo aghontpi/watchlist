@@ -13,32 +13,31 @@ import { FontType, Size, wWidth } from "../StyleConstants";
 
 interface InputProps extends TextInputProps {
   icon: string;
-  placeholder: string;
   active?: boolean;
-  error?: boolean;
+  error?: string;
 }
 
 const ACTIVE_COLOR = "#1a73e8";
 const ERROR_COLOR = "red";
+const NORMAL = "#B2B2B2";
+const NORMAL_PLACEHOLDER = "#A7A7A7";
 
 const Input = ({ icon, placeholder, active, error, ...props }: InputProps) => {
-  const iconColor = error ? ERROR_COLOR : active ? ACTIVE_COLOR : "#B2B2B2";
-  const borderColor = error ? ERROR_COLOR : active ? ACTIVE_COLOR : "";
+  const color = !active ? NORMAL : error ? ERROR_COLOR : ACTIVE_COLOR;
 
   return (
-    <View
-      style={[style.holder, active && [style.active, { ...{ borderColor } }]]}
-    >
+    <View style={[style.holder, { borderColor: color }]}>
       <View style={style.content}>
         <View style={style.contentLayout}>
-          <Icon name={icon} size={Size.l} color={iconColor} style={{}} />
+          <Icon name={icon} size={Size.l} color={color} />
           <TextInput
             style={style.text}
             placeholder={placeholder}
-            placeholderTextColor={error ? ERROR_COLOR : "#A7A7A7"}
+            placeholderTextColor={
+              active && error ? ERROR_COLOR : NORMAL_PLACEHOLDER
+            }
             underlineColorAndroid="transparent"
             autoCorrect={false}
-            blurOnSubmit={false}
             onSubmitEditing={() => Keyboard.dismiss()}
             {...props}
           />
@@ -54,6 +53,8 @@ const style = StyleSheet.create({
     width: wWidth - Size.l * 2,
     borderRadius: Size.m + 2,
     overflow: "hidden",
+    borderWidth: StyleSheet.hairlineWidth,
+    borderStyle: "solid",
   },
   content: {
     flex: 1,
@@ -72,10 +73,6 @@ const style = StyleSheet.create({
     fontSize: FontType.body,
     flex: 1,
     padding: 0,
-  },
-  active: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderStyle: "solid",
   },
 });
 
