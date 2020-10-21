@@ -7,12 +7,9 @@ import React, {
   useState,
 } from "react";
 
-import {
-  UserActionTypes,
-  userInitialState,
-  UserReducer,
-  UserState,
-} from "./Reducer";
+import { UserState } from "./Actions";
+import { UserActionTypes, userInitialState } from "./Actions/userAction";
+import { UserReducer } from "./Reducers";
 import { MovieViewProps } from "./Search/MovieView/MovieView";
 
 type ContextProps = {

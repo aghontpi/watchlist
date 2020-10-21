@@ -5,19 +5,9 @@ import auth from "@react-native-firebase/auth";
 
 import { UserInfoProvider, UserConext } from "./Context";
 import { configureGoogle } from "./Authentication";
-import { LoginUser, LogoutUser } from "./Reducer";
 import { HomeDrawer } from "./Drawer";
 import { PreHome } from "./PreHome";
-
-const Index = () => {
-  return (
-    <UserInfoProvider>
-      <NavigationContainer>
-        <AuthController />
-      </NavigationContainer>
-    </UserInfoProvider>
-  );
-};
+import { LoginUser, LogoutUser } from "./Actions";
 
 const AuthController = () => {
   const {
@@ -34,6 +24,16 @@ const AuthController = () => {
   }, []);
 
   return user ? <HomeDrawer /> : <PreHome />;
+};
+
+const Index = () => {
+  return (
+    <UserInfoProvider>
+      <NavigationContainer>
+        <AuthController />
+      </NavigationContainer>
+    </UserInfoProvider>
+  );
 };
 
 export default Index;
