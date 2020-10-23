@@ -3,6 +3,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from "@react-native-community/google-signin";
+import crashlytics from "@react-native-firebase/crashlytics";
 
 export const configureGoogle = () => {
   GoogleSignin.configure({
@@ -19,15 +20,16 @@ export const onGoogleButtonPress = async () => {
     const signInResult = auth().signInWithCredential(googleCredential);
     return signInResult;
   } catch (err) {
-    // TODO: configure and trigger error collection
     switch (err.code) {
       case statusCodes.SIGN_IN_CANCELLED:
-        console.log("signIn calcelled");
+        crashlytics().log("signIn calcelled.");
         break;
       case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
         console.log("google PlayService Not available");
+        crashlytics().log("google PlayService Not available");
         break;
       default:
+        crashlytics().log("SignIn error");
         console.log("SignIn error", err);
     }
   }

@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import React, { useContext, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
+import crashlytics from "@react-native-firebase/crashlytics";
 
 import { UserInfoProvider, UserConext } from "./Context";
 import { configureGoogle } from "./Authentication";
@@ -17,6 +18,7 @@ const AuthController = () => {
 
   useEffect(() => {
     configureGoogle();
+    crashlytics().log("App mounted.");
     return auth().onAuthStateChanged((userState) => {
       userState ? dispatch(LoginUser(userState)) : dispatch(LogoutUser());
     });
