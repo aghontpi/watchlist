@@ -18,7 +18,7 @@ interface InputProps extends TextInputProps {
 }
 
 const ACTIVE_COLOR = "#1a73e8";
-const ERROR_COLOR = "red";
+const ERROR_COLOR = "rgba(255,0,0,1)";
 const NORMAL = "#B2B2B2";
 const NORMAL_PLACEHOLDER = "#A7A7A7";
 
@@ -71,6 +71,7 @@ const style = StyleSheet.create({
     color: "black",
     backgroundColor: "#F4F4F4",
     fontSize: FontType.body,
+    fontFamily: "SF-Pro-Display-Regular",
     flex: 1,
     padding: 0,
   },

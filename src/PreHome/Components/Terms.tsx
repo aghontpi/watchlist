@@ -26,9 +26,10 @@ const style = StyleSheet.create({
   },
   label: {
     fontSize: Size.m,
+    fontFamily: "SF-Pro-Display-Regular",
   },
   bold: {
-    fontWeight: "bold",
+    fontFamily: "SF-Pro-Display-Bold",
   },
 });
 

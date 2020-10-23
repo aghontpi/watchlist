@@ -31,7 +31,7 @@ const style = StyleSheet.create({
   label: {
     color: "white",
     textAlign: "center",
-    fontWeight: "bold",
+    fontFamily: "SF-Pro-Display-Bold",
     fontSize: FontType.body,
   },
 });

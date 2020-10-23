@@ -9,7 +9,7 @@ const style = StyleSheet.create({
   },
   label: {
     fontSize: FontType.heading2,
-    fontWeight: "bold",
+    fontFamily: "SF-Pro-Display-Bold",
     opacity: 0.8,
     marginVertical: Size.m,
     marginLeft: 4,

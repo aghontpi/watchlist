@@ -52,13 +52,14 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: FontType.heading,
-    fontWeight: "bold",
+    fontFamily: "SF-Pro-Display-Bold",
   },
   subTitleHolder: {
     marginTop: Size.s,
   },
   subtitle: {
     fontSize: Size.l,
+    fontFamily: "SF-Pro-Display-Regular",
     opacity: 0.3,
   },
   formHolder: {
