@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 
+import { Size } from "../Components/StyleConstants";
+
 interface UserProps {
   name: string;
   nick: string;
@@ -24,6 +26,7 @@ const User = ({ name, nick, profile }: UserProps) => {
 const style = StyleSheet.create({
   container: {
     flexDirection: "row",
+    alignItems: "center",
   },
   image: {
     height: SIZE,
@@ -36,7 +39,7 @@ const style = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     marginLeft: 24,
-    paddingVertical: 13,
+    paddingVertical: Size.m,
   },
   name: {
     fontSize: 22,

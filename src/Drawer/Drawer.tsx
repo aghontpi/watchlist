@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -17,6 +17,7 @@ import {
   DrawerProps,
 } from "../Components/Navigation";
 import { FontType, Size, wWidth } from "../Components/StyleConstants";
+import { UserConext } from "../Context";
 
 import Item from "./Item";
 import User from "./User";
@@ -40,6 +41,10 @@ const DrawerItems: DrawerItems[] = [
   { name: "Logout", component: "Logout", icon: <BrokenLogout /> },
 ];
 
+const trimName = (str: string) => {
+  return str.length > Size.m - 6 ? str.substring(0, Size.m - 6) + ".." : str;
+};
+
 const Drawer = ({ navigation }: DrawerProps) => {
   const itemOnPress = ({ component }: DrawerItems): (() => void) => {
     return () =>
@@ -47,6 +52,7 @@ const Drawer = ({ navigation }: DrawerProps) => {
         ? logout().then(() => console.log("logout success"))
         : navigation.navigate(component);
   };
+  const { state: userInfo } = useContext(UserConext);
 
   return (
     <View style={style.container}>
@@ -86,9 +92,19 @@ const Drawer = ({ navigation }: DrawerProps) => {
         </View>
       </View>
       <User
-        name="Aghont Pi"
-        nick="Gopinath"
-        profile="https://bluepie.in/images/me/avatar.jpg"
+        name={trimName(
+          userInfo.user?.email ? userInfo.user.email : "unavailable"
+        )}
+        nick={
+          userInfo.user?.displayName
+            ? userInfo.user.displayName
+            : "not available"
+        }
+        profile={
+          userInfo.user?.photoURL
+            ? userInfo.user.photoURL
+            : "https://bluepie.in/images/me/avatar.jpg"
+        }
       />
     </View>
   );
