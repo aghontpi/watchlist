@@ -20,13 +20,13 @@ const AuthController = () => {
   useEffect(() => {
     configureGoogle();
     crashlytics().log("App mounted.");
-    SplashScreen.hide();
     return auth().onAuthStateChanged((userState) => {
       userState ? dispatch(LoginUser(userState)) : dispatch(LogoutUser());
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  SplashScreen.hide();
   return user ? <HomeDrawer /> : <PreHome />;
 };
 

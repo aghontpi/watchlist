@@ -18,6 +18,7 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState){
     SplashScreen.show(this);
+    // TODO: handle notch causing wired jump in splashscreen
     super.onCreate(savedInstanceState);
   }
 }

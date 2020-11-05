@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/splashscreen_bg" />
     <item
-        android:drawable="@drawable/ic_splashname"
+        android:drawable="@drawable/ic_g1706"
         android:id="@+id/splashDrawable"
         android:gravity="center" />
 </layer-list>
