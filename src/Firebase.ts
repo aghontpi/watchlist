@@ -3,9 +3,6 @@ import database from "@react-native-firebase/database";
 
 import { MovieViewProps } from "./Search/MovieView/MovieView";
 
-interface ItemDetails extends MovieViewProps {
-  uniqueId: string;
-}
 interface Callback {
   success?: () => void;
   failure?: () => void;
@@ -13,7 +10,7 @@ interface Callback {
 
 interface AddToListParams {
   uid: User["user"]["id"];
-  item: ItemDetails;
+  item: MovieViewProps;
   callback?: Callback;
 }
 
@@ -45,4 +42,39 @@ const addToList = async ({ uid, item, callback }: AddToListParams) => {
   }
 };
 
-export { addToList as FirebasePushItem };
+interface IsMovieInListParams {
+  uid: string;
+  name: string;
+  callback: Callback;
+}
+
+const isMovieInList = async ({ uid, name, callback }: IsMovieInListParams) => {
+  if (!uid || !uid.trim()) {
+    console.error("uid provided is not valid.");
+    return false;
+  }
+  if (!name) {
+    console.error("name provided is not valid");
+    return false;
+  }
+
+  const template = `lists/${uid}/`;
+  let snapshot, complete;
+  try {
+    const query = database().ref(template).orderByChild("title").equalTo(name);
+    snapshot = await query.once("value");
+    console.log(`fetched :'${query.ref.key}'`);
+    complete = true;
+  } catch (e) {
+    console.error(e);
+    complete = false;
+  }
+
+  if (callback) {
+    complete
+      ? snapshot?.exists() && callback.success && callback.success()
+      : callback.failure && callback.failure();
+  }
+};
+
+export { addToList as FirebasePushItem, isMovieInList as FirebaseIsInList };

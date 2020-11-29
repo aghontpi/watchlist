@@ -6,6 +6,7 @@ import {
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 
+//TODO: add loading state, disable enable state to btn for loading the state of the user
 export interface RoundedIconProps {
   name: string;
   color: string;

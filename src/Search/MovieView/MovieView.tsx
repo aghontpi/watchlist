@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { string } from "yup";
 
 import {
   FontType,
@@ -8,7 +9,7 @@ import {
   wWidth,
 } from "../../Components/StyleConstants";
 import { MovieInfoContext, UserConext } from "../../Context";
-import { FirebasePushItem } from "../../Firebase";
+import { FirebaseIsInList, FirebasePushItem } from "../../Firebase";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";
@@ -45,8 +46,23 @@ const MovieView = () => {
   const { movieInfo } = useContext(MovieInfoContext);
   const { state: user } = useContext(UserConext);
 
-  //TODO: retrive from database if it is already in user's list
   const [btnActive, setBtnActive] = useState(false);
+
+  useEffect(() => {
+    if (!user.user?.uid) {
+      return;
+    }
+    if (movieInfo) {
+      const item = {
+        uid: user.user.uid,
+        name: movieInfo.title,
+        callback: {
+          success: () => setBtnActive(true),
+        },
+      };
+      FirebaseIsInList(item);
+    }
+  }, [movieInfo, user.user]);
 
   if (!movieInfo) {
     return <Text>Movie not available</Text>;
