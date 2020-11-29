@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 
 import {
@@ -45,6 +45,9 @@ const MovieView = () => {
   const { movieInfo } = useContext(MovieInfoContext);
   const { state: user } = useContext(UserConext);
 
+  //TODO: retrive from database if it is already in user's list
+  const [btnActive, setBtnActive] = useState(false);
+
   if (!movieInfo) {
     return <Text>Movie not available</Text>;
   }
@@ -73,6 +76,9 @@ const MovieView = () => {
     const item = {
       uid: user.user.uid,
       item: movieInfo,
+      callback: {
+        success: () => setBtnActive(true),
+      },
     };
     FirebasePushItem(item);
   };
@@ -102,7 +108,10 @@ const MovieView = () => {
       </View>
       <Text />
       <View style={[StyleSheet.absoluteFillObject, style.restOfInfo]}>
-        <Title {...{ title, genre, runtime, release, certificate, addBtn }} />
+        <Title
+          {...{ title, genre, runtime, release, certificate }}
+          addBtn={{ onPress: addBtn, active: btnActive }}
+        />
         <View style={{ marginTop: Size.xxl + Size.s }}>
           <View>
             <Text style={style.plot}>Plot</Text>

@@ -5,13 +5,17 @@ import { ScrollView } from "react-native-gesture-handler";
 import { RoundedIcon } from "../../Components";
 import { FontType, Size } from "../../Components/StyleConstants";
 
+interface AddButtonProps {
+  onPress: () => void;
+  active: boolean;
+}
 interface TitleProps {
   title: string;
   genre: string[];
   runtime: string;
   release: string;
   certificate: string;
-  addBtn: () => void;
+  addBtn: AddButtonProps;
 }
 
 const Title = ({
@@ -20,7 +24,7 @@ const Title = ({
   runtime,
   release,
   certificate,
-  addBtn,
+  addBtn: { onPress, active },
 }: TitleProps) => {
   return (
     <View>
@@ -52,13 +56,13 @@ const Title = ({
       </View>
       <View style={style.absolutePositionLeft}>
         <RoundedIcon
-          name="plus"
+          name={active ? "check" : "plus"}
           iconRatio={0.3}
           backgroundColor="rgba(254,109,142,1)"
           size={Size.xl * 2}
           color="white"
           borderRadius={Size.l - 4}
-          onPress={addBtn}
+          onPress={onPress}
         />
       </View>
     </View>
