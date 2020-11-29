@@ -7,7 +7,7 @@ import SplashScreen from "react-native-splash-screen";
 
 import { UserInfoProvider, UserConext } from "./Context";
 import { configureGoogle } from "./Authentication";
-import { HomeDrawer } from "./Drawer";
+import { HomeDrawer } from "./Home/Drawer";
 import { PreHome } from "./PreHome";
 import { LoginUser, LogoutUser } from "./Actions";
 

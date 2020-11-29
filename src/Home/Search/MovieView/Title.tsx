@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { RoundedIcon } from "../../Components";
-import { FontType, Size } from "../../Components/StyleConstants";
+import { RoundedIcon } from "../../../Components";
+import { FontType, Size } from "../../../Components/StyleConstants";
 
 interface AddButtonProps {
   onPress: () => void;

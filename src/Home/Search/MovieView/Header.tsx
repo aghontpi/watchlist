@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native";
 
-import { RoundedIcon } from "../../Components";
-import { Size } from "../../Components/StyleConstants";
+import { RoundedIcon } from "../../../Components";
+import { Size } from "../../../Components/StyleConstants";
 
 interface HeaderProps {
   left?: {

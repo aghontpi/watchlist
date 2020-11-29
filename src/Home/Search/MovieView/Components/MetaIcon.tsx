@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-import { FontType, Size } from "../../../Components/StyleConstants";
+import { FontType, Size } from "../../../../Components/StyleConstants";
 
 import { IdbIconStyle } from "./IdbIcon";
 

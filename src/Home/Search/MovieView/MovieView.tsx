@@ -6,9 +6,9 @@ import {
   Size,
   wHeight,
   wWidth,
-} from "../../Components/StyleConstants";
-import { MovieInfoContext, UserConext } from "../../Context";
-import { FirebaseIsInList, FirebasePushItem } from "../../Firebase";
+} from "../../../Components/StyleConstants";
+import { MovieInfoContext, UserConext } from "../../../Context";
+import { FirebaseIsInList, FirebasePushItem } from "../../../Firebase";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-import { Size } from "../../Components/StyleConstants";
+import { Size } from "../../../Components/StyleConstants";
 
 interface RatingProps {
   idbIcon: ReactNode;

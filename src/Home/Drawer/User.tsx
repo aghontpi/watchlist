@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 
-import { Size } from "../Components/StyleConstants";
+import { Size } from "../../Components/StyleConstants";
 
 interface UserProps {
   name: string;

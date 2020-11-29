@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ImdbSearchProps, infoIDB, searchIDB } from "../../Api";
-import { MovieSearchInfoStackNavigationProps } from "../../Components/Navigation";
-import { MovieInfoContext } from "../../Context";
+import { ImdbSearchProps, infoIDB, searchIDB } from "../../../Api";
+import { MovieSearchInfoStackNavigationProps } from "../../../Components/Navigation";
+import { MovieInfoContext } from "../../../Context";
 
 import { Search } from "./Components";
 import ListItem, { ListItemProps } from "./ListItem";

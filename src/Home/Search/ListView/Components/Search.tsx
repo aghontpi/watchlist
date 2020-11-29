@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
-import { ImdbSearchProps } from "../../../Api";
-import { FontType, Size, wWidth } from "../../../Components/StyleConstants";
+import { ImdbSearchProps } from "../../../../Api";
+import { FontType, Size, wWidth } from "../../../../Components/StyleConstants";
 import Header from "../../MovieView/Header";
 
 interface SearchProps {

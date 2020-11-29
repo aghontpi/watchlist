@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
-import { MovieSearchInfoParamList } from "../Components/Navigation";
-import { MovieInfoContextProvider } from "../Context";
+import { MovieSearchInfoParamList } from "../../Components/Navigation";
+import { MovieInfoContextProvider } from "../../Context";
 
 import ListView from "./ListView";
 import MovieView from "./MovieView";
