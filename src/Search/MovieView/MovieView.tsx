@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
-import { string } from "yup";
 
 import {
   FontType,
@@ -49,23 +48,38 @@ const MovieView = () => {
   const [btnActive, setBtnActive] = useState(false);
 
   useEffect(() => {
-    if (!user.user?.uid) {
-      return;
-    }
-    if (movieInfo) {
-      const item = {
-        uid: user.user.uid,
-        name: movieInfo.title,
+    if (movieInfo && user.user?.uid) {
+      const { uid } = user.user;
+      const name = movieInfo.title;
+
+      FirebaseIsInList({
+        uid,
+        name,
         callback: {
           success: () => setBtnActive(true),
         },
-      };
-      FirebaseIsInList(item);
+      });
     }
-  }, [movieInfo, user.user]);
+  }, [movieInfo, user, user.user]);
+
+  const addBtn = () => {
+    if (!user.user?.uid || !movieInfo) {
+      return;
+    }
+    const { uid } = user.user;
+    const item = movieInfo;
+
+    FirebasePushItem({
+      uid,
+      item,
+      callback: {
+        success: () => setBtnActive(true),
+      },
+    });
+  };
 
   if (!movieInfo) {
-    return <Text>Movie not available</Text>;
+    return <Text>unable to fetch movie</Text>;
   }
 
   const {
@@ -83,21 +97,6 @@ const MovieView = () => {
     overview,
     metaCriticCount,
   } = movieInfo;
-
-  const addBtn = () => {
-    if (!user.user?.uid) {
-      return;
-    }
-    console.log(user.user.uid);
-    const item = {
-      uid: user.user.uid,
-      item: movieInfo,
-      callback: {
-        success: () => setBtnActive(true),
-      },
-    };
-    FirebasePushItem(item);
-  };
 
   return (
     <View style={style.container}>

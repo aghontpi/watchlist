@@ -1,5 +1,6 @@
-import { User } from "@react-native-community/google-signin";
-import database from "@react-native-firebase/database";
+import database, {
+  FirebaseDatabaseTypes,
+} from "@react-native-firebase/database";
 
 import { MovieViewProps } from "./Search/MovieView/MovieView";
 
@@ -8,24 +9,46 @@ interface Callback {
   failure?: () => void;
 }
 
-interface AddToListParams {
-  uid: User["user"]["id"];
-  item: MovieViewProps;
-  callback?: Callback;
+interface BaseParams {
+  callback: Callback;
 }
 
-const addToList = async ({ uid, item, callback }: AddToListParams) => {
-  if (!uid || !uid.trim()) {
-    console.error("uid provided is not valid.");
-    return false;
-  }
-  if (!item) {
-    console.error("item provided is not valid");
-    return false;
-  }
+const DatabaseReference = (uid: string): FirebaseDatabaseTypes.Reference => {
   const template = `lists/${uid}/`;
-  let ref = database().ref(template);
+  return database().ref(template);
+};
+
+const emptyCheck = (items: { name: string; value: unknown }[]) => {
+  let check = true;
+  items.map(({ value, name }) => {
+    if (!value || (typeof value === "string" && !value.trim())) {
+      console.error(`${name} provided is not valid.`);
+      check = false;
+    }
+  });
+  return check;
+};
+
+const callBackFn = ({
+  success,
+  failure,
+  complete,
+}: { complete: boolean } & Callback) => {
+  complete ? success && success() : failure && failure();
+};
+
+const addToList = async ({
+  uid,
+  item,
+  callback,
+}: { uid: string; item: MovieViewProps } & BaseParams) => {
+  emptyCheck([
+    { name: "uid", value: uid },
+    { name: "item", value: item },
+  ]);
+  let ref = DatabaseReference(uid);
   let complete = null;
+
   try {
     ref = await ref.push(item);
     console.log(`wrote :'${ref.key}'`);
@@ -35,33 +58,28 @@ const addToList = async ({ uid, item, callback }: AddToListParams) => {
     complete = false;
   }
 
-  if (callback) {
-    complete
-      ? callback.success && callback.success()
-      : callback.failure && callback.failure();
-  }
+  callBackFn({ complete, ...callback });
 };
 
-interface IsMovieInListParams {
-  uid: string;
-  name: string;
-  callback: Callback;
-}
+const isMovieInList = async ({
+  uid,
+  name,
+  callback,
+}: { uid: string; name: string } & BaseParams) => {
+  const status = emptyCheck([
+    { name: "uid", value: uid },
+    { name: "name", value: name },
+  ]);
 
-const isMovieInList = async ({ uid, name, callback }: IsMovieInListParams) => {
-  if (!uid || !uid.trim()) {
-    console.error("uid provided is not valid.");
-    return false;
-  }
-  if (!name) {
-    console.error("name provided is not valid");
-    return false;
+  if (!status) {
+    return;
   }
 
-  const template = `lists/${uid}/`;
   let snapshot, complete;
+  const ref = DatabaseReference(uid);
+
   try {
-    const query = database().ref(template).orderByChild("title").equalTo(name);
+    const query = ref.orderByChild("title").equalTo(name);
     snapshot = await query.once("value");
     console.log(`fetched :'${query.ref.key}'`);
     complete = true;
@@ -70,11 +88,13 @@ const isMovieInList = async ({ uid, name, callback }: IsMovieInListParams) => {
     complete = false;
   }
 
-  if (callback) {
-    complete
-      ? snapshot?.exists() && callback.success && callback.success()
-      : callback.failure && callback.failure();
-  }
+  const success = snapshot?.exists() ? callback.success : undefined;
+
+  callBackFn({
+    complete,
+    ...callback,
+    success,
+  });
 };
 
 export { addToList as FirebasePushItem, isMovieInList as FirebaseIsInList };
