@@ -11,9 +11,17 @@ interface TitleProps {
   runtime: string;
   release: string;
   certificate: string;
+  addBtn: () => void;
 }
 
-const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
+const Title = ({
+  title,
+  genre,
+  runtime,
+  release,
+  certificate,
+  addBtn,
+}: TitleProps) => {
   return (
     <View>
       <View>
@@ -50,7 +58,7 @@ const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
           size={Size.xl * 2}
           color="white"
           borderRadius={Size.l - 4}
-          onPress={() => true}
+          onPress={addBtn}
         />
       </View>
     </View>

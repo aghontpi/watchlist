@@ -7,7 +7,8 @@ import {
   wHeight,
   wWidth,
 } from "../../Components/StyleConstants";
-import { MovieInfoContext } from "../../Context";
+import { MovieInfoContext, UserConext } from "../../Context";
+import { FirebasePushItem } from "../../Firebase";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";
@@ -42,6 +43,7 @@ const posterConversion = (imgSrc: string): string => {
 
 const MovieView = () => {
   const { movieInfo } = useContext(MovieInfoContext);
+  const { state: user } = useContext(UserConext);
 
   if (!movieInfo) {
     return <Text>Movie not available</Text>;
@@ -62,6 +64,18 @@ const MovieView = () => {
     overview,
     metaCriticCount,
   } = movieInfo;
+
+  const addBtn = () => {
+    if (!user.user?.uid) {
+      return;
+    }
+    console.log(user.user.uid);
+    const item = {
+      uid: user.user.uid,
+      item: movieInfo,
+    };
+    FirebasePushItem(item);
+  };
 
   return (
     <View style={style.container}>
@@ -88,7 +102,7 @@ const MovieView = () => {
       </View>
       <Text />
       <View style={[StyleSheet.absoluteFillObject, style.restOfInfo]}>
-        <Title {...{ title, genre, runtime, release, certificate }} />
+        <Title {...{ title, genre, runtime, release, certificate, addBtn }} />
         <View style={{ marginTop: Size.xxl + Size.s }}>
           <View>
             <Text style={style.plot}>Plot</Text>
