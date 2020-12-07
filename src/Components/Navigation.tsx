@@ -13,7 +13,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type DrawerNavigationParamList = {
   Search: undefined;
-  WatchList: undefined;
+  MyList: undefined;
   Favourite: undefined;
   Profile: undefined;
   People: undefined;

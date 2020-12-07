@@ -33,7 +33,7 @@ interface DrawerItems {
 
 const DrawerItems: DrawerItems[] = [
   { name: "Search", component: "Search", icon: <SearchIcon /> },
-  { name: "Your List", component: "Search", icon: <FavouriteIcon /> },
+  { name: "Your List", component: "MyList", icon: <FavouriteIcon /> },
   { name: "Top 250", component: "Search", icon: <ChartIcon /> },
   { name: "Profile", component: "Search", icon: <ProfileIcon /> },
   { name: "Friend's List", component: "Search", icon: <FriendsIcon /> },
