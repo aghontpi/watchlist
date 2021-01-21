@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
-import { add } from "react-native-reanimated";
 
 import {
   FontType,
