@@ -22,7 +22,7 @@ const ListItem = ({
   title,
   cast,
   poster,
-}: ListItemProps) => {
+}: ListItemProps & { cached: boolean }) => {
   return (
     <RectButton {...{ onPress }} key={title} style={style.btn}>
       <View style={style.itemContainer}>

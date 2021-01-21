@@ -56,7 +56,6 @@ const MovieView = () => {
     if (movieInfo && user.user?.uid) {
       const { uid } = user.user;
       const name = movieInfo.title;
-
       FirebaseIsInList({
         uid,
         name,

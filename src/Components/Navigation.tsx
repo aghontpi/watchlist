@@ -37,6 +37,17 @@ export interface MovieSearchInfoStackNavigationProps<
   navigation: StackNavigationProp<MovieSearchInfoParamList, T>;
 }
 
+export type MyListParamList = {
+  MyList: undefined;
+  MovieView: undefined;
+};
+
+export interface MyListInfoStackNavigationProps<
+  T extends keyof MyListParamList
+> {
+  navigation: StackNavigationProp<MyListParamList, T>;
+}
+
 export type StackNavigationParamList = {
   Login: undefined;
   Registration: undefined;

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
-import { UserConext } from "../../Context";
+import { MyListInfoStackNavigationProps } from "../../Components/Navigation";
+import { MovieInfoContext, UserConext } from "../../Context";
 import { FirebaseMyMovies } from "../../Firebase";
 import { FirebaseMyListResponse } from "../../TypeDefinitions/firebaseMyList.";
 import ListItem from "../Search/ListView/ListItem";
@@ -31,17 +32,38 @@ const dataReducer = (WholeData: string) => {
   );
   return limitedData;
 };
-const MyList = () => {
+const MyList = ({ navigation }: MyListInfoStackNavigationProps<"MyList">) => {
   // get logged in user from context
   const { state: user } = useContext(UserConext);
   const [api, setApiData] = useState<string | null>(null);
+  const { movieInfo, setMovieInfo } = useContext(MovieInfoContext);
+  const onPress = (item: ApiListItemProps) => {
+    let value = null;
+    if (item && api) {
+      const tapi = JSON.parse(api);
+      for (const k in tapi) {
+        const v = tapi[k];
+        if (v && v.title === item.title) {
+          value = v;
+        }
+      }
+      console.log("setting mv", value, movieInfo);
+      api && setMovieInfo && setMovieInfo(value);
+      navigation.navigate("MovieView");
+    }
+  };
+
+  useEffect(() => {
+    movieInfo && navigation.navigate("MovieView");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movieInfo]);
 
   useEffect(() => {
     if (user.user?.uid) {
       const { uid } = user.user;
       FirebaseMyMovies(uid).then((value) => {
         if (value !== null) {
-          console.log("setting list", value);
+          console.log("setting list", value.slice(0, 20));
           setApiData(value);
         }
       });
@@ -64,7 +86,12 @@ const MyList = () => {
         }
         data={listViewData}
         renderItem={({ item, index }) => (
-          <ListItem key={index} onPress={() => true} {...item} />
+          <ListItem
+            key={index}
+            cached={true}
+            onPress={() => onPress(item)}
+            {...item}
+          />
         )}
       />
     </View>
