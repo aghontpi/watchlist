@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { add } from "react-native-reanimated";
 
 import {
   FontType,
@@ -8,7 +9,11 @@ import {
   wWidth,
 } from "../../../Components/StyleConstants";
 import { MovieInfoContext, UserConext } from "../../../Context";
-import { FirebaseIsInList, FirebasePushItem } from "../../../Firebase";
+import {
+  FirebaseIsInList,
+  FirebasePushItem,
+  FirebaseRemoveItem,
+} from "../../../Firebase";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";
@@ -45,7 +50,7 @@ const MovieView = () => {
   const { movieInfo } = useContext(MovieInfoContext);
   const { state: user } = useContext(UserConext);
 
-  const [btnActive, setBtnActive] = useState(false);
+  const [btnActive, setBtnActive] = useState<null | boolean>(null);
 
   useEffect(() => {
     if (movieInfo && user.user?.uid) {
@@ -57,6 +62,7 @@ const MovieView = () => {
         name,
         callback: {
           success: () => setBtnActive(true),
+          failure: () => setBtnActive(false),
         },
       });
     }
@@ -74,6 +80,22 @@ const MovieView = () => {
       item,
       callback: {
         success: () => setBtnActive(true),
+      },
+    });
+  };
+
+  const removeBtn = () => {
+    if (!user.user?.uid || !movieInfo) {
+      return;
+    }
+    const { uid } = user.user;
+    const item = movieInfo;
+
+    FirebaseRemoveItem({
+      uid,
+      item,
+      callback: {
+        success: () => setBtnActive(false),
       },
     });
   };
@@ -125,7 +147,10 @@ const MovieView = () => {
       <View style={[StyleSheet.absoluteFillObject, style.restOfInfo]}>
         <Title
           {...{ title, genre, runtime, release, certificate }}
-          addBtn={{ onPress: addBtn, active: btnActive }}
+          addBtn={{
+            onPress: btnActive ? removeBtn : addBtn,
+            active: btnActive,
+          }}
         />
         <View style={{ marginTop: Size.xxl + Size.s }}>
           <View>

@@ -7,7 +7,7 @@ import { FontType, Size } from "../../../Components/StyleConstants";
 
 interface AddButtonProps {
   onPress: () => void;
-  active: boolean;
+  active: boolean | null;
 }
 interface TitleProps {
   title: string;
@@ -55,15 +55,17 @@ const Title = ({
         </View>
       </View>
       <View style={style.absolutePositionLeft}>
-        <RoundedIcon
-          name={active ? "check" : "plus"}
-          iconRatio={0.3}
-          backgroundColor="rgba(254,109,142,1)"
-          size={Size.xl * 2}
-          color="white"
-          borderRadius={Size.l - 4}
-          onPress={onPress}
-        />
+        {active !== null && (
+          <RoundedIcon
+            name={active ? "check" : "plus"}
+            iconRatio={0.3}
+            backgroundColor={active ? "#04931B" : "rgba(254,109,142,1)"}
+            size={Size.xl * 2}
+            color="white"
+            borderRadius={Size.l - 4}
+            onPress={onPress}
+          />
+        )}
       </View>
     </View>
   );

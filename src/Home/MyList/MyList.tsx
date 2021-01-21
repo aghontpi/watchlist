@@ -50,7 +50,7 @@ const MyList = () => {
   }, []);
 
   if (api === null) {
-    return false;
+    return <View />;
   }
   // reduce the whole dataset to only contain listItem required props
   const listViewData = dataReducer(api);

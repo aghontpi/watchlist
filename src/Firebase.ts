@@ -37,11 +37,9 @@ const callBackFn = ({
   complete ? success && success() : failure && failure();
 };
 
-const addToList = async ({
-  uid,
-  item,
-  callback,
-}: { uid: string; item: MovieViewProps } & BaseParams) => {
+type UpdateProps = { uid: string; item: MovieViewProps } & BaseParams;
+
+const addToList = async ({ uid, item, callback }: UpdateProps) => {
   emptyCheck([
     { name: "uid", value: uid },
     { name: "item", value: item },
@@ -81,8 +79,13 @@ const isMovieInList = async ({
   try {
     const query = ref.orderByChild("title").equalTo(name);
     snapshot = await query.once("value");
-    console.log(`fetched :'${query.ref.key}'`);
-    complete = true;
+    if (snapshot.exists()) {
+      console.log(`fetched :'${snapshot.ref.key}'`);
+      complete = true;
+    } else {
+      console.log(`title : ${name} not found in user`);
+      complete = false;
+    }
   } catch (e) {
     console.error(e);
     complete = false;
@@ -105,8 +108,45 @@ const myMovies = async (uid: string) => {
   return null;
 };
 
+const removeFromList = async ({ uid, item, callback }: UpdateProps) => {
+  emptyCheck([
+    { name: "uid", value: uid },
+    { name: "item", value: item },
+  ]);
+  const ref = DatabaseReference(uid);
+  let complete = null;
+
+  const { title } = item;
+  try {
+    const query = await ref.orderByChild("title").equalTo(title);
+    const snapsnot = await query.once("value");
+    if (snapsnot.exists()) {
+      const autogenkeys = Object.keys(snapsnot.val());
+      const update: { [key: string]: null } = {};
+      for (const k in autogenkeys) {
+        const v = autogenkeys[k];
+        update[v] = null;
+      }
+      console.log(update);
+      ref.update(update, () => {
+        console.log(`removed ${update}`);
+      });
+
+      complete = true;
+    } else {
+      console.log(`provided title : ${title} not exists for rm`);
+      complete = false;
+    }
+  } catch (e) {
+    console.error(e);
+    complete = false;
+  }
+
+  callBackFn({ complete, ...callback });
+};
 export {
   addToList as FirebasePushItem,
   isMovieInList as FirebaseIsInList,
   myMovies as FirebaseMyMovies,
+  removeFromList as FirebaseRemoveItem,
 };
