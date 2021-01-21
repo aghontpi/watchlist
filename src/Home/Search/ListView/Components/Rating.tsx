@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-import { IMDB_YELLOW, StarIcon } from "../../../Components";
-import { Size } from "../../../Components/StyleConstants";
+import { IMDB_YELLOW, StarIcon } from "../../../../Components";
+import { Size } from "../../../../Components/StyleConstants";
 
 interface RatingProps {
   heartOnPress: () => void;

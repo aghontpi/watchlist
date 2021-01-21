@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ImdbSearchProps, infoIDB, searchIDB } from "../../Api";
-import { MovieSearchInfoStackNavigationProps } from "../../Components/Navigation";
-import { MovieInfoContext } from "../../Context";
+import { ImdbSearchProps, infoIDB, searchIDB } from "../../../Api";
+import { MovieSearchInfoStackNavigationProps } from "../../../Components/Navigation";
+import { MovieInfoContext } from "../../../Context";
 
 import { Search } from "./Components";
 import ListItem, { ListItemProps } from "./ListItem";
@@ -38,7 +38,7 @@ const ListView = ({
   const OnPress = (item: ApiListItemProps) => {
     setMovieInfo &&
       infoIDB({ ...item }).then((v) =>
-        setMovieInfo((prev) => (v.content !== prev ? v.content : prev))
+        setMovieInfo((prev: unknown) => (v.content !== prev ? v.content : prev))
       );
   };
 
@@ -52,7 +52,12 @@ const ListView = ({
       }
       data={api}
       renderItem={({ item, index }: FlatListRenderProps) => (
-        <ListItem key={index} onPress={() => OnPress(item)} {...item} />
+        <ListItem
+          key={index}
+          cached={false}
+          onPress={() => OnPress(item)}
+          {...item}
+        />
       )}
     />
   );

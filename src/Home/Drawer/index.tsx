@@ -2,8 +2,9 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
 
-import { DrawerNavigationParamList } from "../Components/Navigation";
 import { Search } from "../Search";
+import { DrawerNavigationParamList } from "../../Components/Navigation";
+import { MyList } from "../MyList";
 
 import Drawer, { DRAWER_WIDTH } from "./Drawer";
 
@@ -17,6 +18,7 @@ export const HomeDrawer = () => {
       drawerStyle={style.drawerStyle}
     >
       <DrawerNavigation.Screen name="Search" component={Search} />
+      <DrawerNavigation.Screen name="MyList" component={MyList} />
     </DrawerNavigation.Navigator>
   );
 };

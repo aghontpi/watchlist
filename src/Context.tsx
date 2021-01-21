@@ -9,8 +9,8 @@ import React, {
 
 import { UserState } from "./Actions";
 import { UserActionTypes, userInitialState } from "./Actions/userAction";
+import { MovieViewProps } from "./Home/Search/MovieView/MovieView";
 import { UserReducer } from "./Reducers";
-import { MovieViewProps } from "./Search/MovieView/MovieView";
 
 type ContextProps = {
   children: ReactNode;

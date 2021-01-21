@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 
 import {
@@ -6,8 +6,13 @@ import {
   Size,
   wHeight,
   wWidth,
-} from "../../Components/StyleConstants";
-import { MovieInfoContext } from "../../Context";
+} from "../../../Components/StyleConstants";
+import { MovieInfoContext, UserConext } from "../../../Context";
+import {
+  FirebaseIsInList,
+  FirebasePushItem,
+  FirebaseRemoveItem,
+} from "../../../Firebase";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";
@@ -42,9 +47,59 @@ const posterConversion = (imgSrc: string): string => {
 
 const MovieView = () => {
   const { movieInfo } = useContext(MovieInfoContext);
+  const { state: user } = useContext(UserConext);
+
+  const [btnActive, setBtnActive] = useState<null | boolean>(null);
+
+  useEffect(() => {
+    if (movieInfo && user.user?.uid) {
+      const { uid } = user.user;
+      const name = movieInfo.title;
+      FirebaseIsInList({
+        uid,
+        name,
+        callback: {
+          success: () => setBtnActive(true),
+          failure: () => setBtnActive(false),
+        },
+      });
+    }
+  }, [movieInfo, user, user.user]);
+
+  const addBtn = () => {
+    if (!user.user?.uid || !movieInfo) {
+      return;
+    }
+    const { uid } = user.user;
+    const item = movieInfo;
+
+    FirebasePushItem({
+      uid,
+      item,
+      callback: {
+        success: () => setBtnActive(true),
+      },
+    });
+  };
+
+  const removeBtn = () => {
+    if (!user.user?.uid || !movieInfo) {
+      return;
+    }
+    const { uid } = user.user;
+    const item = movieInfo;
+
+    FirebaseRemoveItem({
+      uid,
+      item,
+      callback: {
+        success: () => setBtnActive(false),
+      },
+    });
+  };
 
   if (!movieInfo) {
-    return <Text>Movie not available</Text>;
+    return <Text>unable to fetch movie</Text>;
   }
 
   const {
@@ -88,7 +143,13 @@ const MovieView = () => {
       </View>
       <Text />
       <View style={[StyleSheet.absoluteFillObject, style.restOfInfo]}>
-        <Title {...{ title, genre, runtime, release, certificate }} />
+        <Title
+          {...{ title, genre, runtime, release, certificate }}
+          addBtn={{
+            onPress: btnActive ? removeBtn : addBtn,
+            active: btnActive,
+          }}
+        />
         <View style={{ marginTop: Size.xxl + Size.s }}>
           <View>
             <Text style={style.plot}>Plot</Text>

@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-import { StarIcon } from "../../../Components";
-import { FontType, Size } from "../../../Components/StyleConstants";
+import { StarIcon } from "../../../../Components";
+import { FontType, Size } from "../../../../Components/StyleConstants";
 
 interface IdbIconProps {
   rating: string;

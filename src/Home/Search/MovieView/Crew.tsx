@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { Size, wWidth } from "../../Components/StyleConstants";
+import { Size, wWidth } from "../../../Components/StyleConstants";
 
 import People from "./Components/People";
 

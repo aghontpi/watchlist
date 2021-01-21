@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground, StyleSheet } from "react-native";
 
-import { FontType, Size } from "../../../Components/StyleConstants";
+import { FontType, Size } from "../../../../Components/StyleConstants";
 
 interface PeopleProps {
   img: string;

@@ -2,7 +2,7 @@ import React, { ReactNode, useContext } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
-import { logout } from "../Authentication";
+import { logout } from "../../Authentication";
 import {
   RoundedIcon,
   ChartIcon,
@@ -10,14 +10,14 @@ import {
   FriendsIcon,
   ProfileIcon,
   SearchIcon,
-} from "../Components";
-import { BrokenLogout } from "../Components/CustomIcons";
+} from "../../Components";
+import { BrokenLogout } from "../../Components/CustomIcons";
 import {
   DrawerNavigationParamList,
   DrawerProps,
-} from "../Components/Navigation";
-import { FontType, Size, wWidth } from "../Components/StyleConstants";
-import { UserConext } from "../Context";
+} from "../../Components/Navigation";
+import { FontType, Size, wWidth } from "../../Components/StyleConstants";
+import { UserConext } from "../../Context";
 
 import Item from "./Item";
 import User from "./User";
@@ -33,7 +33,7 @@ interface DrawerItems {
 
 const DrawerItems: DrawerItems[] = [
   { name: "Search", component: "Search", icon: <SearchIcon /> },
-  { name: "Your List", component: "Search", icon: <FavouriteIcon /> },
+  { name: "Your List", component: "MyList", icon: <FavouriteIcon /> },
   { name: "Top 250", component: "Search", icon: <ChartIcon /> },
   { name: "Profile", component: "Search", icon: <ProfileIcon /> },
   { name: "Friend's List", component: "Search", icon: <FriendsIcon /> },

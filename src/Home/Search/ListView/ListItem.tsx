@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, ImageBackground, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
-import { FontType, Size } from "../../Components/StyleConstants";
+import { FontType, Size } from "../../../Components/StyleConstants";
 
 import Rating from "./Components/Rating";
 
@@ -22,7 +22,7 @@ const ListItem = ({
   title,
   cast,
   poster,
-}: ListItemProps) => {
+}: ListItemProps & { cached: boolean }) => {
   return (
     <RectButton {...{ onPress }} key={title} style={style.btn}>
       <View style={style.itemContainer}>

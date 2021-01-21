@@ -2,18 +2,30 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { RoundedIcon } from "../../Components";
-import { FontType, Size } from "../../Components/StyleConstants";
+import { RoundedIcon } from "../../../Components";
+import { FontType, Size } from "../../../Components/StyleConstants";
 
+interface AddButtonProps {
+  onPress: () => void;
+  active: boolean | null;
+}
 interface TitleProps {
   title: string;
   genre: string[];
   runtime: string;
   release: string;
   certificate: string;
+  addBtn: AddButtonProps;
 }
 
-const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
+const Title = ({
+  title,
+  genre,
+  runtime,
+  release,
+  certificate,
+  addBtn: { onPress, active },
+}: TitleProps) => {
   return (
     <View>
       <View>
@@ -43,15 +55,17 @@ const Title = ({ title, genre, runtime, release, certificate }: TitleProps) => {
         </View>
       </View>
       <View style={style.absolutePositionLeft}>
-        <RoundedIcon
-          name="plus"
-          iconRatio={0.3}
-          backgroundColor="rgba(254,109,142,1)"
-          size={Size.xl * 2}
-          color="white"
-          borderRadius={Size.l - 4}
-          onPress={() => true}
-        />
+        {active !== null && (
+          <RoundedIcon
+            name={active ? "check" : "plus"}
+            iconRatio={0.3}
+            backgroundColor={active ? "#04931B" : "rgba(254,109,142,1)"}
+            size={Size.xl * 2}
+            color="white"
+            borderRadius={Size.l - 4}
+            onPress={onPress}
+          />
+        )}
       </View>
     </View>
   );

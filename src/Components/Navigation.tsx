@@ -13,7 +13,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type DrawerNavigationParamList = {
   Search: undefined;
-  WatchList: undefined;
+  MyList: undefined;
   Favourite: undefined;
   Profile: undefined;
   People: undefined;
@@ -35,6 +35,17 @@ export interface MovieSearchInfoStackNavigationProps<
   T extends keyof MovieSearchInfoParamList
 > {
   navigation: StackNavigationProp<MovieSearchInfoParamList, T>;
+}
+
+export type MyListParamList = {
+  MyList: undefined;
+  MovieView: undefined;
+};
+
+export interface MyListInfoStackNavigationProps<
+  T extends keyof MyListParamList
+> {
+  navigation: StackNavigationProp<MyListParamList, T>;
 }
 
 export type StackNavigationParamList = {
