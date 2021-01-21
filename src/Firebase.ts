@@ -2,7 +2,7 @@ import database, {
   FirebaseDatabaseTypes,
 } from "@react-native-firebase/database";
 
-import { MovieViewProps } from "./Search/MovieView/MovieView";
+import { MovieViewProps } from "./Home/Search/MovieView/MovieView";
 
 interface Callback {
   success?: () => void;
@@ -97,4 +97,16 @@ const isMovieInList = async ({
   });
 };
 
-export { addToList as FirebasePushItem, isMovieInList as FirebaseIsInList };
+const myMovies = async (uid: string) => {
+  if (uid) {
+    const snapshot = await DatabaseReference(uid).ref.once("value");
+    return snapshot.exists() ? JSON.stringify(snapshot.toJSON()) : null;
+  }
+  return null;
+};
+
+export {
+  addToList as FirebasePushItem,
+  isMovieInList as FirebaseIsInList,
+  myMovies as FirebaseMyMovies,
+};
