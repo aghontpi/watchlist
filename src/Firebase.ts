@@ -4,18 +4,30 @@ import database, {
 
 import { MovieViewProps } from "./Home/Search/MovieView/MovieView";
 
+const ENABLE_FIREBASE_DEBUG = true;
 interface Callback {
   success?: () => void;
   failure?: () => void;
 }
+const callBackFn = ({
+  success,
+  failure,
+  complete,
+}: { complete: boolean } & Callback) => {
+  complete ? success && success() : failure && failure();
+};
 
-interface BaseParams {
-  callback: Callback;
-}
+const log = (msg: string) => ENABLE_FIREBASE_DEBUG && console.log(msg);
 
-const DatabaseReference = (uid: string): FirebaseDatabaseTypes.Reference => {
+const DatabaseReference = (
+  uid: string
+): FirebaseDatabaseTypes.Reference | undefined => {
   const template = `lists/${uid}/`;
-  return database().ref(template);
+  try {
+    return database().ref(template);
+  } catch (e) {
+    console.error(`unable to connect firebase, ref : ${template}`);
+  }
 };
 
 const emptyCheck = (items: { name: string; value: unknown }[]) => {
@@ -29,124 +41,104 @@ const emptyCheck = (items: { name: string; value: unknown }[]) => {
   return check;
 };
 
-const callBackFn = ({
-  success,
-  failure,
-  complete,
-}: { complete: boolean } & Callback) => {
-  complete ? success && success() : failure && failure();
+type UpdateProps = {
+  uid: string;
+  item: MovieViewProps;
+  type: "add" | "remove" | "contains";
+  callback: Callback;
 };
 
-type UpdateProps = { uid: string; item: MovieViewProps } & BaseParams;
-
-const addToList = async ({ uid, item, callback }: UpdateProps) => {
-  emptyCheck([
-    { name: "uid", value: uid },
-    { name: "item", value: item },
-  ]);
-  let ref = DatabaseReference(uid);
-  let complete = null;
-
-  try {
-    ref = await ref.push(item);
-    console.log(`wrote :'${ref.key}'`);
-    complete = true;
-  } catch (e) {
-    console.error(e);
-    complete = false;
-  }
-
-  callBackFn({ complete, ...callback });
-};
-
-const isMovieInList = async ({
-  uid,
-  name,
-  callback,
-}: { uid: string; name: string } & BaseParams) => {
-  const status = emptyCheck([
-    { name: "uid", value: uid },
-    { name: "name", value: name },
-  ]);
-
-  if (!status) {
+const performAction = async ({ uid, item, type, callback }: UpdateProps) => {
+  const { title } = item;
+  // whether passes params are valid
+  if (
+    !emptyCheck([
+      { name: "uid", value: uid },
+      { name: "name", value: title },
+    ])
+  ) {
     return;
   }
 
-  let snapshot, complete;
-  const ref = DatabaseReference(uid);
+  let ref = DatabaseReference(uid);
+  let complete = false,
+    snapshot = null;
 
-  try {
-    const query = ref.orderByChild("title").equalTo(name);
-    snapshot = await query.once("value");
-    if (snapshot.exists()) {
-      console.log(`fetched :'${snapshot.ref.key}'`);
-      complete = true;
-    } else {
-      console.log(`title : ${name} not found in user`);
-      complete = false;
-    }
-  } catch (e) {
-    console.error(e);
-    complete = false;
+  // connection to firebase error
+  if (!ref) {
+    return;
   }
 
-  const success = snapshot?.exists() ? callback.success : undefined;
+  try {
+    const query = await ref.orderByChild("title").equalTo(title);
+    snapshot = await query.once("value");
+  } catch (e) {
+    console.error("unable to query from firebase", console.trace());
+  }
 
-  callBackFn({
-    complete,
-    ...callback,
-    success,
-  });
+  switch (type) {
+    case "remove":
+      try {
+        if (snapshot && snapshot.exists()) {
+          const autogenkeys = Object.keys(snapshot.val());
+          const update: { [key: string]: null } = {};
+          for (const k in autogenkeys) {
+            const v = autogenkeys[k];
+            update[v] = null;
+          }
+          ref.update(update, () => {
+            log(`removed ${Object.keys(update)}`);
+          });
+          complete = true;
+        } else {
+          log(`provided title : ${title} not exists for rm`);
+          complete = false;
+        }
+      } catch (e) {
+        console.error(e);
+        complete = false;
+      }
+      break;
+    case "add":
+      try {
+        ref = await ref.push(item);
+        console.log(`wrote :'${ref.key}'`);
+        complete = true;
+      } catch (e) {
+        console.error(e);
+        complete = false;
+      }
+      break;
+    case "contains":
+      try {
+        if (snapshot && snapshot.exists()) {
+          log(`fetched :'${snapshot.ref.key}'`);
+          complete = true;
+        } else {
+          log(`title : ${title} not found in user`);
+          complete = false;
+        }
+      } catch (e) {
+        console.error(e);
+        complete = false;
+      }
+      break;
+
+    default:
+      console.error(`invalid value provided: ${type}`);
+  }
+
+  callBackFn({ complete, ...callback });
 };
 
 const myMovies = async (uid: string) => {
   if (uid) {
-    const snapshot = await DatabaseReference(uid).ref.once("value");
-    return snapshot.exists() ? JSON.stringify(snapshot.toJSON()) : null;
+    const snapshot = await DatabaseReference(uid)?.ref.once("value");
+    return snapshot && snapshot.exists()
+      ? JSON.stringify(snapshot.toJSON())
+      : null;
   }
   return null;
 };
 
-const removeFromList = async ({ uid, item, callback }: UpdateProps) => {
-  emptyCheck([
-    { name: "uid", value: uid },
-    { name: "item", value: item },
-  ]);
-  const ref = DatabaseReference(uid);
-  let complete = null;
-
-  const { title } = item;
-  try {
-    const query = await ref.orderByChild("title").equalTo(title);
-    const snapsnot = await query.once("value");
-    if (snapsnot.exists()) {
-      const autogenkeys = Object.keys(snapsnot.val());
-      const update: { [key: string]: null } = {};
-      for (const k in autogenkeys) {
-        const v = autogenkeys[k];
-        update[v] = null;
-      }
-      console.log(update);
-      ref.update(update, () => {
-        console.log(`removed ${update}`);
-      });
-
-      complete = true;
-    } else {
-      console.log(`provided title : ${title} not exists for rm`);
-      complete = false;
-    }
-  } catch (e) {
-    console.error(e);
-    complete = false;
-  }
-
-  callBackFn({ complete, ...callback });
-};
-export {
-  addToList as FirebasePushItem,
-  isMovieInList as FirebaseIsInList,
-  myMovies as FirebaseMyMovies,
-  removeFromList as FirebaseRemoveItem,
-};
+export { myMovies as FirebaseMyMovies, performAction };

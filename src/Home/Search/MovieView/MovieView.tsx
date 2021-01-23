@@ -8,11 +8,7 @@ import {
   wWidth,
 } from "../../../Components/StyleConstants";
 import { MovieInfoContext, UserConext } from "../../../Context";
-import {
-  FirebaseIsInList,
-  FirebasePushItem,
-  FirebaseRemoveItem,
-} from "../../../Firebase";
+import { performAction } from "../../../Firebase";
 
 import { MetaIcon } from "./Components";
 import IdbIcon from "./Components/IdbIcon";
@@ -54,10 +50,10 @@ const MovieView = () => {
   useEffect(() => {
     if (movieInfo && user.user?.uid) {
       const { uid } = user.user;
-      const name = movieInfo.title;
-      FirebaseIsInList({
+      performAction({
         uid,
-        name,
+        item: movieInfo,
+        type: "contains",
         callback: {
           success: () => setBtnActive(true),
           failure: () => setBtnActive(false),
@@ -71,11 +67,11 @@ const MovieView = () => {
       return;
     }
     const { uid } = user.user;
-    const item = movieInfo;
 
-    FirebasePushItem({
+    performAction({
       uid,
-      item,
+      item: movieInfo,
+      type: "add",
       callback: {
         success: () => setBtnActive(true),
       },
@@ -87,11 +83,11 @@ const MovieView = () => {
       return;
     }
     const { uid } = user.user;
-    const item = movieInfo;
 
-    FirebaseRemoveItem({
+    performAction({
       uid,
-      item,
+      item: movieInfo,
+      type: "remove",
       callback: {
         success: () => setBtnActive(false),
       },
@@ -99,7 +95,8 @@ const MovieView = () => {
   };
 
   if (!movieInfo) {
-    return <Text>unable to fetch movie</Text>;
+    console.error("movieInfo null");
+    return <Text>unable to process selection</Text>;
   }
 
   const {
