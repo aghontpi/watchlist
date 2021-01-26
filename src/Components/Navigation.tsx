@@ -16,7 +16,7 @@ export type DrawerNavigationParamList = {
   MyList: undefined;
   Favourite: undefined;
   Profile: undefined;
-  People: undefined;
+  Friend: undefined;
   settings: undefined;
   Logout: undefined;
 };

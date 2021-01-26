@@ -5,6 +5,7 @@ import { StyleSheet } from "react-native";
 import { Search } from "../Search";
 import { DrawerNavigationParamList } from "../../Components/Navigation";
 import { MyList } from "../MyList";
+import { Friends } from "../Friends";
 
 import Drawer, { DRAWER_WIDTH } from "./Drawer";
 
@@ -19,6 +20,7 @@ export const HomeDrawer = () => {
     >
       <DrawerNavigation.Screen name="Search" component={Search} />
       <DrawerNavigation.Screen name="MyList" component={MyList} />
+      <DrawerNavigation.Screen name="Friend" component={Friends} />
     </DrawerNavigation.Navigator>
   );
 };
