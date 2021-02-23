@@ -1,7 +1,8 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
-import { Size } from "../../Components/StyleConstants";
+import { Size, wWidth } from "../../Components/StyleConstants";
+import { Button } from "../../Components";
 import {
   RoundImageStyle,
   imgConversion,
@@ -10,15 +11,34 @@ import {
 const Person = () => {
   return (
     <View style={style.container}>
-      <View style={RoundImageStyle.imgContainer}>
+      <View style={[RoundImageStyle.imgContainer]}>
         <ImageBackground
           source={{ uri: imgConversion(null, true) }}
           style={RoundImageStyle.img}
         />
       </View>
       <View style={style.detailsContainer}>
-        <Text>Bluepie</Text>
-        <Text>gopinath2nr@gmail.com</Text>
+        <View style={{ flexDirection: "row", flex: 1 }}>
+          <View
+            style={{
+              flexDirection: "column",
+            }}
+          >
+            <Text style={style.name}>Bluepie</Text>
+            <Text style={style.email}>gopinath2nr@gmail.com</Text>
+          </View>
+          {/*TODO: fix the button overflow, */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              flex: 1,
+              justifyContent: "center",
+            }}
+          >
+            <Button isActive={true} label="friends" onPress={() => true} />
+          </View>
+        </View>
         <Text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum similique
           commodi unde.
@@ -30,11 +50,21 @@ const Person = () => {
 
 const style = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    paddingVertical: Size.s,
+    flexDirection: "row",
+    paddingVertical: Size.m,
+    width: wWidth,
   },
   detailsContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
+    paddingLeft: Size.s,
+    flex: 1,
+  },
+  name: {
+    fontWeight: "bold",
+  },
+  email: {
+    color: "#6b7489",
+    marginBottom: Size.s,
   },
 });
 
