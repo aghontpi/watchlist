@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { Size, wWidth } from "../../Components/StyleConstants";
@@ -18,6 +19,7 @@ const Friends = () => {
           }}
           showsVerticalScrollIndicator={false}
         >
+          <Text>tabone</Text>
           <Person />
           <Person />
           <Person />
@@ -36,7 +38,14 @@ const Friends = () => {
         </ScrollView>
       }
       tabTwo={
-        <ScrollView style={{ flex: 1, marginHorizontal: Size.m }}>
+        <ScrollView
+          style={{
+            flex: 1,
+            width: wWidth - Size.m * 2,
+            marginHorizontal: Size.m,
+          }}
+        >
+          <Text>tabtwo</Text>
           <Person />
         </ScrollView>
       }
