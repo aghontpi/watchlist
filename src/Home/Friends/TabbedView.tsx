@@ -1,61 +1,33 @@
 import React, { ReactNode } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { StyleSheet, View } from "react-native";
 import Animated, {
+  Extrapolate,
+  interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
 
 import { Size, wWidth } from "../../Components/StyleConstants";
+
+import { AnimatedTabName, Header, Indicator } from "./Components";
+
+const TABS = ["Find", "Friends"];
 
 interface TabbledViewProps {
   tabOne: ReactNode;
   tabTwo: ReactNode;
 }
 
-interface TabNameProps {
-  active: number;
-}
-
-const TabName = ({ active }: TabNameProps) => {
-  return (
-    <View style={{ flexDirection: "row", marginTop: Size.m }}>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={{ color: "#20A1F5", fontWeight: "bold" }}>tabone</Text>
-      </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <Text>tabtwo</Text>
-      </View>
-    </View>
-  );
-};
-
-interface Indicator {
-  style: ReturnType<typeof useAnimatedStyle>;
-}
-const Indicator = ({ style }: Indicator) => {
-  return (
-    <Animated.View style={{ flexDirection: "row", height: Size.s }}>
-      <Animated.View
-        style={[
-          {
-            width: wWidth / 2,
-            backgroundColor: "#1C9EEF",
-            borderRadius: Size.s / 2,
-          },
-          style,
-        ]}
-      />
-    </Animated.View>
-  );
-};
-
 const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
   const translateX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler((event) => {
     translateX.value = -event.contentOffset.x;
   });
+  const activeTab = useDerivedValue(() =>
+    interpolate(translateX.value, [0, -wWidth / 2], [0, 1], Extrapolate.CLAMP)
+  );
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: -translateX.value / 2 }],
@@ -63,20 +35,19 @@ const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
   });
   return (
     <View>
-      <View style={{ alignItems: "center" }}>
-        <TextInput
-          style={{
-            backgroundColor: "#E7ECF0",
-            height: Size.xxl,
-            width: wWidth - Size.xxl * 2,
-            borderRadius: Size.xxl / 2,
-          }}
-        />
+      <Header />
+      <View style={style.tabtileContainer}>
+        {TABS.map((v, i) => (
+          <AnimatedTabName
+            enabled={i === Math.floor(activeTab.value)}
+            key={i}
+            active={activeTab}
+            label={v}
+          />
+        ))}
       </View>
-      <TabName />
       <Indicator style={animatedStyle} />
-      <View style={{ height: Size.l }} />
-      <Animated.View style={[style.container]}>
+      <Animated.View>
         <Animated.ScrollView
           horizontal
           onScroll={scrollHandler}
@@ -94,7 +65,7 @@ const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
 };
 
 const style = StyleSheet.create({
-  container: {},
+  tabtileContainer: { flexDirection: "row", marginTop: Size.m },
 });
 
 export default TabbledView;
