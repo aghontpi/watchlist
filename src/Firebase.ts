@@ -1,3 +1,4 @@
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import database, {
   FirebaseDatabaseTypes,
 } from "@react-native-firebase/database";
@@ -13,9 +14,8 @@ const callBackFn = ({
   success,
   failure,
   complete,
-}: { complete: boolean } & Callback) => {
+}: { complete: boolean } & Callback) =>
   complete ? success && success() : failure && failure();
-};
 
 const log = (msg: string) => ENABLE_FIREBASE_DEBUG && console.log(msg);
 
@@ -141,4 +141,22 @@ const myMovies = async (uid: string) => {
   return null;
 };
 
+const postLogin = async (
+  uid: FirebaseAuthTypes.User["uid"],
+  user: FirebaseAuthTypes.UserCredential
+) => {
+  if (uid) {
+    try {
+      const ref = database().ref(`users/${uid}`);
+      const snapshot = await ref.once("value");
+      if (!(snapshot && snapshot.exists())) {
+        ref.set(user);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+};
+
 export { myMovies as FirebaseMyMovies, performAction };
+export { postLogin as LoginCallback };
