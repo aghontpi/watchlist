@@ -150,7 +150,15 @@ const postLogin = async (
       const ref = database().ref(`users/${uid}`);
       const snapshot = await ref.once("value");
       if (!(snapshot && snapshot.exists())) {
-        ref.set(user);
+        const payload = JSON.parse(JSON.stringify(user));
+        ref.set(payload, (err: Error) => {
+          if (err) {
+            console.error("updating user to database error");
+          }
+          console.log("updated user to the database");
+        });
+      } else {
+        console.log("already existing user");
       }
     } catch (e) {
       console.error(e);
