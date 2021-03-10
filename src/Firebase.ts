@@ -147,18 +147,39 @@ const postLogin = async (
 ) => {
   if (uid) {
     try {
+      const { email, photoURL, displayName, uid } = user?.user;
+      const updateList = async () => {
+        const listRef = database().ref(`users-list/${uid}`);
+        const snapshot = await listRef.once("value");
+        if (!(snapshot && snapshot.exists())) {
+          const userList = {
+            email,
+            photoURL,
+            displayName,
+          };
+          listRef.set(userList, (err: Error) => {
+            if (err) {
+              console.error(`updating list-user for ${email} error`);
+            }
+            console.log("updated list user to the database");
+          });
+        }
+      };
+
       const ref = database().ref(`users/${uid}`);
       const snapshot = await ref.once("value");
       if (!(snapshot && snapshot.exists())) {
         const payload = JSON.parse(JSON.stringify(user));
-        ref.set(payload, (err: Error) => {
+        ref.set(payload, async (err: Error) => {
           if (err) {
             console.error("updating user to database error");
           }
           console.log("updated user to the database");
+          await updateList();
         });
       } else {
         console.log("already existing user");
+        await updateList();
       }
     } catch (e) {
       console.error(e);
