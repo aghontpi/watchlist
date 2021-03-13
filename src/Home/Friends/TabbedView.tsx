@@ -55,6 +55,8 @@ const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
           scrollEventThrottle={16}
           bounces={false}
           snapToInterval={wWidth}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
         >
           {tabOne}
           {tabTwo}

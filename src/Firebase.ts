@@ -147,7 +147,7 @@ const postLogin = async (
 ) => {
   if (uid) {
     try {
-      const { email, photoURL, displayName, uid } = user?.user;
+      const { email, photoURL, displayName } = user?.user;
       const updateList = async () => {
         const listRef = database().ref(`users-list/${uid}`);
         const snapshot = await listRef.once("value");
@@ -187,5 +187,11 @@ const postLogin = async (
   }
 };
 
+const getUsers = async () => {
+  const users = await database().ref("users-list/").orderByKey().once("value");
+  console.log(users.val());
+  return users.toJSON();
+};
+
 export { myMovies as FirebaseMyMovies, performAction };
-export { postLogin as LoginCallback };
+export { postLogin as LoginCallback, getUsers as ListUsers };

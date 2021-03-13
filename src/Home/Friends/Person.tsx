@@ -8,12 +8,18 @@ import {
   imgConversion,
 } from "../Search/MovieView/Components/People";
 
-const Person = () => {
+interface Person {
+  photo: string;
+  email: string;
+  name: string;
+}
+
+const Person = ({ photo, email, name }: Person) => {
   return (
     <View style={style.container}>
       <View style={[RoundImageStyle.imgContainer]}>
         <ImageBackground
-          source={{ uri: imgConversion(null, true) }}
+          source={{ uri: imgConversion(photo, true) }}
           style={RoundImageStyle.img}
         />
       </View>
@@ -24,8 +30,8 @@ const Person = () => {
               flexDirection: "column",
             }}
           >
-            <Text style={style.name}>Bluepie</Text>
-            <Text style={style.email}>gopinath2nr@gmail.com</Text>
+            <Text style={style.name}>{name}</Text>
+            <Text style={style.email}>{email}</Text>
           </View>
           {/*TODO: fix the button overflow, */}
           <View
