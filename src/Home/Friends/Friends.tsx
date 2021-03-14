@@ -42,6 +42,8 @@ const Friends = () => {
                   email={user.email}
                   photo={user.photoURL}
                   name={user.displayName}
+                  buttonPress={() => true}
+                  active={false}
                 />
               );
             })}

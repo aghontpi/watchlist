@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
 import { Size, wWidth } from "../../Components/StyleConstants";
@@ -12,9 +12,13 @@ interface Person {
   photo: string;
   email: string;
   name: string;
+  buttonPress: () => void;
+  active: boolean;
 }
 
-const Person = ({ photo, email, name }: Person) => {
+const Person = ({ photo, email, name, active, buttonPress }: Person) => {
+  const [btnStatus, setBtnStatus] = useState<boolean>(active);
+  const label = btnStatus ? "requested" : "add";
   return (
     <View style={style.container}>
       <View style={[RoundImageStyle.imgContainer]}>
@@ -42,7 +46,14 @@ const Person = ({ photo, email, name }: Person) => {
               justifyContent: "center",
             }}
           >
-            <Button isActive={true} label="friends" onPress={() => true} />
+            <Button
+              isActive={btnStatus}
+              label={label}
+              onPress={() => {
+                buttonPress();
+                setBtnStatus(!btnStatus);
+              }}
+            />
           </View>
         </View>
         <Text>
