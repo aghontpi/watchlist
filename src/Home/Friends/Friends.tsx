@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { Size, wWidth } from "../../Components/StyleConstants";
-import { ListUsers } from "../../Firebase";
+import { UserConext } from "../../Context";
+import { FriendRequest, ListUsers } from "../../Firebase";
 
 import Person from "./Person";
 import TabbledView from "./TabbedView";
@@ -15,11 +16,21 @@ interface ListUsersF {
 
 const Friends = () => {
   const [users, setUsers] = useState<ListUsersF[]>();
+  const [userIds, setUserIds] = useState<string[]>();
+  const {
+    state: { user },
+  } = useContext(UserConext);
+
   useEffect(() => {
     ListUsers().then((response) => {
-      const usersList: ListUsersF[] = Object.values(response);
-      console.log("fetched", usersList);
-      setUsers(usersList);
+      if (response) {
+        // TODO: taking keys and values sepeartely, make it consice
+        const usersIds = Object.keys(response);
+        setUserIds(usersIds);
+        const usersList: ListUsersF[] = Object.values(response);
+        console.log("fetched", usersList);
+        setUsers(usersList);
+      }
     });
   }, []);
   return (
@@ -35,14 +46,21 @@ const Friends = () => {
           showsHorizontalScrollIndicator={false}
         >
           {users &&
-            users.map((user, key) => {
+            users.map(({ email, photoURL, displayName }, key) => {
               return (
                 <Person
                   key={key}
-                  email={user.email}
-                  photo={user.photoURL}
-                  name={user.displayName}
-                  buttonPress={() => true}
+                  email={email}
+                  photo={photoURL}
+                  name={displayName}
+                  buttonPress={() => {
+                    if (user?.uid && userIds) {
+                      console.log("requesting", user.uid, userIds[key]);
+                      FriendRequest(user.uid, userIds[key]);
+                    } else {
+                      console.error("either user or userids are empty");
+                    }
+                  }}
                   active={false}
                 />
               );
