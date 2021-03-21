@@ -5,7 +5,7 @@ import { RectButton } from "react-native-gesture-handler";
 import { onGoogleButtonPress } from "../../Authentication";
 import { GoogleIcon } from "../../Components";
 import { Size } from "../../Components/StyleConstants";
-import { LoginCallback } from "../../Firebase";
+import { LoginCallback } from "../../Firebase/";
 
 import Divider from "./Divider";
 

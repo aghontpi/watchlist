@@ -3,7 +3,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 import { Size, wWidth } from "../../Components/StyleConstants";
 import { UserConext } from "../../Context";
-import { FriendRequest, ListUsers } from "../../Firebase";
+import { FriendRequest, ListUsers } from "../../Firebase/";
 
 import Person from "./Person";
 import TabbledView from "./TabbedView";

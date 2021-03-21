@@ -1,9 +1,8 @@
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import database, {
   FirebaseDatabaseTypes,
 } from "@react-native-firebase/database";
 
-import { MovieViewProps } from "./Home/Search/MovieView/MovieView";
+import { MovieViewProps } from "../Home/Search/MovieView/MovieView";
 
 const ENABLE_FIREBASE_DEBUG = true;
 interface Callback {
@@ -141,88 +140,4 @@ const myMovies = async (uid: string) => {
   return null;
 };
 
-const postLogin = async (
-  uid: FirebaseAuthTypes.User["uid"],
-  user: FirebaseAuthTypes.UserCredential
-) => {
-  if (uid) {
-    try {
-      const { email, photoURL, displayName } = user?.user;
-      const updateList = async () => {
-        const listRef = database().ref(`users-list/${uid}`);
-        const snapshot = await listRef.once("value");
-        if (!(snapshot && snapshot.exists())) {
-          const userList = {
-            email,
-            photoURL,
-            displayName,
-          };
-          listRef.set(userList, (err: Error) => {
-            if (err) {
-              console.error(`updating list-user for ${email} error`);
-            }
-            console.log("updated list user to the database");
-          });
-        }
-      };
-
-      const ref = database().ref(`users/${uid}`);
-      const snapshot = await ref.once("value");
-      if (!(snapshot && snapshot.exists())) {
-        const payload = JSON.parse(JSON.stringify(user));
-        ref.set(payload, async (err: Error) => {
-          if (err) {
-            console.error("updating user to database error");
-          }
-          console.log("updated user to the database");
-          await updateList();
-        });
-      } else {
-        console.log("already existing user");
-        await updateList();
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }
-};
-
-const getUsers = async () => {
-  const users = await database().ref("users-list/").orderByKey().once("value");
-  console.log(users.val());
-  return users.toJSON();
-};
-
-const addPerson = async (
-  uid: FirebaseAuthTypes.User["uid"],
-  requestingPerson: FirebaseAuthTypes.User["uid"]
-) => {
-  const requestingUser = await database()
-    .ref(`users/${uid}/friends/`)
-    .orderByChild("userid")
-    .equalTo(requestingPerson)
-    .once("value");
-
-  if (!(requestingUser && requestingUser.exists())) {
-    const payload = {
-      userid: requestingPerson,
-      status: "requested",
-      friendSince: Date.now(),
-    };
-    database()
-      .ref(`users/${uid}/friends`)
-      .push(payload, (err: Error) => {
-        if (err) {
-          console.error(`error adding request for user ${requestingPerson}`);
-        } else {
-          console.log(`added user request to user ${uid}`);
-        }
-      });
-  } else {
-    console.log("already an existing request exists");
-  }
-};
-
 export { myMovies as FirebaseMyMovies, performAction };
-export { postLogin as LoginCallback, getUsers as ListUsers };
-export { addPerson as FriendRequest };
