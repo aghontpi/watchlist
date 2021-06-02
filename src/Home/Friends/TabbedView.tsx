@@ -47,7 +47,7 @@ const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
         ))}
       </View>
       <Indicator style={animatedStyle} />
-      <Animated.View>
+      <Animated.View style={style.scrollViewContainer}>
         <Animated.ScrollView
           horizontal
           onScroll={scrollHandler}
@@ -68,6 +68,7 @@ const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
 
 const style = StyleSheet.create({
   tabtileContainer: { flexDirection: "row", marginTop: Size.m },
+  scrollViewContainer: { height: "100%" },
 });
 
 export default TabbledView;
