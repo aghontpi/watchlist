@@ -1,6 +1,12 @@
 import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import database from "@react-native-firebase/database";
 
+export interface FriendType {
+  userid: FirebaseAuthTypes.User["uid"];
+  status: "requested" | "friends";
+  friendSince: ReturnType<typeof Date.now>;
+}
+
 const addPerson = async (
   uid: FirebaseAuthTypes.User["uid"],
   requestingPerson: FirebaseAuthTypes.User["uid"]
@@ -12,7 +18,7 @@ const addPerson = async (
     .once("value");
 
   if (!(requestingUser && requestingUser.exists())) {
-    const payload = {
+    const payload: FriendType = {
       userid: requestingPerson,
       status: "requested",
       friendSince: Date.now(),
@@ -39,4 +45,21 @@ const getUsers = async () => {
   console.log(_listUsers.val());
   return _listUsers.toJSON();
 };
-export { addPerson as FriendRequest, getUsers as ListUsers };
+
+// security: based on firebase rules set, this is accessible only for the logged in user
+const getFriendsCurrentUser = async (uid: FirebaseAuthTypes.User["uid"]) => {
+  const friends = await database()
+    .ref(`users/${uid}/friends/`)
+    .orderByChild("userid")
+    .once("value");
+  return (
+    friends &&
+    friends.exists() &&
+    ((friends.toJSON() as unknown) as { string: FriendType }[])
+  );
+};
+export {
+  addPerson as FriendRequest,
+  getUsers as ListUsers,
+  getFriendsCurrentUser,
+};
