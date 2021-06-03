@@ -4,7 +4,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Size, wWidth } from "../../Components/StyleConstants";
 import { UserConext } from "../../Context";
 import { FriendRequest, ListUsers } from "../../Firebase";
-import { getFriendsCurrentUser, FriendType } from "../../Firebase/friends";
+import {
+  getFriendsCurrentUser,
+  FriendType,
+  queryUsers,
+} from "../../Firebase/friends";
 
 import Person from "./Person";
 import TabbledView from "./TabbedView";
@@ -52,8 +56,24 @@ const Friends = () => {
     });
   }, []);
 
+  const search = (query: string) => {
+    queryUsers({ query }).then((response) => {
+      if (response) {
+        const usersIds = Object.keys(response);
+        setUserIds(usersIds);
+        const usersList: ListUsersF[] = Object.values(response);
+        console.log("queried", usersList);
+        setUsers(usersList);
+      } else {
+        setUserIds([]);
+        setUsers([]);
+      }
+    });
+  };
+
   return (
     <TabbledView
+      search={search}
       tabOne={
         <ScrollView
           style={{

@@ -18,9 +18,11 @@ const TABS = ["Find", "Friends"];
 interface TabbledViewProps {
   tabOne: ReactNode;
   tabTwo: ReactNode;
+  // todo: refactor and remove this with redux
+  search: (query: string) => void;
 }
 
-const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
+const TabbledView = ({ tabOne, tabTwo, search }: TabbledViewProps) => {
   const translateX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler((event) => {
     translateX.value = -event.contentOffset.x;
@@ -35,7 +37,7 @@ const TabbledView = ({ tabOne, tabTwo }: TabbledViewProps) => {
   });
   return (
     <View>
-      <Header />
+      <Header search={search} />
       <View style={style.tabtileContainer}>
         {TABS.map((v, i) => (
           <AnimatedTabName
