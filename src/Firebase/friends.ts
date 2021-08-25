@@ -2,9 +2,10 @@ import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import database from "@react-native-firebase/database";
 
 export interface FriendType {
-  userid: FirebaseAuthTypes.User["uid"];
-  status: "requested" | "friends";
+  userid?: FirebaseAuthTypes.User["uid"];
+  status: "requested" | "accepted" | "pending";
   friendSince: ReturnType<typeof Date.now>;
+  from?: FirebaseAuthTypes.User["uid"];
 }
 
 const addPerson = async (
@@ -34,6 +35,35 @@ const addPerson = async (
       });
   } else {
     console.log("already an existing request exists");
+  }
+
+  // add the user also to the requested person's list
+  const requestedUser = await database()
+    .ref(`users/${requestingPerson}/friends/`)
+    .orderByChild("from")
+    .equalTo(uid)
+    .once("value");
+
+  if (!(requestedUser && requestedUser.exists())) {
+    const payload: FriendType = {
+      from: uid,
+      status: "pending",
+      friendSince: Date.now(),
+    };
+
+    database()
+      .ref(`users/${requestingPerson}/friends`)
+      .push(payload, (err: Error) => {
+        if (err) {
+          console.error(
+            `error adding pending request for user ${requestingPerson}`
+          );
+        } else {
+          console.log(
+            `added pending user request to user ${requestingPerson} from ${uid}`
+          );
+        }
+      });
   }
 };
 
@@ -66,10 +96,7 @@ const queryUsers = async ({ query }: QueryUsers) => {
 
 // security: based on firebase rules set, this is accessible only for the logged in user
 const getFriendsCurrentUser = async (uid: FirebaseAuthTypes.User["uid"]) => {
-  const friends = await database()
-    .ref(`users/${uid}/friends/`)
-    .orderByChild("userid")
-    .once("value");
+  const friends = await database().ref(`users/${uid}/friends/`).once("value");
   return (
     friends &&
     friends.exists() &&

@@ -23,6 +23,7 @@ const Friends = () => {
   const [users, setUsers] = useState<ListUsersF[]>();
   const [userIds, setUserIds] = useState<string[]>();
   const [friends, setFriends] = useState<Map<string, FriendType["status"]>>();
+  const [pending, setPending] = useState<Map<string, FriendType["status"]>>();
 
   const {
     state: { user },
@@ -35,10 +36,16 @@ const Friends = () => {
         if (response) {
           const _friends = (Object.values(response) as unknown) as FriendType[];
           const friendsMap = new Map<string, FriendType["status"]>();
+          const pendingMap = new Map<string, FriendType["status"]>();
           for (let i = 0; i < _friends.length; i++) {
-            friendsMap.set(_friends[i].userid, _friends[i].status);
-            setFriends(friendsMap);
+            const key = _friends[i].userid;
+            key && friendsMap.set(key, _friends[i].status);
+            const k = _friends[i].from;
+            console.log("iterate", _friends[i]);
+            k && pendingMap.set(k, _friends[i].status);
           }
+          setFriends(friendsMap);
+          setPending(pendingMap);
         }
       });
     }
@@ -90,6 +97,13 @@ const Friends = () => {
               if (userIds[key] === user?.uid) {
                 return null;
               }
+
+              if (
+                friends?.get(userIds[key]) === "accepted" ||
+                friends?.get(userIds[key]) === "pending"
+              ) {
+                return null;
+              }
               return (
                 <Person
                   key={key}
@@ -119,7 +133,61 @@ const Friends = () => {
             width: wWidth - Size.m * 2,
             marginHorizontal: Size.m,
           }}
-        />
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
+          {users &&
+            userIds &&
+            users.map(({ email, photoURL, displayName }, key) => {
+              const userkey = userIds[key];
+              if (userkey === user?.uid) {
+                return null;
+              }
+
+              if (friends?.get(userkey) === "accepted") {
+                return (
+                  <Person
+                    key={key}
+                    email={email}
+                    photo={photoURL}
+                    name={displayName}
+                    buttonPress={() => {
+                      // if (user?.uid && userIds) {
+                      //   console.log("requesting", user.uid, userIds[key]);
+                      //   FriendRequest(user.uid, userIds[key]);
+                      // } else {
+                      //   console.error("either user or userids are empty");
+                      // }
+                    }}
+                    active={false}
+                    overrideLabel="remove"
+                  />
+                );
+              }
+
+              if (pending?.get(userkey) === "pending") {
+                return (
+                  <Person
+                    key={key}
+                    email={email}
+                    photo={photoURL}
+                    name={displayName}
+                    buttonPress={() => {
+                      // if (user?.uid && userIds) {
+                      //   console.log("requesting", user.uid, userIds[key]);
+                      //   FriendRequest(user.uid, userIds[key]);
+                      // } else {
+                      //   console.error("either user or userids are empty");
+                      // }
+                      console.debug("remove the user from the friends list");
+                    }}
+                    active={false}
+                    overrideLabel="approve"
+                  />
+                );
+              }
+            })}
+        </ScrollView>
       }
     />
   );

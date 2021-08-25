@@ -14,9 +14,17 @@ interface Person {
   name: string;
   buttonPress: () => void;
   active: boolean;
+  overrideLabel?: string;
 }
 
-const Person = ({ photo, email, name, active, buttonPress }: Person) => {
+const Person = ({
+  photo,
+  email,
+  name,
+  active,
+  buttonPress,
+  overrideLabel,
+}: Person) => {
   const [btnStatus, setBtnStatus] = useState<boolean>(active);
   const label = btnStatus ? "requested" : "add";
   return (
@@ -48,7 +56,7 @@ const Person = ({ photo, email, name, active, buttonPress }: Person) => {
           >
             <Button
               isActive={btnStatus}
-              label={label}
+              label={overrideLabel ? overrideLabel : label}
               onPress={() => {
                 buttonPress();
                 setBtnStatus(!btnStatus);
