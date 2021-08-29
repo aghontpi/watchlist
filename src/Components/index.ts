@@ -1,4 +1,5 @@
 export { default as RoundedIcon } from "./RoundIcon";
+export { default as Button } from "./Button";
 export {
   BrokenSearch as SearchIcon,
   BrokenSettings as SettingsIcon,

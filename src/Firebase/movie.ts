@@ -2,7 +2,7 @@ import database, {
   FirebaseDatabaseTypes,
 } from "@react-native-firebase/database";
 
-import { MovieViewProps } from "./Home/Search/MovieView/MovieView";
+import { MovieViewProps } from "../Home/Search/MovieView/MovieView";
 
 const ENABLE_FIREBASE_DEBUG = true;
 interface Callback {
@@ -13,9 +13,8 @@ const callBackFn = ({
   success,
   failure,
   complete,
-}: { complete: boolean } & Callback) => {
+}: { complete: boolean } & Callback) =>
   complete ? success && success() : failure && failure();
-};
 
 const log = (msg: string) => ENABLE_FIREBASE_DEBUG && console.log(msg);
 

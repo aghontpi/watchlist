@@ -5,6 +5,7 @@ import { RectButton } from "react-native-gesture-handler";
 import { onGoogleButtonPress } from "../../Authentication";
 import { GoogleIcon } from "../../Components";
 import { Size } from "../../Components/StyleConstants";
+import { LoginCallback } from "../../Firebase";
 
 import Divider from "./Divider";
 
@@ -25,11 +26,15 @@ const Footer = ({ terms, socialIcons }: FooterProps) => {
           </View>
           <View style={style.sso}>
             <RectButton
-              onPress={() =>
-                onGoogleButtonPress().then(() =>
-                  console.log("SignIn process Complete")
-                )
-              }
+              onPress={async () => {
+                const user = await onGoogleButtonPress();
+                if (user) {
+                  console.log(user);
+                  LoginCallback(user.user.uid, user);
+                } else {
+                  console.log("error fetching user");
+                }
+              }}
               style={style.iconHolder}
             >
               <GoogleIcon size={Size.l} />

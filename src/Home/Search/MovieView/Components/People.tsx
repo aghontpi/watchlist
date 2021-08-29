@@ -14,10 +14,14 @@ const SIZE = Size.xxl * 2;
 const wrapText = (s: string, w: number) =>
   s.replace(new RegExp(`(?![^\\n]{1,${w}}$)([^\\n]{1,${w}})\\s`, "g"), "$1\n");
 
-const imgConverison = (imgSrc: string): string => {
+const imgConversion = (imgSrc: string | null, normal = false): string => {
+  const placeholder = `https://picsum.photos/${SIZE}/${SIZE}`;
+  if (normal) {
+    return imgSrc ? imgSrc : placeholder;
+  }
   return imgSrc
     ? imgSrc.slice(0, imgSrc.indexOf("_V1")) + `_SY${SIZE * 2}_.jpg`
-    : `https://picsum.photos/${SIZE}/${SIZE}`;
+    : placeholder;
 };
 
 const People = ({ name, role, img }: PeopleProps) => {
@@ -25,7 +29,7 @@ const People = ({ name, role, img }: PeopleProps) => {
     <View style={style.container}>
       <View style={style.imgContainer}>
         <ImageBackground
-          source={{ uri: imgConverison(img) }}
+          source={{ uri: imgConversion(img) }}
           resizeMode="cover"
           style={style.img}
         />
@@ -65,3 +69,4 @@ const style = StyleSheet.create({
 });
 
 export default People;
+export { style as RoundImageStyle, imgConversion };

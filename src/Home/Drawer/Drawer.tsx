@@ -36,7 +36,7 @@ const DrawerItems: DrawerItems[] = [
   { name: "Your List", component: "MyList", icon: <FavouriteIcon /> },
   { name: "Top 250", component: "Search", icon: <ChartIcon /> },
   { name: "Profile", component: "Search", icon: <ProfileIcon /> },
-  { name: "Friend's List", component: "Search", icon: <FriendsIcon /> },
+  { name: "Friend's List", component: "Friend", icon: <FriendsIcon /> },
   //{ name: "Settings", component: "Search", icon: <SettingsIcon /> },
   { name: "Logout", component: "Logout", icon: <BrokenLogout /> },
 ];
